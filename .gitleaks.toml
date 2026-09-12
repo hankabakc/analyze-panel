@@ -13,6 +13,8 @@ description = "Test senaryolari, ornek konfigurasyonlar ve dokumanlardaki sahte/
 paths = [
     '''backend/src/test/.*''',
     '''frontend/src/test/.*''',
+    '''frontend/src/.*\.test\.(ts|tsx)$''',
+    '''frontend/scripts/.*''',
     '''backend/src/main/resources/application\.properties\.example''',
     '''PLANLAMA/.*''',
     '''README\.md''',
@@ -23,5 +25,7 @@ regexes = [
     '''analyzepanel_32_char_secret_key_''',
     '''ci_test_jwt_secret_key_.*''',
     '''ci_test_pii_encryption_key_.*''',
+    '''ci_build_dummy_.*''',
+    '''faq\.1\.question''',
     '''https://d13c1d421346011470d1dd7c4b125c1e@o4511481291210752\.ingest\.de\.sentry\.io/4511948874317904'''
 ]

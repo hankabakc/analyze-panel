@@ -56,8 +56,8 @@ jobs:
           SPRING_DATASOURCE_USERNAME: postgres
           SPRING_DATASOURCE_PASSWORD: postgres
           APPLICATION_SECURITY_JWT_SECRET_KEY: ci_test_jwt_secret_key_minimum_64_characters_long_for_security_hs512_check
-          APPLICATION_SECURITY_PII_ENCRYPTION_KEY: ci_test_pii_encryption_key_32_c
-          PII_ENCRYPTION_KEY: ci_test_pii_encryption_key_32_c
+          APPLICATION_SECURITY_PII_ENCRYPTION_KEY: ci_test_pii_encryption_key_32_ch
+          PII_ENCRYPTION_KEY: ci_test_pii_encryption_key_32_ch
           INITIAL_ADMIN_EMAIL: ci-admin@analyzepanel.local
           SENTRY_DSN: ""
           SENTRY_ENVIRONMENT: ci
@@ -175,6 +175,7 @@ jobs:
         env:
           DB_PASSWORD: ci_build_dummy_password
           APPLICATION_SECURITY_JWT_SECRET_KEY: ci_build_dummy_jwt_secret_key_64_characters_long_for_hs512_verification
+          APPLICATION_SECURITY_PII_ENCRYPTION_KEY: ci_build_dummy_pii_secret_key_32
           PII_ENCRYPTION_KEY: ci_build_dummy_pii_secret_key_32
           INITIAL_ADMIN_EMAIL: admin@analyzepanel.local
           APP_CORS_ORIGINS: http://localhost
