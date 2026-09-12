@@ -60,7 +60,19 @@ class SinavzaKarneParserTest {
 
         // Dersler doğrulaması
         List<AnalysisResponse.LessonDto> lessons = result.consolidatedResult().lessons();
-        assertEquals(2, lessons.size(), "Sentetik karnede 2 ders (Turkce, Matematik) bulunmalıdır.");
+        assertEquals(2, lessons.size(), "Sentetik karnede 2 ders (Türkçe, Matematik) bulunmalıdır.");
+        assertEquals("Türkçe", lessons.get(0).lessonName(), "İlk ders Türkçe olmalıdır.");
+        assertEquals("Matematik", lessons.get(1).lessonName(), "İkinci ders Matematik olmalıdır.");
+
+        // Türkçe yaprak konuları doğrulaması (Türkçe karakter doğrulaması: ç, ı, ş, Ü)
+        assertEquals(2, lessons.get(0).topics().size(), "Türkçe altında 2 yaprak konu olmalıdır.");
+        assertEquals("Gerçek ve Mecaz Anlam", lessons.get(0).topics().get(0).topicName());
+        assertEquals("Deyimler ve Atasözleri", lessons.get(0).topics().get(1).topicName());
+
+        // Matematik yaprak konuları doğrulaması
+        assertEquals(2, lessons.get(1).topics().size(), "Matematik altında 2 yaprak konu olmalıdır.");
+        assertEquals("Çarpanlar ve Katlar", lessons.get(1).topics().get(0).topicName());
+        assertEquals("Üslü İfadeler", lessons.get(1).topics().get(1).topicName());
 
         for (AnalysisResponse.LessonDto lesson : lessons) {
             int lessonTotal = lesson.correct() + lesson.wrong() + lesson.empty();

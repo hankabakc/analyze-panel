@@ -288,8 +288,7 @@ public class SinavzaKarneParser {
             StringBuilder flat = new StringBuilder();
             for (Tok t : tokens) flat.append(t.text());
             String joined = flat.toString();
-            String flatClean = joined.replace(" ", "");
-            if (!joined.contains("SS") || (!flatClean.contains("KonuAdı") && !flatClean.contains("KonuAdi"))) continue;
+            if (!joined.contains("SS") || !joined.replace(" ", "").contains("KonuAdı")) continue;
 
             List<List<Tok>> blocks = new ArrayList<>();
             List<Tok> block = new ArrayList<>();
@@ -308,7 +307,7 @@ public class SinavzaKarneParser {
                 Map<String, Float> centers = new HashMap<>();
                 float end = 0f;
                 for (Tok t : b) {
-                    String key = (t.text().startsWith("Baş") || t.text().startsWith("Bas")) ? "BAS" : t.text();
+                    String key = t.text().startsWith("Baş") ? "BAS" : t.text();
                     if (NUM_COLS.contains(key)) centers.put(key, (t.x0() + t.x1()) / 2);
                     end = Math.max(end, t.x1());
                 }
