@@ -58,7 +58,7 @@ public class SinavzaKarneParser {
 
     /** Sınav listesi satırı: "3 OKYANUS MASTER KTT-2 ... 25.01.2026 79,01" */
     private static final Pattern EXAM_ROW =
-            Pattern.compile("^(\\d+)(.+?)(\\d{2}\\.\\d{2}\\.\\d{4})(\\d+,\\d+)$");
+            Pattern.compile("^(\\d+)(.+?)(\\d{2}\\.\\d{2}\\.\\d{4})\\s*(\\d+,\\d+)$");
 
     /** Ders adının sonundaki kod: "Türkçe( LGS-TRK )" -> "Türkçe" */
     private static final Pattern LESSON_CODE = Pattern.compile("\\(\\s*[^()]*\\)\\s*$");
@@ -288,7 +288,8 @@ public class SinavzaKarneParser {
             StringBuilder flat = new StringBuilder();
             for (Tok t : tokens) flat.append(t.text());
             String joined = flat.toString();
-            if (!joined.contains("SS") || !joined.replace(" ", "").contains("KonuAdı")) continue;
+            String flatClean = joined.replace(" ", "");
+            if (!joined.contains("SS") || (!flatClean.contains("KonuAdı") && !flatClean.contains("KonuAdi"))) continue;
 
             List<List<Tok>> blocks = new ArrayList<>();
             List<Tok> block = new ArrayList<>();
@@ -307,7 +308,7 @@ public class SinavzaKarneParser {
                 Map<String, Float> centers = new HashMap<>();
                 float end = 0f;
                 for (Tok t : b) {
-                    String key = t.text().startsWith("Baş") ? "BAS" : t.text();
+                    String key = (t.text().startsWith("Baş") || t.text().startsWith("Bas")) ? "BAS" : t.text();
                     if (NUM_COLS.contains(key)) centers.put(key, (t.x0() + t.x1()) / 2);
                     end = Math.max(end, t.x1());
                 }
