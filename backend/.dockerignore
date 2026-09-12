@@ -1,0 +1,19 @@
+# Backend .dockerignore (T-071 / ENG-10 §1)
+# Sırların, gereksiz dosyaların ve yerel derleme artıklarının imaja girmesini engeller.
+
+.git
+.gitignore
+target
+!target/*.jar
+node_modules
+*.log
+.idea
+.vscode
+*.iml
+.mvn/wrapper/maven-wrapper.jar
+uploads
+
+# Yerel geliştirme sırları KESİNLİKLE imaja dahil edilmez (ENG-10 §1)
+src/main/resources/application.properties
+.env
+.env.*

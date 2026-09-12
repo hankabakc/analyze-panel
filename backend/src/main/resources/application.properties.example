@@ -1,0 +1,104 @@
+# Yerel geliştirme yapılandırması ŞABLONU (T-069).
+#
+#   cp application.properties.example application.properties
+#
+# Gerçek application.properties git'e girmez; kişisel değerleriniz orada kalır.
+# Canlı ortam bu dosyayı kullanmaz: application-prod.properties ve ortam değişkenleri geçerlidir.
+# Buradaki varsayılanlar YALNIZCA yerel geliştirme içindir, canlıda kullanılmaz.
+
+# Uygulama Bilgileri
+spring.application.name=analyzepanel
+server.port=8081
+
+# Java 25 Virtual Threads (Project Loom) Aktivasyonu
+spring.threads.virtual.enabled=true
+
+# Veritabanı Yapılandırması (PostgreSQL 17)
+# Güvenlik için şifre ve URL dinamik hale getirildi
+spring.datasource.url=${DB_URL:jdbc:postgresql://localhost:5433/analyzepanel_db}
+spring.datasource.username=${DB_USER:postgres}
+spring.datasource.password=${DB_PASSWORD:postgres}
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# HikariCP Bağlantı Havuzu (200 kullanıcı / 15 bağlantı havuzu, S-027)
+spring.datasource.hikari.maximum-pool-size=${DB_POOL_SIZE:15}
+spring.datasource.hikari.minimum-idle=5
+spring.datasource.hikari.connection-timeout=10000
+
+# JPA / Hibernate Ayarları
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.show-sql=false
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.open-in-view=false
+
+# Flyway Migrasyon Ayarları
+spring.flyway.enabled=true
+spring.flyway.locations=classpath:db/migration
+spring.flyway.baseline-on-migrate=true
+spring.flyway.validate-on-migrate=false
+spring.flyway.repair-on-migrate=false
+
+# Jackson Ayarları
+spring.jackson.default-property-inclusion=non_null
+spring.jackson.deserialization.fail-on-unknown-properties=true
+# Not: Duplicate keys kontrolü ObjectMapper bean ile daha sağlıklı yapılır
+
+# DoS Koruması: İstek Boyutu Sınırları
+server.max-http-header-size=8KB
+# Karne PDF'leri görsel içerdiğinde 5MB'ı rahatça aşıyor.
+# Dosya sınırı istek sınırından düşük tutulur: böylece tek dosya çok büyük olduğunda
+# Tomcat'in ham hata sayfası yerine GlobalExceptionHandler'ın anlaşılır mesajı döner.
+spring.servlet.multipart.max-file-size=20MB
+spring.servlet.multipart.max-request-size=25MB
+
+# Hata yanıtlarında yığın izi dönmesin. Spring Boot 4'te bu ayarın adı
+# server.error.* değil spring.web.error.* olarak değişti. Varsayılanı zaten
+# "never" ama devtools geliştirme modunda açtığı için burada açıkça kapatılır.
+spring.web.error.include-stacktrace=never
+
+# Güvenlik Yapılandırması (JWT)
+# Bu değer kesinlikle kod içine yazılmamalıdır (HS512 için en az 64 karakter / 512-bit).
+application.security.jwt.secret-key=${APPLICATION_SECURITY_JWT_SECRET_KEY:yerel-gelistirme-icin-en-az-64-karakterlik-guvenli-anahtar-hs512-standardi-1234567890}
+application.security.jwt.expiration=900000
+application.security.jwt.refresh-token.expiration=604800000
+application.security.jwt.refresh-token.remembered-expiration=2592000000
+application.security.jwt.refresh-token.short-expiration=86400000
+
+# Sistem Başlangıç Ayarları
+application.security.initial-admin-email=${INITIAL_ADMIN_EMAIL:admin@admin.com}
+application.security.initial-admin-phone=${INITIAL_ADMIN_PHONE:0000000000}
+
+# Hata İzleme (Sentry)
+sentry.dsn=${SENTRY_DSN:}
+sentry.send-default-pii=false
+sentry.environment=${SENTRY_ENVIRONMENT:local}
+
+# Veri Şifreleme (PII Encryption)
+# Bu anahtar 16, 24 veya 32 karakter olmalıdır.
+application.security.pii.encryption-key=${APPLICATION_SECURITY_PII_ENCRYPTION_KEY:${PII_ENCRYPTION_KEY:yerel_gelistirme_32_karakter_key}}
+
+# Actuator ve Gözlemlenebilirlik (T-070 / S-027)
+management.endpoints.web.exposure.include=health
+management.endpoint.health.show-components=always
+management.endpoint.health.show-details=never
+management.endpoint.health.probes.enabled=true
+
+# Logging Ayarları
+logging.level.org.springframework.web=INFO
+logging.level.com.hankabakc.analyzepanel=DEBUG
+logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} [%X{correlationId:-SYSTEM}] - %msg%n
+
+analysis.lgs.puan-per-net=${ANALYSIS_LGS_PUAN_PER_NET:4.44}
+analysis.lgs.taban-puan=${ANALYSIS_LGS_TABAN_PUAN:100.0}
+
+# Konu Başarı Eşikleri (Performans Bantları: STRONG >= 85.0, MEDIUM >= 50.0, WEAK < 50.0)
+# UYGULAMA_OZELLIKLERI.md §5: Ayarlanabilir parametre koda gömülmez.
+analysis.topic.threshold-strong=${ANALYSIS_TOPIC_THRESHOLD_STRONG:85.0}
+analysis.topic.threshold-medium=${ANALYSIS_TOPIC_THRESHOLD_MEDIUM:50.0}
+
+# Psikolojik Test STAI Kaygı Seviye Eşikleri (T-061 / S-024)
+# UYGULAMA_OZELLIKLERI.md §5: Düşük 20-39 · Orta 40-59 · Yüksek 60-80
+application.psych-test.stai.medium-min=${APPLICATION_PSYCH_TEST_STAI_MEDIUM_MIN:40}
+application.psych-test.stai.high-min=${APPLICATION_PSYCH_TEST_STAI_HIGH_MIN:60}
+

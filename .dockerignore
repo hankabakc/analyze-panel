@@ -1,0 +1,16 @@
+# Kök .dockerignore (T-071 / ENG-10 §1)
+# Gizli dosyaların, test ve geliştirme artıklarının Docker bağlamına girmesini engeller.
+
+.git
+.gitignore
+.env
+.env.*
+uploads
+node_modules
+target
+*.log
+.idea
+.vscode
+*.iml
+PLANLAMA
+scratch

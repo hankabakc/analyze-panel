@@ -1,0 +1,33 @@
+# ==========================================
+# ANALYZEPANEL Frontend Caddyfile (T-071)
+# SPA & Reverse Proxy Yapılandırması
+# ==========================================
+
+:80 {
+    root * /usr/share/caddy
+    encode gzip zstd
+
+    # Güvenlik: Actuator uçlarına dış ağdan erişim kesinlikle engellenir (IST-01 §3.2)
+    handle /actuator* {
+        respond "Forbidden" 403
+    }
+
+    # API isteklerini arka uç servisine yönlendir (Ters Vekil)
+    handle /api/* {
+        reverse_proxy backend:8081
+    }
+
+    # Statik varlıklara uzun ömürlü önbellek (Cache-Control: immutable)
+    @static path /assets/*
+    header @static Cache-Control "public, max-age=31536000, immutable"
+
+    # index.html için önbellek kapatma (her zaman güncel dağıtım alınsın)
+    @index path / /index.html
+    header @index Cache-Control "no-cache, no-store, must-revalidate"
+
+    # SPA rotaları ve statik dosya sunumu
+    handle {
+        try_files {path} /index.html
+        file_server
+    }
+}

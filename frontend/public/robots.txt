@@ -1,0 +1,20 @@
+# AnalyzePanel Arama Motoru Tarama Kurallari (robots.txt)
+# T-074 / S-027
+
+User-agent: *
+# Panel ve kullaniciya ozel oturum adresleri indekslemeye kapalidir
+Disallow: /raporlar
+Disallow: /liderlik
+Disallow: /analysis/
+Disallow: /sifre-degistir
+Disallow: /api/
+
+# Herkese acik kurumsal bilgi sayfalari indekslenebilir
+Allow: /
+Allow: /karsilama
+Allow: /ozellikler
+Allow: /hakkinda
+Allow: /sss
+Allow: /iletisim
+Allow: /gizlilik
+Allow: /giris

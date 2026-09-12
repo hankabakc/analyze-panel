@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- AnalyzePanel Koyu Kurumsal Arka Plan -->
+  <rect width="64" height="64" rx="14" fill="#0f172a"/>
+  
+  <!-- Analitik Veri Sütunları (Artan Başarı Grafiği) -->
+  <rect x="13" y="38" width="7" height="13" rx="2" fill="#06b6d4" fill-opacity="0.35"/>
+  <rect x="23" y="30" width="7" height="21" rx="2" fill="#06b6d4" fill-opacity="0.6"/>
+  <rect x="33" y="22" width="7" height="29" rx="2" fill="#06b6d4" fill-opacity="0.85"/>
+  <rect x="43" y="14" width="7" height="37" rx="2" fill="#38bdf8"/>
+  
+  <!-- Yükselen Başarı Trend Çizgisi -->
+  <path d="M16 38L26 30L36 24L47 14" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="47" cy="14" r="3.5" fill="#ffffff"/>
+</svg>

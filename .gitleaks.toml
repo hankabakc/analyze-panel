@@ -1,0 +1,27 @@
+# ==========================================
+# ANALYZEPANEL Gitleaks Yapilandirma Dosyasi
+# T-078 / S-027 CI Kalite Kapisi
+# ==========================================
+
+title = "AnalyzePanel Gitleaks Guvenlik Taramasi"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Test senaryolari, ornek konfigurasyonlar ve dokumanlardaki sahte/ornek sirlari yoksay"
+paths = [
+    '''backend/src/test/.*''',
+    '''frontend/src/test/.*''',
+    '''backend/src/main/resources/application\.properties\.example''',
+    '''PLANLAMA/.*''',
+    '''README\.md''',
+    '''\.github/workflows/.*'''
+]
+regexes = [
+    '''analyzepanel_cok_gizli_anahtar_en_az_32_karakter_olmalidir_yerel_gelistirme''',
+    '''analyzepanel_32_char_secret_key_''',
+    '''ci_test_jwt_secret_key_.*''',
+    '''ci_test_pii_encryption_key_.*''',
+    '''https://d13c1d421346011470d1dd7c4b125c1e@o4511481291210752\.ingest\.de\.sentry\.io/4511948874317904'''
+]

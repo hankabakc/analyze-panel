@@ -1,0 +1,180 @@
+name: CI Kalite Kapisi
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend-test:
+    name: Backend Testleri (Java 25 & PostgreSQL 17)
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: analyzepanel_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Kaynak Kodunu Cek (Checkout)
+        uses: actions/checkout@v4
+
+      - name: JDK 25 Kurulumu (Eclipse Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+          cache: 'maven'
+
+      - name: Maven Wrapper Iznini Ver
+        run: chmod +x backend/mvnw
+
+      - name: Ornek Konfigurasyonu Kopyala
+        run: cp src/main/resources/application.properties.example src/main/resources/application.properties
+        working-directory: backend
+
+      - name: Backend Testlerini Calistir
+        run: ./mvnw clean test -B
+        working-directory: backend
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/analyzepanel_test
+          SPRING_DATASOURCE_USERNAME: postgres
+          SPRING_DATASOURCE_PASSWORD: postgres
+          APPLICATION_SECURITY_JWT_SECRET_KEY: ci_test_jwt_secret_key_minimum_64_characters_long_for_security_hs512_check
+          APPLICATION_SECURITY_PII_ENCRYPTION_KEY: ci_test_pii_encryption_key_32_c
+          PII_ENCRYPTION_KEY: ci_test_pii_encryption_key_32_c
+          INITIAL_ADMIN_EMAIL: ci-admin@analyzepanel.local
+          SENTRY_DSN: ""
+          SENTRY_ENVIRONMENT: ci
+
+  frontend-test:
+    name: Frontend Testleri ve Linting (Node 22)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kaynak Kodunu Cek (Checkout)
+        uses: actions/checkout@v4
+
+      - name: Node.js 22 Kurulumu
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Ornek Ortam Degiskenlerini Kopyala
+        run: cp .env.example .env
+        working-directory: frontend
+
+      - name: Bagimliliklari Kur (npm ci)
+        run: npm ci
+        working-directory: frontend
+
+      - name: ESLint Statik Kod Analizi
+        run: npm run lint
+        working-directory: frontend
+
+      - name: Frontend Birim ve Entegrasyon Testleri
+        run: npm test
+        working-directory: frontend
+
+      - name: Frontend Uretim Paketi Derlemesi (Build)
+        run: npm run build
+        working-directory: frontend
+
+  migration-immutability-check:
+    name: Migrasyon Degismezlik Denetimi (ENG-08 §3.2)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kaynak Kodunu ve Gecmisi Cek (Checkout)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Uygulanmis Migrasyonlarin (V*.sql) Degismezligini Denetle
+        run: |
+          echo "=== Migrasyon Degismezlik Denetimi Baslatiliyor ==="
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_REF="origin/${{ github.base_ref }}"
+          else
+            BEFORE_SHA="${{ github.event.before }}"
+            if [ -n "$BEFORE_SHA" ] && [ "$BEFORE_SHA" != "0000000000000000000000000000000000000000" ] && git rev-parse --verify "$BEFORE_SHA" >/dev/null 2>&1; then
+              BASE_REF="$BEFORE_SHA"
+            elif git rev-parse --verify HEAD~1 >/dev/null 2>&1; then
+              BASE_REF="HEAD~1"
+            else
+              BASE_REF=""
+            fi
+          fi
+
+          if [ -z "$BASE_REF" ]; then
+            echo "Inceleme icin onceki commit bulunamadi (ilk commit). Denetim atlanıyor."
+            exit 0
+          fi
+
+          echo "Taban referans: $BASE_REF"
+          # Degistirilen (M), silinen (D) veya yeniden adlandirilan (R) V*.sql dosyalarini yakala
+          VIOLATIONS=$(git diff --name-status "$BASE_REF"...HEAD -- backend/src/main/resources/db/migration/ | grep -E '^[MDR][[:space:]].*V[0-9]+__.*\.sql$' || true)
+
+          if [ -n "$VIOLATIONS" ]; then
+            echo "::error::🚨 KRITIK HATA: Uygulanmis Flyway migrasyon dosyalari degistirilemez, silinemez veya yeniden adlandirilamaz (ENG-08 §3.2)!"
+            echo "Asagidaki migrasyon dosyalarinda kural ihlali tespit edildi:"
+            echo "$VIOLATIONS"
+            echo ""
+            echo "Cozum: Mevcut V*.sql dosyalarini eski haline getirin ve sema degisikliklerinizi yeni bir migrasyon surumu (orn. V35__...) olarak ekleyin."
+            exit 1
+          else
+            echo "✅ Basarili: Hicbir mevcut V*.sql migrasyon dosyasi degistirilmedi, silinmedi veya yeniden adlandirilmadi."
+          fi
+
+  gitleaks-secret-scan:
+    name: Statik Sir ve Guvenlik Taramasi (Gitleaks)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kaynak Kodunu ve Git Gecmisini Cek (Checkout)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Gitleaks ile Hassas Veri Taramasi Yap
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_CONFIG: .gitleaks.toml
+
+  docker-build-check:
+    name: Docker Uretim Imajlarinin Derleme Kontrolu
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kaynak Kodunu Cek (Checkout)
+        uses: actions/checkout@v4
+
+      - name: Docker Buildx Kurulumu
+        uses: docker/setup-buildx-action@v3
+
+      - name: Uretim Imajlarini Derle (docker compose build)
+        run: docker compose -f docker-compose.prod.yml build
+        env:
+          DB_PASSWORD: ci_build_dummy_password
+          APPLICATION_SECURITY_JWT_SECRET_KEY: ci_build_dummy_jwt_secret_key_64_characters_long_for_hs512_verification
+          PII_ENCRYPTION_KEY: ci_build_dummy_pii_secret_key_32
+          INITIAL_ADMIN_EMAIL: admin@analyzepanel.local
+          APP_CORS_ORIGINS: http://localhost

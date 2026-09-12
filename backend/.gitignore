@@ -1,0 +1,43 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Uygulama Yapılandırması (Hassas Veriler) ###
+src/main/resources/application.properties
+src/main/resources/*.properties
+# T-069: Canlı yapılandırması ve şablon sır barındırmaz (değerler ortam değişkeninden gelir), depoda durur.
+!src/main/resources/application-prod.properties
+!src/main/resources/application.properties.example
+src/main/resources/*.yml
+src/main/resources/*.yaml
+uploads/

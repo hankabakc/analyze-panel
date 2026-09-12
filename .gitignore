@@ -1,0 +1,82 @@
+# ============================================================
+# SIRLAR — yigindan bagimsiz, her projede gecerli (ENG-10 §1)
+# ============================================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.mobileprovision
+secrets.*
+credentials.json
+**/serviceAccountKey.json
+google-services.json
+GoogleService-Info.plist
+
+# ============================================================
+# OGRENCI VERISI — asla commit edilmez (APP-03 §4)
+# ============================================================
+# Yuklenen karne PDF'leri gercek ogrenci verisi tasir.
+uploads/
+restore_test_uploads/
+backups/
+*.pdf
+*.dump
+*.enc
+!docs/**/*.pdf
+
+# ============================================================
+# ARAC YEREL AYARLARI
+# ============================================================
+**/.claude/settings.local.json
+.idea/
+*.iml
+.vscode/
+!.vscode/settings.json
+*.swp
+
+# ============================================================
+# ISLETIM SISTEMI
+# ============================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============================================================
+# LOG VE GECICI
+# ============================================================
+*.log
+logs/
+tmp/
+temp/
+scratch/
+
+# ============================================================
+# YIGINA OZEL — Java / Maven
+# ============================================================
+target/
+*.class
+.mvn/wrapper/maven-wrapper.jar
+
+# ============================================================
+# YIGINA OZEL — Node / Vite
+# ============================================================
+node_modules/
+dist/
+dist-ssr/
+coverage/
+*.local
+
+# ============================================================
+# GELISTIRME NOTLARI (depoya girmez)
+# ============================================================
+amac.txt
+fazlar.txt
+edumatch-ui-style.skill
+edumatch-ui-style.zip
+edumatch_skill_content/
+incele/
