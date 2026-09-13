@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { useSiteContent } from "../site-content-context";
-import { text } from "../siteContent";
+import { LOGIN_BUTTON_LABEL, text } from "../siteContent";
 
 /** Üst menüdeki bilgi sayfaları (S-026). */
 const NAV_ITEMS = [
@@ -28,7 +28,7 @@ const mobileLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 /**
  * PublicLayout: Genel sitenin üst menüsü, mobil menüsü ve alt bilgisi (T-063B / S-026).
- * Oturumsuz ziyaretçiye "Giriş yap", giriş yapmış kullanıcıya "Panele dön" gösterilir.
+ * Oturumsuz ziyaretçiye "Öğrenci / Öğretmen Girişi", giriş yapmış kullanıcıya "Panele dön" gösterilir (T-085).
  * Dar ekranda (375 px) taşmasın diye hesap bağlantısı mobil menüye alınır.
  */
 export function PublicLayout() {
@@ -48,7 +48,7 @@ export function PublicLayout() {
   const homePath = isAuthenticated ? "/karsilama" : "/";
   const account = isAuthenticated
     ? { to: "/", label: "Panele dön" }
-    : { to: "/giris", label: "Giriş yap" };
+    : { to: "/giris", label: LOGIN_BUTTON_LABEL };
 
   return (
     <div className="flex min-h-screen flex-col bg-[#F8FAFC] text-slate-900">

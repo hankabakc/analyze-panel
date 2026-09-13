@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Home, HelpCircle, Mail, Sparkles, ArrowRight, ShieldAlert } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
+import { LOGIN_BUTTON_LABEL } from "../siteContent";
 import { useDocumentTitle } from "../useDocumentTitle";
 
 const FOCUS_RING =
@@ -54,7 +55,7 @@ export default function NotFoundPage() {
             to="/giris"
             className={`inline-flex h-12 items-center gap-3 rounded-2xl border border-slate-200 bg-white px-6 text-[11px] font-black uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-slate-50 ${FOCUS_RING}`}
           >
-            Giriş Yap
+            {LOGIN_BUTTON_LABEL}
           </Link>
         )}
       </div>

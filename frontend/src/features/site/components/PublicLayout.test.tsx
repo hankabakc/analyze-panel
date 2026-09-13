@@ -35,15 +35,15 @@ describe("PublicLayout", () => {
     expect(screen.getByRole("link", { name: "İçeriğe geç" })).toHaveAttribute("href", "#site-icerik");
   });
 
-  it("oturumsuz ziyaretçiye Giriş yap, giriş yapmış kullanıcıya Panele dön gösterir", () => {
+  it("oturumsuz ziyaretçiye Öğrenci / Öğretmen Girişi, giriş yapmış kullanıcıya Panele dön gösterir", () => {
     auth.isAuthenticated = false;
     const { unmount } = renderLayout({ status: "ready", content: {} });
-    screen.getAllByRole("link", { name: "Giriş yap" }).forEach((link) => expect(link).toHaveAttribute("href", "/giris"));
+    screen.getAllByRole("link", { name: "Öğrenci / Öğretmen Girişi" }).forEach((link) => expect(link).toHaveAttribute("href", "/giris"));
     unmount();
 
     auth.isAuthenticated = true;
     renderLayout({ status: "ready", content: {} });
-    expect(screen.queryByRole("link", { name: "Giriş yap" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Öğrenci / Öğretmen Girişi" })).not.toBeInTheDocument();
     screen.getAllByRole("link", { name: "Panele dön" }).forEach((link) => expect(link).toHaveAttribute("href", "/"));
     auth.isAuthenticated = false;
   });

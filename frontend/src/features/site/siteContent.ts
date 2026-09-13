@@ -64,3 +64,11 @@ export function mailtoHref(email: string): string | null {
   const address = email.trim();
   return /^[^\s@<>"'()]+@[^\s@<>"'()]+\.[^\s@<>"'()]+$/.test(address) ? `mailto:${address}` : null;
 }
+
+/** Oturumsuz ziyaretçiyi /giris sayfasına yönlendiren buton ve bağlantıların ortak adı (T-085). */
+export const LOGIN_BUTTON_LABEL = "Öğrenci / Öğretmen Girişi";
+
+/** Giriş formunun altındaki sabit kurumsal hesap bilgilendirme notu (T-085). */
+export const LOGIN_ACCOUNT_NOTICE =
+  "Hesabınız yok mu? Hesaplar kurum tarafından verilir; bu sayfadan hesap açılamaz.";
+

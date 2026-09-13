@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { AuthController } from "@/features/auth/components/AuthForms";
+import { LOGIN_ACCOUNT_NOTICE } from "../siteContent";
 import { useDocumentTitle } from "../useDocumentTitle";
 
 /**
  * LoginPage: Giriş ekranı artık /giris adresinde (T-063B / S-026). Görünüm önceki giriş ekranıyla aynıdır;
  * yalnızca siteye dönüş bağlantısı eklendi.
+ * T-085: Giriş formunun altında kurumsal hesap bilgilendirme notu yer alır.
  */
 export default function LoginPage() {
   useDocumentTitle("Giriş");
@@ -28,6 +30,11 @@ export default function LoginPage() {
           </p>
         </div>
         <AuthController />
+        <div className="-mt-6 max-w-md px-4 text-center">
+          <p className="text-xs sm:text-sm font-medium leading-relaxed text-slate-600">
+            {LOGIN_ACCOUNT_NOTICE}
+          </p>
+        </div>
         <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300">Analysis Platform &bull; Core System</p>
       </div>
     </div>

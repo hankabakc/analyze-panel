@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { NetStripe } from "../components/NetStripe";
 import { Prose, SiteContentGate } from "../components/SiteBlocks";
-import { SITE_FEATURES, text } from "../siteContent";
+import { LOGIN_BUTTON_LABEL, SITE_FEATURES, text } from "../siteContent";
 import type { SiteContent } from "../siteContent";
 import { useDocumentTitle } from "../useDocumentTitle";
 
@@ -27,7 +27,7 @@ function HomeContent({ content }: { content: SiteContent }) {
   const intro = text(content, "home.intro");
   const account = isAuthenticated
     ? { to: "/", label: "Panele dön" }
-    : { to: "/giris", label: "Giriş yap" };
+    : { to: "/giris", label: LOGIN_BUTTON_LABEL };
 
   return (
     <>
@@ -121,7 +121,7 @@ function HomeContent({ content }: { content: SiteContent }) {
               to="/giris"
               className="inline-flex h-14 shrink-0 items-center justify-center rounded-2xl bg-cyan-500 px-7 text-[11px] font-black uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-cyan-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
             >
-              Giriş yap
+              {LOGIN_BUTTON_LABEL}
             </Link>
           </div>
         </section>

@@ -45,7 +45,7 @@ describe("HomePage", () => {
   it("oturumsuz ziyaretçiye giriş bağlantısı, giriş yapmış kullanıcıya panel bağlantısı verir", () => {
     auth.isAuthenticated = false;
     const { unmount } = renderWithSiteContent(<HomePage />, ready({}));
-    const loginLinks = screen.getAllByRole("link", { name: /Giriş yap/ });
+    const loginLinks = screen.getAllByRole("link", { name: /Öğrenci \/ Öğretmen Girişi/ });
     expect(loginLinks.length).toBe(2);
     loginLinks.forEach((link) => expect(link).toHaveAttribute("href", "/giris"));
     unmount();
@@ -53,7 +53,7 @@ describe("HomePage", () => {
     auth.isAuthenticated = true;
     renderWithSiteContent(<HomePage />, ready({}));
     expect(screen.getByRole("link", { name: /Panele dön/ })).toHaveAttribute("href", "/");
-    expect(screen.queryByRole("link", { name: /Giriş yap/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /Öğrenci \/ Öğretmen Girişi/ })).not.toBeInTheDocument();
     auth.isAuthenticated = false;
   });
 
