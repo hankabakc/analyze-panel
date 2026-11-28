@@ -96,6 +96,44 @@ public final class SyntheticKarneBuilder {
     }
 
     /**
+     * createPageBreakKarnePdf: Ana konusu 1. sayfada başlayıp yaprakları 2. sayfada devam eden
+     * karne. Gerçek karnelerde kolon/sayfa geçişinde aynı durum oluşur.
+     */
+    public static byte[] createPageBreakKarnePdf() throws IOException {
+        try (PDDocument doc = new PDDocument()) {
+            PDPage page1 = new PDPage();
+            PDPage page2 = new PDPage();
+            doc.addPage(page1);
+            doc.addPage(page2);
+            PDType0Font font = loadFont(doc, "/fonts/Roboto-Regular.ttf");
+            PDType0Font fontBold = loadFont(doc, "/fonts/Roboto-Bold.ttf");
+
+            try (PDPageContentStream cs = new PDPageContentStream(doc, page1)) {
+                writeText(cs, font, 8, 30, 750, "1 DENEME SINAVI 15.01.2026 80,00");
+                writeText(cs, fontBold, 8, 30, 700, "Konu Adı");
+                writeText(cs, fontBold, 8, 150, 700, "SS");
+                writeText(cs, fontBold, 8, 180, 700, "D");
+                writeText(cs, fontBold, 8, 210, 700, "Y");
+                writeText(cs, fontBold, 8, 240, 700, "B");
+                writeText(cs, fontBold, 8, 270, 700, "Baş.(%)");
+                writeTableRow(cs, fontBold, 8, 30, 675, "Fen Bilimleri( LGS-FEN )", "20", "15", "3", "2", "75");
+                writeTableRow(cs, font, 8, 30, 655, "Basınç", "20", "15", "3", "2", "75");
+                writeTableRow(cs, font, 8, 36, 635, "Katı Basıncı", "10", "8", "1", "1", "80");
+            }
+            try (PDPageContentStream cs = new PDPageContentStream(doc, page2)) {
+                // 2. sayfa ana konu satırı olmadan devam eden yaprakla başlar
+                writeTableRow(cs, font, 8, 36, 750, "Sıvı Basıncı", "10", "7", "2", "1", "70");
+                writeTableRow(cs, fontBold, 8, 30, 730, "Matematik( LGS-MAT )", "10", "5", "3", "2", "50");
+                writeTableRow(cs, font, 8, 30, 710, "Üslü İfadeler", "10", "5", "3", "2", "50");
+                writeTableRow(cs, font, 8, 36, 690, "Üslü İfadeler", "10", "5", "3", "2", "50");
+            }
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            doc.save(baos);
+            return baos.toByteArray();
+        }
+    }
+
+    /**
      * createDummyPdf: Geçerli bir PDF belgesi olan ancak Sinavza karne düzenine
      * sahip olmayan sıradan bir metin PDF'i üretir. Tanınmayan format testlerinde kullanılır.
      */

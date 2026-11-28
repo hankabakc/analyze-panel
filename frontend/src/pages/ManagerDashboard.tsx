@@ -516,7 +516,7 @@ export default function ManagerDashboard() {
              </div>
 
              {/* Aktif Kullanıcı Listeleri */}
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+             <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 pt-4">
                 {/* Öğretmenler */}
                 <div className="bg-white rounded-xl p-8 shadow-sm border border-slate-50 space-y-4">
                   <h3 className="text-lg font-semibold text-slate-900 tracking-tight flex items-center justify-between">

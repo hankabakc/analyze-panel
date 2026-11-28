@@ -94,6 +94,18 @@ class SinavzaKarneParserTest {
         }
     }
 
+    /** Sayfa geçişinde devam eden yaprak, ana konusunu kaybetmemeli. */
+    @Test
+    void anaKonuSayfaGecisindeKorunur() throws IOException {
+        AnalysisResponse result = parser.parse(SyntheticKarneBuilder.createPageBreakKarnePdf(), 1);
+
+        assertTrue(result.validationErrors().isEmpty(), result.validationErrors());
+        AnalysisResponse.LessonDto fen = result.consolidatedResult().lessons().stream()
+                .filter(l -> l.lessonName().equals("Fen Bilimleri")).findFirst().orElseThrow();
+        assertEquals(List.of("Basınç - Katı Basıncı", "Basınç - Sıvı Basıncı"),
+                fen.topics().stream().map(AnalysisResponse.TopicDto::topicName).toList());
+    }
+
     /**
      * taninmayanFormatHataFirlatir: Desteklenmeyen veya genel formatlı bir PDF verildiğinde
      * sistemin sessizce başarısız olmak yerine açıklayıcı IllegalArgumentException

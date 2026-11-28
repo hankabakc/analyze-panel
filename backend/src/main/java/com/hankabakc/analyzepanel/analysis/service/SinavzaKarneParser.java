@@ -354,6 +354,9 @@ public class SinavzaKarneParser {
     private List<Lesson> readLessons(List<List<Glyph>> pages, Layout layout) {
         List<Lesson> lessons = new ArrayList<>();
         Lesson current = null;
+        // Ders gibi ana konu da kolon/sayfa geçişinde devam eder; sıfırlanırsa devam eden
+        // yapraklar ana konusuz kaydedilir ("Basınç - Sıvı Basıncı" yerine "Sıvı Basıncı").
+        String mainTopic = null;
 
         for (List<Glyph> page : pages) {
             List<List<Glyph>> rows = rowsOf(page);
@@ -382,7 +385,6 @@ public class SinavzaKarneParser {
                 float base = Float.MAX_VALUE;
                 for (Row r : parsed) base = Math.min(base, r.x0());
 
-                String mainTopic = null;
                 for (Row r : parsed) {
                     if (r.bold()) {                               // ders başlığı: "Türkçe( LGS-TRK )"
                         current = new Lesson(
