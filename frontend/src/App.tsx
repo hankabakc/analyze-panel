@@ -27,7 +27,6 @@ const ManagerDashboard = lazy(() => import('./pages/ManagerDashboard'));
 const TeacherDashboard = lazy(() => import('./pages/TeacherDashboard'));
 const StudentDashboard = lazy(() => import('./pages/StudentDashboard'));
 const AnalysisDetail = lazy(() => import('./pages/AnalysisDetail'));
-const CumulativeAnalysis = lazy(() => import('./pages/CumulativeAnalysis'));
 const LeaderboardPage = lazy(() => import('./pages/LeaderboardPage'));
 const ReportsPage = lazy(() => import('./pages/ReportsPage'));
 
@@ -215,7 +214,7 @@ export function AppRoutes() {
             <Route path="/raporlar" element={<ReportsPage />} />
             <Route path="/sifre-degistir" element={<ChangePasswordScreen />} />
             <Route path="/analysis/:reportId" element={<AnalysisDetail />} />
-            <Route path="/analysis/cumulative/:studentId" element={<CumulativeAnalysis />} />
+            <Route path="/analysis/cumulative/:studentId" element={<AnalysisDetail />} />
           </Route>
         </>
       )}

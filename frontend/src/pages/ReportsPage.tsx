@@ -101,7 +101,7 @@ export default function ReportsPage() {
               onClick={() => navigate(`/analysis/cumulative/${user.id}`)}
               className="tap-44 self-start md:self-auto bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold text-xs tracking-normal hover:bg-cyan-700 transition-all shadow-sm shadow-cyan-100 flex items-center gap-2"
             >
-              <Layers className="h-4 w-4" /> Gelişim Dosyası
+              <Layers className="h-4 w-4" /> Gelişim dosyası
             </button>
           )}
         </div>
@@ -129,7 +129,7 @@ export default function ReportsPage() {
                     <div className="min-w-0">
                       <h4 className="text-base sm:text-lg font-semibold text-slate-900 tracking-tight truncate">{report.examTitle}</h4>
                       <p className="text-sm text-slate-500 mt-1 truncate">
-                        {new Date(report.processedAt).toLocaleDateString("tr-TR")} • {report.intendedExamCount} Deneme Verisi
+                        Yüklendi {new Date(report.processedAt).toLocaleDateString("tr-TR")}
                       </p>
                     </div>
                   </div>
@@ -224,7 +224,7 @@ export default function ReportsPage() {
                     onClick={() => navigate(`/analysis/cumulative/${selectedStudentId}`)}
                     className="tap-44 self-start sm:self-auto bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold text-xs tracking-normal hover:bg-indigo-700 transition-all shadow-sm shadow-indigo-100 flex items-center gap-2"
                   >
-                    <Layers className="h-4 w-4" /> Gelişim Dosyası
+                    <Layers className="h-4 w-4" /> Gelişim dosyası
                   </button>
                 )}
               </div>
@@ -284,10 +284,7 @@ export default function ReportsPage() {
                               </span>
                             </div>
                             <p className="text-sm text-slate-500 mt-1">
-                              {new Date(report.processedAt).toLocaleDateString("tr-TR")} •{" "}
-                              {report.intendedExamCount > 0
-                                ? `${report.intendedExamCount} Deneme Verisi`
-                                : "Tür Tespit Ediliyor..."}
+                              Yüklendi {new Date(report.processedAt).toLocaleDateString("tr-TR")}
                             </p>
                           </div>
                         </div>

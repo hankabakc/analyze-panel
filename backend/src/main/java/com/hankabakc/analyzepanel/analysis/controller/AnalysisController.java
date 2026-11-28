@@ -123,14 +123,4 @@ public class AnalysisController {
     public ApiResponse<AnalysisResponse> getCumulativeProfile(@PathVariable UUID studentId) {
         return ApiResponse.success(analysisService.getStudentCumulativeProfile(studentId), "Kümülatif profil getirildi.");
     }
-
-    @PostMapping("/merge-cumulative/{studentId}")
-    public ApiResponse<String> mergeCumulative(@PathVariable UUID studentId) {
-        return ApiResponse.success(analysisService.mergeReportsToCumulative(studentId), "Raporlar harmanlandı.");
-    }
-
-    @PostMapping("/global-summary/{studentId}")
-    public ApiResponse<String> getGlobalSummary(@PathVariable UUID studentId) {
-        return ApiResponse.success(analysisService.generateGlobalStrategicSummary(studentId), "Global özet oluşturuldu.");
-    }
 }

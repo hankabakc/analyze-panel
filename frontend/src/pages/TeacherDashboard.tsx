@@ -1586,7 +1586,7 @@ export default function TeacherDashboard() {
                           onClick={() => navigate(`/analysis/cumulative/${selectedStudentId}`)}
                           className="tap-44 min-h-[44px] self-start sm:self-auto bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold text-xs tracking-normal hover:bg-indigo-700 transition-all shadow-sm shadow-indigo-100 flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
                         >
-                          <Layers className="h-4 w-4" /> Tüm PDF'lerin Analizi
+                          <Layers className="h-4 w-4" /> Gelişim dosyası
                         </button>
                      </div>
                      {reports.length === 0 ? (
@@ -1621,7 +1621,7 @@ export default function TeacherDashboard() {
                                         </span>
                                      </div>
                                      <p className="text-sm text-slate-500 mt-1 truncate">
-                                        {new Date(report.processedAt).toLocaleDateString('tr-TR')} • {(report.intendedExamCount ?? 0) > 0 ? `${report.intendedExamCount} Deneme Verisi` : "Tür Tespit Ediliyor..."}
+                                        Yüklendi {new Date(report.processedAt).toLocaleDateString('tr-TR')}
                                      </p>
                                   </div>
                                </div>

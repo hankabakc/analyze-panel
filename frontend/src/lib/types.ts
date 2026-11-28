@@ -94,7 +94,6 @@ export interface AnalysisReportSummary {
   intendedExamCount: number | null;
   reportType: string;
   validationErrors?: string | null;
-  cumulativeStatus?: 'INCLUDED' | 'NOT_INCLUDED' | null;
 }
 
 /** ReferenceSchool: Hedef okul aramasında dönen okul kaydı. */

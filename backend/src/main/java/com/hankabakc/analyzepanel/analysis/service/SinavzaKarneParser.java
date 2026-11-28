@@ -128,7 +128,7 @@ public class SinavzaKarneParser {
 
         return new AnalysisResponse(
                 null, null,
-                "Birleştirilmiş Karne (" + examCount + " Deneme)",
+                title(exams, examCount),
                 null, null,
                 examCount,
                 validate(lessons),
@@ -145,6 +145,34 @@ public class SinavzaKarneParser {
                 priorityLists,
                 null
         );
+    }
+
+    private static final java.time.format.DateTimeFormatter TR_DATE =
+            java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+    /**
+     * title: Karnenin adı kapsadığı tarih aralığıdır ("Karne · 07.09 – 21.09.2026 (2 deneme)").
+     * Yayınevinin "Birleştirilmiş Karne" adı, öğrencinin tüm zamanlarını toplayan gelişim
+     * dosyasıyla karışıyordu. V44 eski kayıtları aynı biçime çevirir.
+     */
+    static String title(List<AnalysisResponse.ExamSummaryDto> exams, int examCount) {
+        List<java.time.LocalDate> dates = new ArrayList<>();
+        for (AnalysisResponse.ExamSummaryDto e : exams) {
+            try {
+                dates.add(java.time.LocalDate.parse(e.examDate(), TR_DATE));
+            } catch (java.time.format.DateTimeParseException ignored) {
+                // tarihi okunamayan deneme başlığa girmez
+            }
+        }
+        String count = examCount > 1 ? " (" + examCount + " deneme)" : "";
+        if (dates.isEmpty()) return "Karne" + count;
+        java.time.LocalDate min = java.util.Collections.min(dates);
+        java.time.LocalDate max = java.util.Collections.max(dates);
+        String range = min.equals(max) ? max.format(TR_DATE)
+                : (min.getYear() == max.getYear()
+                        ? min.format(java.time.format.DateTimeFormatter.ofPattern("dd.MM"))
+                        : min.format(TR_DATE)) + " – " + max.format(TR_DATE);
+        return "Karne · " + range + count;
     }
 
     // ---------------------------------------------------------------- PDF okuma

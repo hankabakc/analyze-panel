@@ -225,8 +225,8 @@ export const analysisApi = {
     api.get<ApiResponse<AnalysisReportSummary[]>>(`/analysis/reports/${studentId}`),
 
   // Seçilen bir raporun tüm grafik ve AI detaylarını getirir
-  getAnalysisDetail: (reportId: string, cumulative: boolean = false) => 
-    api.get<ApiResponse<AnalysisData>>(`/analysis/details/${reportId}?cumulative=${cumulative}`),
+  getAnalysisDetail: (reportId: string) => 
+    api.get<ApiResponse<AnalysisData>>(`/analysis/details/${reportId}`),
 
   // Bekleyen analizi onaylar ve öğrenciye gönderir
   approveReport: (reportId: string) => 
@@ -254,14 +254,8 @@ export const analysisApi = {
     return api.post<ApiResponse<void>>(`/analysis/profile?${params.toString()}`);
   },
 
-  getGlobalSummary: (studentId: string) => 
-    api.post<ApiResponse<string>>(`/analysis/global-summary/${studentId}`),
-
   getCumulativeProfile: (studentId: string) => 
-    api.get<ApiResponse<AnalysisData>>(`/analysis/profile/cumulative/${studentId}`),
-
-  mergeCumulative: (studentId: string) => 
-    api.post<ApiResponse<string>>(`/analysis/merge-cumulative/${studentId}`)
+    api.get<ApiResponse<AnalysisData>>(`/analysis/profile/cumulative/${studentId}`)
 };
 
 /**

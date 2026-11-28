@@ -94,6 +94,19 @@ class SinavzaKarneParserTest {
         }
     }
 
+    /** Karne adı kapsadığı tarih aralığıdır; "Birleştirilmiş" adı gelişim dosyasıyla karışıyordu. */
+    @Test
+    void karneAdiTarihAraligidir() {
+        var e = (java.util.function.Function<String, AnalysisResponse.ExamSummaryDto>)
+                d -> new AnalysisResponse.ExamSummaryDto("D", d, BigDecimal.ONE);
+        assertEquals("Karne · 07.09 – 21.09.2026 (2 deneme)",
+                SinavzaKarneParser.title(List.of(e.apply("21.09.2026"), e.apply("07.09.2026")), 2));
+        assertEquals("Karne · 20.12.2025 – 10.01.2026 (2 deneme)",
+                SinavzaKarneParser.title(List.of(e.apply("20.12.2025"), e.apply("10.01.2026")), 2));
+        assertEquals("Karne · 15.01.2026", SinavzaKarneParser.title(List.of(e.apply("15.01.2026")), 1));
+        assertEquals("Karne (3 deneme)", SinavzaKarneParser.title(List.of(), 3));
+    }
+
     /** Sayfa geçişinde devam eden yaprak, ana konusunu kaybetmemeli. */
     @Test
     void anaKonuSayfaGecisindeKorunur() throws IOException {

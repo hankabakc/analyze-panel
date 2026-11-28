@@ -21,7 +21,6 @@ vi.mock("./pages/StudentDashboard", () => ({ default: () => <p>Öğrenci paneli<
 vi.mock("./pages/ReportsPage", () => ({ default: () => <p>Raporlar sayfası</p> }));
 vi.mock("./pages/LeaderboardPage", () => ({ default: () => <p>Liderlik sayfası</p> }));
 vi.mock("./pages/AnalysisDetail", () => ({ default: () => <p>Analiz sayfası</p> }));
-vi.mock("./pages/CumulativeAnalysis", () => ({ default: () => <p>Gelişim sayfası</p> }));
 vi.mock("./features/auth/components/MustChangePasswordScreen", () => ({
   MustChangePasswordScreen: () => <p>Zorunlu şifre değiştirme ekranı</p>,
 }));

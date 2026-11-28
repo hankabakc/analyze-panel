@@ -57,9 +57,6 @@ public class AnalysisReport {
     @Column(name = "teacher_action_plan", columnDefinition = "TEXT")
     private String teacherActionPlan;
 
-    @Column(name = "cumulative_status", length = 20)
-    private String cumulativeStatus; // INCLUDED, NOT_INCLUDED
-
     /* No-args constructor (JPA için gerekli) */
     public AnalysisReport() {
     }
@@ -74,11 +71,7 @@ public class AnalysisReport {
         this.status = "PROCESSING";
         this.intendedExamCount = intendedExamCount;
         this.reportType = "SINGLE"; // Varsayılan
-        this.cumulativeStatus = "NOT_INCLUDED";
     }
-
-    public String getCumulativeStatus() { return cumulativeStatus; }
-    public void setCumulativeStatus(String cumulativeStatus) { this.cumulativeStatus = cumulativeStatus; }
 
     /* Getter ve Setter Metotları */
     public String getReportType() { return reportType; }

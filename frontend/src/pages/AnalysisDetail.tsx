@@ -2,7 +2,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { analysisApi } from "@/lib/api";
 import { useAuth } from "@/lib/auth-context";
-import { PriorityTopics } from "@/features/analysis/components/PriorityTopics"; 
+import { PriorityTopics } from "@/features/analysis/components/PriorityTopics";
+import { TopicTrendSection } from "@/features/analysis/components/TopicTrendSection";
 import { toast } from "sonner";
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, 
@@ -18,15 +19,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import type { AnalysisData, ReferenceSchool, TopicDetail } from "@/lib/types";
 
 export default function AnalysisDetail() {
-  const { reportId } = useParams();
+  // İki görünüm: tek karne (/analysis/:reportId) veya öğrencinin gelişim dosyası (/analysis/cumulative/:studentId)
+  const { reportId, studentId } = useParams();
+  const isCumulative = Boolean(studentId);
   const navigate = useNavigate();
   const { user } = useAuth(); 
   const [data, setData] = useState<AnalysisData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   
-  // GÖRÜNÜM MODU STATE (TEKİL VS KÜMÜLATİF)
-  const [isCumulative, setIsCumulative] = useState(false);
-
   const [activeTab, setActiveTab] = useState<'PERFORMANCE' | 'MENTOR' | 'TARGET'>('PERFORMANCE');
   const [performanceView, setPerformanceView] = useState<'DATE' | 'NET'>('DATE');
   
@@ -41,9 +41,11 @@ export default function AnalysisDetail() {
   const [searchResults, setSearchResults] = useState<ReferenceSchool[]>([]);
 
   const fetchDetail = useCallback(async () => {
-    if (!reportId) return;
     try {
-      const response = await analysisApi.getAnalysisDetail(reportId, isCumulative);
+      const response = studentId
+        ? await analysisApi.getCumulativeProfile(studentId)
+        : reportId ? await analysisApi.getAnalysisDetail(reportId) : null;
+      if (!response) return;
       if (response.data.success) {
         const reportData = response.data.data;
         setData(reportData);
@@ -53,7 +55,7 @@ export default function AnalysisDetail() {
     } finally {
       setIsLoading(false);
     }
-  }, [reportId, isCumulative]);
+  }, [reportId, studentId]);
 
   const handleSchoolSearch = async (query: string) => {
     setSearchQuery(query);
@@ -175,18 +177,14 @@ export default function AnalysisDetail() {
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <button onClick={() => navigate(-1)} className="tap-44 min-h-[44px] flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-900 transition-colors"><ChevronLeft className="h-4 w-4" /> Geri</button>
-          {(user?.role === 'TEACHER' || user?.role === 'MANAGER') && <button onClick={handleDelete} aria-label="Raporu Sil" title="Raporu sil" className="tap-44 min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-400 hover:text-red-600 rounded-md transition-colors"><Trash2 className="h-4 w-4" /></button>}
+          {!isCumulative && (user?.role === 'TEACHER' || user?.role === 'MANAGER') && <button onClick={handleDelete} aria-label="Raporu Sil" title="Raporu sil" className="tap-44 min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-400 hover:text-red-600 rounded-md transition-colors"><Trash2 className="h-4 w-4" /></button>}
         </div>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5">
           <div className="min-w-0">
             <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight truncate">{isCumulative ? "Gelişim dosyası" : data.examTitle}</h2>
-            <p className="text-sm text-slate-500 mt-1 truncate">{isCumulative ? "Onaylı tüm karnelerin birleşimi" : (data.reportType === 'SUMMARY' ? "Birden çok denemenin özeti" : 'Tek deneme analizi')}</p>
+            <p className="text-sm text-slate-500 mt-1 truncate">{isCumulative ? "Öğrencinin onaylanmış bütün karneleri, tek yerde" : "Bu karnedeki denemeler"}</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <div className="flex bg-slate-100 p-1 rounded-lg shrink-0">
-              <button onClick={() => setIsCumulative(false)} className={`tap-44 px-3 py-1.5 rounded-md text-sm transition-colors ${!isCumulative ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-900'}`}>Sınav karnesi</button>
-              <button onClick={() => setIsCumulative(true)} className={`tap-44 px-3 py-1.5 rounded-md text-sm transition-colors ${isCumulative ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-900'}`}>Gelişim dosyası</button>
-            </div>
             {user?.role === 'TEACHER' && data.status === 'PENDING_APPROVAL' && (
               <>
                 <button onClick={handleReject} className="tap-44 h-9 px-4 rounded-md border border-slate-300 bg-white text-sm text-slate-700 hover:bg-slate-50 transition-colors">Reddet</button>
@@ -292,6 +290,8 @@ export default function AnalysisDetail() {
              </div>
           </div>
         )}
+
+        {activeTab === 'PERFORMANCE' && isCumulative && <div className="mt-8"><TopicTrendSection data={data} /></div>}
 
         {activeTab === 'MENTOR' && (
           <div className="space-y-8">

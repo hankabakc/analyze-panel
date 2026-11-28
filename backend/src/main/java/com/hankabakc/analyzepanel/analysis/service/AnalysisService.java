@@ -286,23 +286,19 @@ public class AnalysisService {
                 .filter(r -> "APPROVED".equals(r.getStatus())).toList(); 
     }
 
-    @Transactional
-    public String mergeReportsToCumulative(UUID studentId) {
-        validateAccess(studentId); // IDOR Kontrolü
-        List<AnalysisReport> pendingReports = reportRepository.findAllByStudentIdOrderByProcessedAtDesc(studentId)
-                .stream().filter(r -> "APPROVED".equals(r.getStatus()) && "NOT_INCLUDED".equals(r.getCumulativeStatus())).toList();
-        if (pendingReports.isEmpty()) return generateGlobalStrategicSummary(studentId);
-        for (var report : pendingReports) {
-            report.setCumulativeStatus("INCLUDED");
-            reportRepository.save(report);
-        }
-        return generateGlobalStrategicSummary(studentId);
-    }
-
     @Transactional(readOnly = true)
     public AnalysisResponse getStudentCumulativeProfile(UUID studentId) {
         validateAccess(studentId); // IDOR Kontrolü
+        return cumulativeResponse(studentId, null, null, java.time.LocalDateTime.now());
+    }
 
+    /**
+     * cumulativeResponse: Gelişim dosyası - öğrencinin ONAYLI tüm karnelerinin toplamı.
+     * Karne onaylandığı anda dahil olur; ayrıca "ekleme" adımı yoktur. Öğrenci sayfası ve
+     * rapor üzerinden açılan görünüm aynı veriyi buradan alır.
+     */
+    private AnalysisResponse cumulativeResponse(UUID studentId, UUID reportId, String fileName,
+                                                java.time.LocalDateTime processedAt) {
         StudentProfile profile = profileRepository.findByUserId(studentId).orElse(null);
         String targetName = null; java.math.BigDecimal targetScore = null;
         if (profile != null && profile.getTargetSchoolId() != null) {
@@ -310,32 +306,58 @@ public class AnalysisService {
             if (school != null) { targetName = school.getSchoolName(); targetScore = school.getBaseScore(); }
         }
 
+        // T-025 / B-55 & B-56: yalnızca ONAYLI raporlar; onaylı rapor yoksa boş ve bilgilendirici durum.
         @SuppressWarnings("unchecked")
         List<Object[]> approvedReports = entityManager.createNativeQuery(
             "SELECT ar.id FROM analysis_reports ar WHERE ar.student_id = :sid AND ar.status = 'APPROVED'")
             .setParameter("sid", studentId).getResultList();
 
         if (approvedReports.isEmpty()) {
-            return new AnalysisResponse(null, null, "GENEL GELİŞİM DOSYASI", java.time.LocalDateTime.now(), "APPROVED", 0, null, "SUMMARY", "Henüz onaylanmış bir analiz raporu bulunmuyor.", null, "Henüz onaylanmış rapor bulunmuyor.", null, targetName, targetScore, List.of(), new AnalysisResponse.ConsolidatedResultDto(List.of()), "Henüz onaylanmış bir analiz raporu bulunmuyor.", new AnalysisResponse.TopicTrendDataDto(List.of(), List.of(), List.of(), List.of()), new AnalysisResponse.PriorityListsDto(List.of(), List.of()), null);
+            return new AnalysisResponse(
+                reportId, fileName, "Gelişim dosyası", processedAt, "APPROVED", 0, null, "SUMMARY",
+                "Henüz onaylanmış bir analiz raporu bulunmuyor.",
+                null,
+                "Henüz onaylanmış rapor bulunmuyor.",
+                "Öğrenciye ait onaylanmış analiz raporu bulunmadığı için gelişim dosyası oluşturulamadı.",
+                targetName, targetScore, List.of(),
+                new AnalysisResponse.ConsolidatedResultDto(List.of()),
+                "Henüz onaylanmış bir analiz raporu bulunmuyor.",
+                null,
+                new AnalysisResponse.PriorityListsDto(List.of(), List.of()),
+                null);
         }
 
         @SuppressWarnings("unchecked")
-        List<Object[]> allExamsRows = entityManager.createNativeQuery(
-            "SELECT es.exam_name, es.exam_date, es.total_score FROM exam_summaries es " +
-            "JOIN analysis_reports ar ON es.report_id = ar.id WHERE ar.student_id = :sid AND ar.status = 'APPROVED' ORDER BY es.exam_date ASC")
+        List<Object[]> approvedExamsRows = entityManager.createNativeQuery(
+            "SELECT es.exam_name, es.exam_date, es.total_score " +
+            "FROM exam_summaries es " +
+            "JOIN analysis_reports ar ON es.report_id = ar.id " +
+            "WHERE ar.student_id = :sid AND ar.status = 'APPROVED' " +
+            "ORDER BY es.exam_date ASC")
             .setParameter("sid", studentId).getResultList();
 
-        List<AnalysisResponse.ExamSummaryDto> examList = allExamsRows.stream()
-            .map(row -> new AnalysisResponse.ExamSummaryDto((String) row[0], ExamDate.format(row[1]), (java.math.BigDecimal) row[2])).toList();
+        List<AnalysisResponse.ExamSummaryDto> examList = approvedExamsRows.stream()
+            .map(row -> new AnalysisResponse.ExamSummaryDto((String) row[0], ExamDate.format(row[1]), (java.math.BigDecimal) row[2]))
+            .toList();
 
         List<AnalysisResponse.LessonDto> lessonDtos = cumulativeLessonDtos(studentId);
-
-        // 4. KONU BAZLI TREND ANALİZİ (KRONİK MOTORU)
         AnalysisResponse.TopicTrendDataDto trendData = calculateTopicTrendData(studentId);
         java.util.Set<String> chronicSet = new java.util.HashSet<>(trendData.chronicTopics());
-        AnalysisResponse.TargetComparisonDto targetComparison = calculateTargetComparison(targetName, targetScore, examList);
+        String globalFeedback = generateGlobalStrategicSummary(studentId);
+        AnalysisResponse.PriorityListsDto priorityLists = TopicPriority.of(lessonDtos, lgsCalculator.getPuanPerNet(), chronicSet);
 
-        return new AnalysisResponse(null, null, "GENEL GELİŞİM DOSYASI", java.time.LocalDateTime.now(), "APPROVED", examList.size(), null, "SUMMARY", null, null, null, null, targetName, targetScore, examList, new AnalysisResponse.ConsolidatedResultDto(lessonDtos), "Öğrencinin tüm zamanlardaki performans özetidir.", trendData, TopicPriority.of(lessonDtos, lgsCalculator.getPuanPerNet(), chronicSet), targetComparison);
+        return new AnalysisResponse(
+            reportId, fileName, "Gelişim dosyası", processedAt, "APPROVED", examList.size(), null, "SUMMARY",
+            globalFeedback,
+            null,
+            TopicPriority.strategicPriority(lessonDtos),
+            TopicPriority.teacherActionPlan(trendData.chronicTopics(), priorityLists.byPoints()),
+            targetName, targetScore, examList,
+            new AnalysisResponse.ConsolidatedResultDto(lessonDtos),
+            globalFeedback,
+            trendData,
+            priorityLists,
+            calculateTargetComparison(targetName, targetScore, examList));
     }
 
     /**
@@ -620,84 +642,7 @@ public class AnalysisService {
         }
 
         if (cumulative) {
-            // T-025 / B-55 & B-56: Kümülatif mod yalnızca ONAYLI ('APPROVED') raporları toplar.
-            // Onaylı rapor yoksa tekil raporun sayılarına geri düşülmez (B-55); boş ve bilgilendirici durum dönülür.
-            @SuppressWarnings("unchecked")
-            List<Object[]> approvedReports = entityManager.createNativeQuery(
-                "SELECT ar.id FROM analysis_reports ar WHERE ar.student_id = :sid AND ar.status = 'APPROVED'")
-                .setParameter("sid", studentId).getResultList();
-
-            if (approvedReports.isEmpty()) {
-                // Onaylı rapor yok durumu (B-55)
-                return new AnalysisResponse(
-                    report.getId(),
-                    report.getFileName(),
-                    "GELİŞİM DOSYASI (Onaylı Rapor Bulunmuyor)",
-                    report.getProcessedAt(),
-                    report.getStatus(),
-                    0,
-                    null,
-                    "SUMMARY",
-                    "Henüz onaylanmış bir analiz raporu bulunmuyor.",
-                    null,
-                    "Henüz onaylanmış rapor bulunmuyor.",
-                    "Öğrenciye ait onaylanmış analiz raporu bulunmadığı için gelişim dosyası oluşturulamadı.",
-                    targetName,
-                    targetScore,
-                    List.of(),
-                    new AnalysisResponse.ConsolidatedResultDto(List.of()),
-                    "Henüz onaylanmış bir analiz raporu bulunmuyor.",
-                    null,
-                    new AnalysisResponse.PriorityListsDto(List.of(), List.of()),
-                    null
-                );
-            }
-
-            @SuppressWarnings("unchecked")
-            List<Object[]> approvedExamsRows = entityManager.createNativeQuery(
-                "SELECT es.exam_name, es.exam_date, es.total_score " +
-                "FROM exam_summaries es " +
-                "JOIN analysis_reports ar ON es.report_id = ar.id " +
-                "WHERE ar.student_id = :sid AND ar.status = 'APPROVED' " +
-                "ORDER BY es.exam_date ASC")
-                .setParameter("sid", studentId).getResultList();
-
-            List<AnalysisResponse.ExamSummaryDto> examList = approvedExamsRows.stream()
-                .map(row -> new AnalysisResponse.ExamSummaryDto((String) row[0], ExamDate.format(row[1]), (java.math.BigDecimal) row[2]))
-                .toList();
-
-            List<AnalysisResponse.LessonDto> lessonDtos = cumulativeLessonDtos(studentId);
-
-            AnalysisResponse.TopicTrendDataDto trendData = calculateTopicTrendData(studentId);
-            java.util.Set<String> chronicSet = new java.util.HashSet<>(trendData.chronicTopics());
-            String globalFeedback = generateGlobalStrategicSummary(studentId);
-            AnalysisResponse.PriorityListsDto priorityLists = TopicPriority.of(lessonDtos, lgsCalculator.getPuanPerNet(), chronicSet);
-            String strategicPriority = TopicPriority.strategicPriority(lessonDtos);
-            String teacherActionPlan = TopicPriority.teacherActionPlan(trendData.chronicTopics(), priorityLists.byPoints());
-            AnalysisResponse.TargetComparisonDto targetComparison = calculateTargetComparison(targetName, targetScore, examList);
-
-            return new AnalysisResponse(
-                report.getId(),
-                report.getFileName(),
-                "GELİŞİM DOSYASI",
-                report.getProcessedAt(),
-                "APPROVED",
-                examList.size(),
-                null,
-                "SUMMARY",
-                globalFeedback,
-                null,
-                strategicPriority,
-                teacherActionPlan,
-                targetName,
-                targetScore,
-                examList,
-                new AnalysisResponse.ConsolidatedResultDto(lessonDtos),
-                globalFeedback,
-                trendData,
-                priorityLists,
-                targetComparison
-            );
+            return cumulativeResponse(studentId, report.getId(), report.getFileName(), report.getProcessedAt());
         }
 
         // Tekil Karne Modu (cumulative == false)

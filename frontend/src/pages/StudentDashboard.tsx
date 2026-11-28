@@ -433,7 +433,7 @@ export default function StudentDashboard() {
                           <div className="min-w-0">
                              <h4 className="text-base sm:text-lg font-semibold text-slate-900 tracking-tight truncate">{report.examTitle}</h4>
                              <p className="text-sm text-slate-500 mt-1">
-                                {new Date(report.processedAt).toLocaleDateString('tr-TR')} • {report.intendedExamCount} Deneme Verisi
+                                Yüklendi {new Date(report.processedAt).toLocaleDateString('tr-TR')}
                              </p>
                           </div>
                        </div>
