@@ -165,7 +165,7 @@ export default function AnalysisDetail() {
 
   useEffect(() => { fetchDetail(); }, [fetchDetail]);
 
-  if (isLoading) return <div className="flex-1 flex flex-col items-center justify-center gap-6 py-32"><div className="w-12 h-12 border-[6px] border-cyan-500 border-t-transparent rounded-full animate-spin"></div><p className="text-xs font-semibold tracking-normal text-slate-400">Yükleniyor...</p></div>;
+  if (isLoading) return <div className="flex-1 flex flex-col items-center justify-center gap-6 py-32"><div className="w-12 h-12 border-[6px] border-cyan-500 border-t-transparent rounded-full animate-spin"></div><p className="text-sm text-slate-500">Yükleniyor...</p></div>;
   if (!data) return null;
 
   return (
@@ -380,7 +380,7 @@ export default function AnalysisDetail() {
                              </div>
                            )}
                         </div>
-                        <p className="text-xs font-semibold text-slate-400 tracking-normal text-center">* 2025 LGS TABAN PUANLARI REFERANS ALINMAKTADIR</p>
+                        <p className="text-sm text-slate-500 text-center">* 2025 LGS TABAN PUANLARI REFERANS ALINMAKTADIR</p>
                      </div>
                   </Card>
                </div>

@@ -84,7 +84,7 @@ export function PriorityTopics({ priorityLists, onSelect, hasData = true }: Prio
     <div className="space-y-4">
       {/* Sıralama Seçici (Puana Göre / Orana Göre) */}
       <div className="flex items-center justify-between gap-3 pb-1">
-        <span className="text-xs font-semibold tracking-normal text-slate-400">
+        <span className="text-sm text-slate-500">
           {sortMode === "points" ? "Öncelik: Puan Kaybı" : "Öncelik: Başarı Oranı"}
         </span>
         <div
@@ -142,7 +142,7 @@ export function PriorityTopics({ priorityLists, onSelect, hasData = true }: Prio
               <div className="min-w-0 flex-1 space-y-2.5">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0 space-y-1">
-                    <p className="text-xs font-semibold tracking-normal text-slate-400 truncate">
+                    <p className="text-sm text-slate-500 truncate">
                       {t.lessonName}
                     </p>
                     <div className="flex flex-wrap items-center gap-2">

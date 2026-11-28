@@ -417,7 +417,7 @@ export default function PsychTestAssignmentTab({
           {isLoadingResults ? (
             <div className="py-20 flex flex-col items-center justify-center gap-4">
               <Loader2 className="h-8 w-8 text-cyan-600 animate-spin" />
-              <p className="text-xs font-semibold tracking-normal text-slate-400">Veriler Yükleniyor...</p>
+              <p className="text-sm text-slate-500">Veriler Yükleniyor...</p>
             </div>
           ) : filteredStudents.length === 0 ? (
             <Card className="rounded-xl p-12 text-center bg-white border border-slate-100 shadow-sm">
@@ -432,7 +432,7 @@ export default function PsychTestAssignmentTab({
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-[600px] sm:min-w-full">
                   <thead>
-                    <tr className="border-b border-slate-100 bg-slate-50/50 text-xs font-semibold tracking-normal text-slate-400">
+                    <tr className="border-b border-slate-100 bg-slate-50/50 text-sm text-slate-500">
                       <th className="py-4 px-6 w-14">Seç</th>
                       <th className="py-4 px-6">Öğrenci Adı</th>
                       <th className="py-4 px-6">Sınıf</th>
@@ -594,7 +594,7 @@ export default function PsychTestAssignmentTab({
           {isLoadingResults ? (
             <div className="py-20 flex flex-col items-center justify-center gap-4">
               <Loader2 className="h-8 w-8 text-purple-600 animate-spin" />
-              <p className="text-xs font-semibold tracking-normal text-slate-400">Sonuçlar Yükleniyor...</p>
+              <p className="text-sm text-slate-500">Sonuçlar Yükleniyor...</p>
             </div>
           ) : filteredResults.length === 0 ? (
             <Card
@@ -612,7 +612,7 @@ export default function PsychTestAssignmentTab({
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-[700px] sm:min-w-full">
                   <thead>
-                    <tr className="border-b border-slate-100 bg-slate-50/50 text-xs font-semibold tracking-normal text-slate-400">
+                    <tr className="border-b border-slate-100 bg-slate-50/50 text-sm text-slate-500">
                       <th className="py-4 px-6">Öğrenci Adı</th>
                       <th className="py-4 px-6">Ölçek</th>
                       <th className="py-4 px-6">Atanma / Tamamlanma</th>

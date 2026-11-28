@@ -19,7 +19,7 @@ const FOCUS_RING =
 
 const desktopLinkClass = ({ isActive }: { isActive: boolean }) =>
   `tap-44 inline-flex items-center rounded-md text-sm transition-colors ${FOCUS_RING} ${
-    isActive ? "text-cyan-700" : "text-slate-500 hover:text-slate-900"
+    isActive ? "text-slate-900 font-medium" : "text-slate-500 hover:text-slate-900"
   }`;
 
 const mobileLinkClass = ({ isActive }: { isActive: boolean }) =>

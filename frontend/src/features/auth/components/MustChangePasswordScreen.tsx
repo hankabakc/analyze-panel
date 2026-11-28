@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { 
-  KeyRound, Eye, EyeOff, 
+  Eye, EyeOff, 
   ArrowRight, Loader2, LogOut, Info, AlertTriangle 
 } from "@/components/icons";
 
@@ -73,9 +73,6 @@ export function MustChangePasswordScreen() {
           <CardContent className="p-8 sm:p-12">
             {/* Header */}
             <div className="flex flex-col items-center text-center mb-6">
-              <div className="w-20 h-20 bg-amber-50 rounded-xl flex items-center justify-center mb-4 border border-amber-100/60 shadow-inner">
-                <KeyRound className="h-9 w-9 text-amber-600" />
-              </div>
               <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
                 Şifrenizi Belirleyin
               </h2>
@@ -104,7 +101,7 @@ export function MustChangePasswordScreen() {
               {/* Yeni Şifre */}
               <div className="space-y-1.5 text-left">
                 <div className="flex items-center justify-between ml-4">
-                  <label className="text-xs font-semibold text-slate-400 tracking-normal">
+                  <label className="text-sm text-slate-500">
                     Yeni Şifre *
                   </label>
                   <span className={`text-xs font-semibold ${newPassword.length >= 12 ? "text-emerald-600" : "text-slate-400"}`}>
@@ -119,7 +116,7 @@ export function MustChangePasswordScreen() {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     disabled={isLoading}
-                    className="h-14 rounded-lg border-2 border-slate-50 bg-slate-50 focus:bg-white focus:border-slate-900 font-medium px-5 text-sm pr-12 transition-all"
+                    className="h-12 rounded-md border border-slate-300 bg-white focus:border-slate-900 px-4 text-sm pr-12 transition-colors"
                   />
                   <button
                     type="button"
@@ -134,7 +131,7 @@ export function MustChangePasswordScreen() {
 
               {/* Yeni Şifre Tekrar */}
               <div className="space-y-1.5 text-left">
-                <label className="text-xs font-semibold text-slate-400 tracking-normal ml-4">
+                <label className="text-sm text-slate-500 ml-4">
                   Yeni Şifre (Tekrar) *
                 </label>
                 <div className="relative">
@@ -145,7 +142,7 @@ export function MustChangePasswordScreen() {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     disabled={isLoading}
-                    className="h-14 rounded-lg border-2 border-slate-50 bg-slate-50 focus:bg-white focus:border-slate-900 font-medium px-5 text-sm pr-12 transition-all"
+                    className="h-12 rounded-md border border-slate-300 bg-white focus:border-slate-900 px-4 text-sm pr-12 transition-colors"
                   />
                   <button
                     type="button"

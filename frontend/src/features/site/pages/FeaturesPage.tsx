@@ -14,16 +14,11 @@ export default function FeaturesPage() {
       <SiteContentGate>
         {(content) => (
           <ul className="mx-auto max-w-6xl divide-y divide-slate-200 px-4 py-10 sm:px-8">
-            {SITE_FEATURES.map(({ key, title, icon: Icon }) => {
+            {SITE_FEATURES.map(({ key, title }, i) => {
               const description = text(content, key);
               return (
                 <li key={key} className="grid gap-4 py-8 sm:grid-cols-[3rem_1fr] sm:gap-8">
-                  <span
-                    aria-hidden="true"
-                    className="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-900 text-cyan-400"
-                  >
-                    <Icon className="h-6 w-6" />
-                  </span>
+                  <span aria-hidden="true" className="pt-1 font-mono text-sm text-slate-400">{String(i + 1).padStart(2, "0")}</span>
                   <div className="min-w-0">
                     <h2 className="text-2xl font-semibold tracking-tight text-slate-900">{title}</h2>
                     <Prose value={description} className="mt-3 max-w-3xl" />

@@ -49,6 +49,19 @@ export default defineConfig({
   build: {
     // Vite'ın boyut uyarısı da aynı sınıra bağlı; sınırın tek kaynağı yukarıdaki sabit.
     chunkSizeWarningLimit: PAKET_SINIRI_KB,
+    // Kütüphaneler ayrı paketlerde: hiçbir paket sınıra yaklaşmaz, uygulama kodu değişince kütüphaneler önbellekte kalır.
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return undefined;
+          // Vite modül yollarını her işletim sisteminde "/" ile verir.
+          if (/\/node_modules\/(react|react-dom|scheduler|react-router|react-router-dom)\//.test(id)) return "react";
+          if (id.includes("@sentry")) return "sentry";
+          if (id.includes("recharts") || id.includes("d3-") || id.includes("victory")) return undefined;
+          return "vendor";
+        },
+      },
+    },
   },
   resolve: {
     alias: {

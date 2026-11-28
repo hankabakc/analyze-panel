@@ -104,7 +104,7 @@ export function SiteContentEditor() {
 
   if (state.status === "loading") {
     return (
-      <p role="status" className="py-16 text-xs font-semibold tracking-normal text-slate-400">
+      <p role="status" className="py-16 text-sm text-slate-500">
         Site içeriği yükleniyor…
       </p>
     );
@@ -133,7 +133,7 @@ export function SiteContentEditor() {
     <section aria-labelledby="site-icerigi-baslik" className="space-y-8">
       <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-xs font-semibold tracking-normal text-slate-400">Karşılama sitesi</p>
+          <p className="text-sm text-slate-500">Karşılama sitesi</p>
           <h2 id="site-icerigi-baslik" className="mt-2 text-3xl font-semibold tracking-tight text-slate-900">
             Site içeriği
           </h2>

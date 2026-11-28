@@ -54,7 +54,7 @@ function LoadingScreen() {
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center gap-6 bg-[#F8FAFC]">
       <div className="w-12 h-12 border-[6px] border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
-      <p className="text-xs font-semibold tracking-normal text-slate-400">Sistem Yükleniyor</p>
+      <p className="text-sm text-slate-500">Sistem Yükleniyor</p>
     </div>
   );
 }

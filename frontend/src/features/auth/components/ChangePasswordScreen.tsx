@@ -5,7 +5,7 @@ import { useAuth } from "@/lib/auth-context";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { KeyRound, Eye, EyeOff, Loader2, ArrowLeft, AlertTriangle, ShieldCheck } from "@/components/icons";
+import { Eye, EyeOff, Loader2, ArrowLeft, AlertTriangle, ShieldCheck } from "@/components/icons";
 
 /**
  * ChangePasswordScreen: Giriş yapmış kullanıcının şifresini isteğine göre değiştirdiği ekrandır (T-018).
@@ -85,21 +85,18 @@ export function ChangePasswordScreen() {
   );
 
   const alanSinifi =
-    "h-14 rounded-lg border-2 border-slate-50 bg-slate-50 focus:bg-white font-medium px-5 text-sm pr-12 transition-all";
+    "h-12 rounded-md border border-slate-300 bg-white focus:border-slate-900 px-4 text-sm pr-12 transition-colors";
 
   return (
     <div className="w-full flex justify-center">
       <div className="w-full max-w-[520px] animate-in fade-in zoom-in-95 duration-500">
-        <Card className="rounded-xl border-0 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.10)] overflow-hidden bg-white">
+        <Card className="rounded-xl border border-slate-200 shadow-sm overflow-hidden bg-white">
 
 
           <CardContent className="p-8 sm:p-12">
             <div className="flex flex-col items-center text-center mb-8">
-              <div className="w-20 h-20 bg-cyan-50 rounded-xl flex items-center justify-center mb-4 border border-cyan-100/60 shadow-inner">
-                <KeyRound className="h-9 w-9 text-cyan-600" />
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
-                Şifremi Değiştir
+              <h2 className="text-2xl font-semibold text-slate-900 tracking-tight">
+                Şifremi değiştir
               </h2>
               <p className="text-xs text-slate-500 mt-1">
                 Hesap Güvenliği
@@ -130,7 +127,7 @@ export function ChangePasswordScreen() {
                 <div className="space-y-1.5 text-left">
                   <label
                     htmlFor="mevcut-sifre"
-                    className="text-xs font-semibold text-slate-400 tracking-normal ml-4 block"
+                    className="text-sm text-slate-500 ml-4 block"
                   >
                     Mevcut Şifre *
                   </label>
@@ -161,7 +158,7 @@ export function ChangePasswordScreen() {
                 <div className="flex items-center justify-between ml-4">
                   <label
                     htmlFor="yeni-sifre"
-                    className="text-xs font-semibold text-slate-400 tracking-normal"
+                    className="text-sm text-slate-500"
                   >
                     Yeni Şifre *
                   </label>
@@ -191,7 +188,7 @@ export function ChangePasswordScreen() {
               <div className="space-y-1.5 text-left">
                 <label
                   htmlFor="yeni-sifre-tekrar"
-                  className="text-xs font-semibold text-slate-400 tracking-normal ml-4 block"
+                  className="text-sm text-slate-500 ml-4 block"
                 >
                   Yeni Şifre (Tekrar) *
                 </label>
@@ -222,7 +219,7 @@ export function ChangePasswordScreen() {
                 type="button"
                 onClick={() => navigate("/")}
                 disabled={isLoading}
-                className="tap-44 min-h-[44px] w-full flex items-center justify-center gap-2 text-xs font-semibold tracking-normal text-slate-400 hover:text-slate-700 transition-colors py-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
+                className="tap-44 min-h-[44px] w-full flex items-center justify-center gap-2 text-sm text-slate-500 hover:text-slate-700 transition-colors py-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
               >
                 <ArrowLeft className="h-3.5 w-3.5" /> Vazgeç
               </button>

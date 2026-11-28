@@ -27,7 +27,7 @@ export default function FaqPage() {
                       <summary className="flex min-h-[56px] cursor-pointer list-none items-center justify-between gap-4 rounded-xl px-6 py-4 text-lg font-medium text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-cyan-500 [&::-webkit-details-marker]:hidden">
                         <span className="min-w-0 break-words">{item.question}</span>
                         <Plus
-                          className="h-5 w-5 shrink-0 text-cyan-600 transition-transform group-open:rotate-45"
+                          className="h-5 w-5 shrink-0 text-slate-400 transition-transform group-open:rotate-45"
                           aria-hidden="true"
                         />
                       </summary>

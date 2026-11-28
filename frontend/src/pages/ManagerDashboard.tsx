@@ -358,7 +358,7 @@ export default function ManagerDashboard() {
     return (
       <div className="flex-1 flex flex-col items-center justify-center gap-6 py-32">
         <div className="w-10 h-10 border-[5px] border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-xs font-semibold tracking-normal text-slate-400">Yükleniyor</p>
+        <p className="text-sm text-slate-500">Yükleniyor</p>
       </div>
     );
   }
@@ -392,7 +392,7 @@ export default function ManagerDashboard() {
               {/* Ad Soyad */}
               <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-semibold text-slate-400 tracking-normal">Ad Soyad</p>
+                  <p className="text-sm text-slate-500">Ad Soyad</p>
                   <p className="text-sm font-semibold text-slate-900">{createdUserInfo.fullName}</p>
                 </div>
               </div>
@@ -400,7 +400,7 @@ export default function ManagerDashboard() {
               {/* E-Posta */}
               <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-semibold text-slate-400 tracking-normal">Giriş E-Postası</p>
+                  <p className="text-sm text-slate-500">Giriş E-Postası</p>
                   <p className="text-sm font-semibold text-slate-900 font-mono">{createdUserInfo.email}</p>
                 </div>
                 <button
@@ -445,7 +445,7 @@ export default function ManagerDashboard() {
       <aside className="w-full lg:w-80 shrink-0 space-y-6 lg:space-y-8">
         <div className="bg-white rounded-xl sm:rounded-xl p-4 shadow-sm border border-slate-50">
           <div className="p-4 sm:p-6 mb-2 sm:mb-4">
-             <p className="text-xs font-semibold text-slate-400 tracking-normal mb-2">Yönetim Paneli</p>
+             <p className="text-sm text-slate-500 mb-2">Yönetim Paneli</p>
              <h3 className="text-xl font-semibold text-slate-900 tracking-tight">Navigasyon</h3>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-2">
@@ -460,10 +460,9 @@ export default function ManagerDashboard() {
         </div>
 
         {/* Bilgi Kartı (Sidebar altı) */}
-        <div className="bg-slate-900 rounded-xl sm:rounded-xl p-6 sm:p-10 text-white relative overflow-hidden group">
-           <ShieldAlert className="h-8 w-8 sm:h-10 sm:w-10 text-cyan-400 mb-4 sm:mb-6" />
-           <p className="text-xs font-semibold tracking-normal text-cyan-400/80 mb-2">Hesap Yönetimi</p>
-           <p className="text-xs font-medium leading-relaxed text-slate-300">
+        <div className="rounded-xl border border-slate-200 bg-white p-5">
+           <p className="text-sm font-medium text-slate-900 mb-1">Hesap yönetimi</p>
+           <p className="text-sm leading-relaxed text-slate-500">
              Yeni öğretmen ve öğrenci hesapları güvenli e-posta ve şifre ile anında aktifleşir.
            </p>
         </div>
@@ -499,7 +498,7 @@ export default function ManagerDashboard() {
              <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">Sistem Özeti</h2>
              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
                 <Card className="rounded-xl sm:rounded-xl border-0 shadow-sm p-6 sm:p-10 bg-white">
-                   <p className="text-xs font-semibold text-slate-400 tracking-normal mb-4">Aktif Kullanıcı Sayısı</p>
+                   <p className="text-sm text-slate-500 mb-4">Aktif Kullanıcı Sayısı</p>
                    <p className="text-4xl sm:text-5xl font-semibold text-slate-900 tracking-tight">
                      {activeTeachers.length + activeStudents.length}
                    </p>
@@ -509,12 +508,10 @@ export default function ManagerDashboard() {
                      <span>Öğrenci: <b className="text-slate-900">{activeStudents.length}</b></span>
                    </div>
                 </Card>
-                <Card className="rounded-xl sm:rounded-xl border-0 shadow-sm p-6 sm:p-10 bg-slate-900 text-white">
-                   <p className="text-xs font-semibold text-cyan-400 tracking-normal mb-4">Eşleşme Bekleyenler</p>
-                   <p className="text-4xl sm:text-5xl font-semibold tracking-tight">{unpairedStudents.length}</p>
-                   <div className="mt-4 text-xs font-medium text-slate-400">
-                     <span>Eşleşmemiş Öğrenci Sayısı</span>
-                   </div>
+                <Card className="rounded-xl border border-slate-200 shadow-none p-6 sm:p-8 bg-white">
+                   <p className="text-sm text-slate-500 mb-3">Eşleşme bekleyen öğrenci</p>
+                   <p className="text-4xl font-semibold tracking-tight text-slate-900">{unpairedStudents.length}</p>
+                   <p className="mt-3 text-sm text-slate-500">Öğretmeni olmayan öğrenciler</p>
                 </Card>
              </div>
 
@@ -609,7 +606,7 @@ export default function ManagerDashboard() {
                <form onSubmit={handleCreateUser} className="space-y-6">
                  {/* Ad Soyad */}
                  <div className="space-y-2">
-                   <label className="text-xs font-semibold text-slate-400 tracking-normal ml-4">
+                   <label className="text-sm text-slate-500 ml-4">
                      Ad Soyad *
                    </label>
                    <Input 
@@ -623,7 +620,7 @@ export default function ManagerDashboard() {
 
                  {/* Hesap Türü (Rol Seçimi) */}
                  <div className="space-y-2 pt-2">
-                   <label className="text-xs font-semibold text-slate-400 tracking-normal ml-4">
+                   <label className="text-sm text-slate-500 ml-4">
                      Hesap Türü *
                    </label>
                    <div className="grid grid-cols-2 gap-4">
@@ -660,7 +657,7 @@ export default function ManagerDashboard() {
                  {/* Sınıf Seviyesi (Yalnızca Öğrenci için görünür - T-016 / IST-02 §3) */}
                  {createRole === "STUDENT" && (
                    <fieldset className="space-y-2 animate-in fade-in slide-in-from-top-2 duration-300 border-0 p-0 m-0">
-                     <legend className="text-xs font-semibold text-slate-400 tracking-normal ml-4 mb-2">
+                     <legend className="text-sm text-slate-500 ml-4 mb-2">
                        Sınıf Seviyesi *
                      </legend>
                      <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
@@ -716,13 +713,13 @@ export default function ManagerDashboard() {
           <div className="space-y-8 animate-in fade-in duration-500">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight text-slate-900">Sınıflar</h2>
-              <p className="text-xs font-semibold tracking-normal text-slate-400 mt-2">
+              <p className="text-sm text-slate-500 mt-2">
                 Sınıf oluştur, öğrencileri ekle ve çıkar
               </p>
             </div>
 
             <Card className="rounded-xl border-0 shadow-sm bg-white p-8">
-              <p className="text-xs font-semibold tracking-normal text-slate-400 mb-4">Yeni Sınıf</p>
+              <p className="text-sm text-slate-500 mb-4">Yeni Sınıf</p>
               <div className="flex flex-wrap gap-3">
                 <input
                   type="text"
@@ -759,7 +756,7 @@ export default function ManagerDashboard() {
                       <div className="flex flex-wrap items-center justify-between gap-4">
                         <div>
                           <h3 className="text-xl font-semibold text-slate-900">{c.name}</h3>
-                          <p className="text-xs font-semibold tracking-normal text-slate-400 mt-1">
+                          <p className="text-sm text-slate-500 mt-1">
                             {c.students.length} öğrenci
                           </p>
                         </div>
@@ -780,7 +777,7 @@ export default function ManagerDashboard() {
                               <span className="text-xs font-medium text-slate-700">
                                 {st.fullName}
                                 {st.grade != null && (
-                                  <span className="ml-2 text-xs font-semibold tracking-normal text-slate-400">
+                                  <span className="ml-2 text-sm text-slate-500">
                                     {st.grade}. sınıf
                                   </span>
                                 )}
@@ -800,7 +797,7 @@ export default function ManagerDashboard() {
 
                       {sinifsizlar.length > 0 && (
                         <div className="pt-4 border-t border-slate-100">
-                          <p className="text-xs font-semibold tracking-normal text-slate-400 mb-3">
+                          <p className="text-sm text-slate-500 mb-3">
                             Sınıfsız öğrenciyi ekle
                           </p>
                           <div className="flex flex-wrap gap-2">
@@ -830,7 +827,7 @@ export default function ManagerDashboard() {
           <div className="space-y-8 animate-in fade-in duration-500">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight text-slate-900">Aktiflik</h2>
-              <p className="text-xs font-semibold tracking-normal text-slate-400 mt-2">
+              <p className="text-sm text-slate-500 mt-2">
                 Kim ne zaman girdi, öğretmen öğrencisinin verisine baktı mı
               </p>
             </div>
@@ -853,7 +850,7 @@ export default function ManagerDashboard() {
                         </div>
                         <div>
                           <p className="font-semibold text-slate-900">{a.fullName}</p>
-                          <span className="text-xs font-semibold tracking-normal text-slate-400">{({ MANAGER: "Yönetici", TEACHER: "Öğretmen", STUDENT: "Öğrenci" } as Record<string, string>)[a.role] ?? a.role}</span>
+                          <span className="text-sm text-slate-500">{({ MANAGER: "Yönetici", TEACHER: "Öğretmen", STUDENT: "Öğrenci" } as Record<string, string>)[a.role] ?? a.role}</span>
                         </div>
                       </div>
                       <div className="flex flex-wrap items-center gap-3">
@@ -870,7 +867,7 @@ export default function ManagerDashboard() {
 
                     {a.viewedStudents.length > 0 && (
                       <div className="mt-6 pt-6 border-t border-slate-100 space-y-2">
-                        <p className="text-xs font-semibold tracking-normal text-slate-400">
+                        <p className="text-sm text-slate-500">
                           Eşleştiği öğrenciler
                         </p>
                         {a.viewedStudents.map((sv) => (
@@ -900,13 +897,13 @@ export default function ManagerDashboard() {
           <div className="space-y-8 animate-in slide-in-from-right-10 duration-500">
              <div className="flex flex-col gap-2">
                 <h2 className="text-3xl font-semibold text-slate-900 tracking-tight">Eşleştirme Merkezi</h2>
-                <p className="text-xs font-semibold text-slate-400 tracking-normal">Eğitmen ve Öğrenci bağlarını buradan kurun</p>
+                <p className="text-sm text-slate-500">Eğitmen ve Öğrenci bağlarını buradan kurun</p>
              </div>
              
              <div className="grid grid-cols-2 gap-8">
                 {/* Öğretmen Seçim Alanı */}
                 <div className="space-y-4">
-                   <p className="text-xs font-semibold text-slate-400 tracking-normal ml-4">1. Eğitmen Seçin ({activeTeachers.length})</p>
+                   <p className="text-sm text-slate-500 ml-4">1. Eğitmen Seçin ({activeTeachers.length})</p>
                    <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-50 min-h-[500px] max-h-[500px] overflow-y-auto space-y-3 custom-scrollbar">
                       {activeTeachers.length === 0 ? (
                         <p className="text-center text-slate-300 text-xs font-medium py-20">Aktif eğitmen bulunmuyor.</p>
@@ -927,7 +924,7 @@ export default function ManagerDashboard() {
 
                 {/* Öğrenci Seçim Alanı (T-021: Yalnızca eşleşmemiş öğrenciler) */}
                 <div className="space-y-4">
-                   <p className="text-xs font-semibold text-slate-400 tracking-normal ml-4">2. Öğrenci Seçin ({unpairedStudents.length})</p>
+                   <p className="text-sm text-slate-500 ml-4">2. Öğrenci Seçin ({unpairedStudents.length})</p>
                    <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-50 min-h-[500px] max-h-[500px] overflow-y-auto space-y-3 custom-scrollbar">
                       {unpairedStudents.length === 0 ? (
                         <p className="text-center text-slate-300 text-xs font-medium py-20">Eşleşmeye uygun öğrenci bulunmuyor.</p>
@@ -976,7 +973,7 @@ export default function ManagerDashboard() {
                      {pairings.length}
                    </span>
                  </div>
-                 <p className="text-xs font-semibold text-slate-400 tracking-normal">
+                 <p className="text-sm text-slate-500">
                    Mevcut Eğitmen - Öğrenci Bağlantıları
                  </p>
                </div>

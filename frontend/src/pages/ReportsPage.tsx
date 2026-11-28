@@ -77,7 +77,7 @@ export default function ReportsPage() {
     return (
       <div className="w-full flex flex-col items-center justify-center gap-6 py-32">
         <div className="w-10 h-10 border-[5px] border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-xs font-semibold tracking-normal text-slate-400">Raporlar Yükleniyor</p>
+        <p className="text-sm text-slate-500">Raporlar Yükleniyor</p>
       </div>
     );
   }
@@ -92,7 +92,7 @@ export default function ReportsPage() {
               <FileBarChart2 className="h-7 w-7 sm:h-8 sm:w-8 text-cyan-500" />
               Analiz Raporlarım
             </h2>
-            <p className="text-xs font-semibold text-slate-400 tracking-normal">
+            <p className="text-sm text-slate-500">
               Tamamlanmış ve Onaylanmış Deneme Karneleri
             </p>
           </div>
@@ -128,7 +128,7 @@ export default function ReportsPage() {
                     </div>
                     <div className="min-w-0">
                       <h4 className="text-base sm:text-lg font-semibold text-slate-900 tracking-tight truncate">{report.examTitle}</h4>
-                      <p className="text-xs font-semibold text-slate-400 tracking-normal mt-1 truncate">
+                      <p className="text-sm text-slate-500 mt-1 truncate">
                         {new Date(report.processedAt).toLocaleDateString("tr-TR")} • {report.intendedExamCount} Deneme Verisi
                       </p>
                     </div>
@@ -153,7 +153,7 @@ export default function ReportsPage() {
           <FileBarChart2 className="h-7 w-7 sm:h-8 sm:w-8 text-blue-500" />
           Analiz Raporları
         </h2>
-        <p className="text-xs font-semibold text-slate-400 tracking-normal">
+        <p className="text-sm text-slate-500">
           Öğrenci Bazlı Karne ve Gelişim Raporları
         </p>
       </div>
@@ -232,7 +232,7 @@ export default function ReportsPage() {
               {isReportsLoading ? (
                 <div className="py-20 flex flex-col items-center justify-center gap-4">
                   <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                  <p className="text-xs font-semibold tracking-normal text-slate-400">Raporlar yükleniyor…</p>
+                  <p className="text-sm text-slate-500">Raporlar yükleniyor…</p>
                 </div>
               ) : reports.length === 0 ? (
                 <Card className="rounded-xl border-2 border-dashed border-slate-200 bg-slate-50/50 p-12 sm:p-20 text-center">
@@ -283,7 +283,7 @@ export default function ReportsPage() {
                                   : "Onay Bekliyor"}
                               </span>
                             </div>
-                            <p className="text-xs font-semibold text-slate-400 tracking-normal mt-1">
+                            <p className="text-sm text-slate-500 mt-1">
                               {new Date(report.processedAt).toLocaleDateString("tr-TR")} •{" "}
                               {report.intendedExamCount > 0
                                 ? `${report.intendedExamCount} Deneme Verisi`

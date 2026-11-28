@@ -14,7 +14,7 @@ export function SiteContentGate({ children }: { children: (content: SiteContent)
   if (state.status === "loading") {
     return (
       <div className={`${PAGE_WIDTH} py-20`}>
-        <p role="status" className="text-xs font-semibold tracking-normal text-slate-400">
+        <p role="status" className="text-sm text-slate-500">
           İçerik yükleniyor…
         </p>
       </div>
@@ -42,16 +42,11 @@ export function SiteContentGate({ children }: { children: (content: SiteContent)
   return <>{children(state.content)}</>;
 }
 
-/** PageHeader: Alt sayfa başlığı; altındaki kısa şerit imza öğesinin küçük hâlidir. */
+/** PageHeader: Alt sayfa başlığı. */
 export function PageHeader({ title }: { title: string }) {
   return (
     <header className={`${PAGE_WIDTH} pt-14 sm:pt-20`}>
-      <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-6xl">{title}</h1>
-      <div aria-hidden="true" className="mt-6 flex h-1.5 w-28 overflow-hidden rounded-full">
-        <span className="w-[60%] bg-cyan-500" />
-        <span className="w-[25%] bg-slate-900" />
-        <span className="w-[15%] bg-slate-200" />
-      </div>
+      <h1 className="border-b border-slate-200 pb-8 text-3xl font-semibold tracking-tight text-slate-900 sm:text-5xl">{title}</h1>
     </header>
   );
 }

@@ -6,7 +6,7 @@ import type { AnalysisReportSummary, User } from "@/lib/types";
 import type { StudyPlanDto, PsychTestResultDto, BourdonResultDto } from "@/lib/api";
 import { toast } from "sonner";
 import { 
-  Users, ChevronRight, Upload, FileBarChart2, Info, Sparkles, Layers,
+  Users, ChevronRight, Upload, FileBarChart2, Info, Layers,
   FileUp, AlertCircle, CheckCircle2, Trash2, Loader2, ArrowRight,
   Calendar, Plus, ListTodo, CheckCircle, Clock, X, BookOpen, RefreshCw,
   Brain
@@ -699,7 +699,7 @@ export default function TeacherDashboard() {
   if (isLoading) return (
     <div className="w-full flex flex-col items-center justify-center gap-6 py-32">
       <div className="w-10 h-10 border-[5px] border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-      <p className="text-xs font-semibold tracking-normal text-slate-400">Yükleniyor</p>
+      <p className="text-sm text-slate-500">Yükleniyor</p>
     </div>
   );
 
@@ -711,7 +711,7 @@ export default function TeacherDashboard() {
           <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
             Eğitmen Paneli
           </h2>
-          <p className="text-xs font-semibold text-slate-400 tracking-normal">Karne yükleme ve öğrenci takibi</p>
+          <p className="text-sm text-slate-500">Karne yükleme ve öğrenci takibi</p>
         </div>
 
         <div className="flex items-center gap-2 p-1.5 bg-slate-100/80 rounded-lg self-start sm:self-auto">
@@ -997,21 +997,19 @@ export default function TeacherDashboard() {
                <div className="space-y-8 animate-in slide-in-from-bottom-5">
                   
                   {/* Otonom Yükleme Alanı */}
-                  <div className="bg-white p-6 sm:p-10 rounded-xl sm:rounded-xl shadow-sm border border-slate-50 flex flex-col items-center gap-8 relative overflow-hidden">
-                     <div className="flex flex-col items-center text-center gap-4">
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-600 text-white rounded-xl sm:rounded-xl flex items-center justify-center shadow-sm shadow-blue-200">
-                           <Sparkles className="h-8 w-8 sm:h-10 sm:w-10" />
-                        </div>
+                  <div className="bg-white p-6 sm:p-8 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                     <div className="flex items-start gap-4">
+                        <FileUp className="h-5 w-5 text-slate-400 mt-0.5 shrink-0" />
                         <div className="space-y-1">
-                           <h3 className="font-semibold text-slate-900 text-lg sm:text-xl tracking-tight">Karne Analizi</h3>
-                           <p className="text-xs text-slate-500">PDF karneyi yükleyin; netler ve konular otomatik okunur.</p>
+                           <h3 className="font-semibold text-slate-900 text-base tracking-tight">Karne yükle</h3>
+                           <p className="text-sm text-slate-500">PDF karneyi seçin; netler ve konular okunur, onayınızdan sonra öğrenciye görünür.</p>
                         </div>
                      </div>
 
-                     <div className="flex flex-col items-center gap-3 w-full max-w-md">
-                       <label className="w-full cursor-pointer bg-slate-900 text-white px-6 sm:px-12 py-4 sm:py-6 rounded-xl sm:rounded-xl font-semibold text-xs tracking-normal flex items-center justify-center gap-4 hover:bg-blue-600 transition-all shadow-sm shadow-blue-100 group tap-44 min-h-[44px]">
-                          <Upload className="h-5 w-5 transition-transform shrink-0" /> 
-                          PDF Karne Analiz Et
+                     <div className="flex flex-col items-stretch sm:items-end gap-2 shrink-0">
+                       <label className="tap-44 cursor-pointer bg-slate-900 text-white h-10 px-5 rounded-md text-sm font-medium flex items-center justify-center gap-2 hover:bg-slate-700 transition-colors shadow-blue-100 group tap-44 min-h-[44px]">
+                          <Upload className="h-4 w-4 shrink-0" />
+                          PDF seç
                           <input type="file" className="hidden" accept=".pdf" onChange={(e) => handleFileUpload(selectedStudentId, e)} />
                        </label>
                        
@@ -1622,7 +1620,7 @@ export default function TeacherDashboard() {
                                             report.status === 'FAILED' ? 'Başarısız' : 'Onay Bekliyor'}
                                         </span>
                                      </div>
-                                     <p className="text-xs font-semibold text-slate-400 tracking-normal mt-1 truncate">
+                                     <p className="text-sm text-slate-500 mt-1 truncate">
                                         {new Date(report.processedAt).toLocaleDateString('tr-TR')} • {(report.intendedExamCount ?? 0) > 0 ? `${report.intendedExamCount} Deneme Verisi` : "Tür Tespit Ediliyor..."}
                                      </p>
                                   </div>

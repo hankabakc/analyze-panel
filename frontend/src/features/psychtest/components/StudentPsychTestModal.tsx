@@ -219,7 +219,7 @@ export function StudentPsychTestModal({
           {isLoading ? (
             <div className="py-24 flex flex-col items-center justify-center gap-4 text-center">
               <Loader2 className="h-10 w-10 text-cyan-600 animate-spin" />
-              <p className="text-xs font-semibold tracking-normal text-slate-400">
+              <p className="text-sm text-slate-500">
                 Ölçek Maddeleri Yükleniyor...
               </p>
             </div>

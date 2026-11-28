@@ -111,8 +111,11 @@
  * Yalnızca YÜKSEKLİK büyütülür: bu sınıfın kullanıldığı düğmelerin genişliği zaten 44 px üzerinde
  * (en darı 81 px). Yatayda da büyütmek yan yana duran düğmelerin tıklama alanlarını çakıştırırdı.
  */
-.tap-44 {
-  position: relative;
+/* Bileşen katmanında: absolute gibi yardımcı sınıflar bunu ezebilsin (göz düğmesi alanın altına düşüyordu). */
+@layer components {
+  .tap-44 {
+    position: relative;
+  }
 }
 
 .tap-44::after {

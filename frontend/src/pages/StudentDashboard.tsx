@@ -135,7 +135,7 @@ export default function StudentDashboard() {
   if (isLoading) return (
     <div className="w-full flex flex-col items-center justify-center gap-6 py-32">
       <div className="w-10 h-10 border-[5px] border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
-      <p className="text-xs font-semibold tracking-normal text-slate-400">Öğrenci Paneli Yükleniyor</p>
+      <p className="text-sm text-slate-500">Öğrenci Paneli Yükleniyor</p>
     </div>
   );
 
@@ -146,29 +146,27 @@ export default function StudentDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         <div className="flex flex-col justify-center gap-2">
           <h2 className="text-2xl sm:text-3xl lg:text-3xl font-semibold text-slate-900 tracking-tight">
-            Merhaba, <span>{user?.fullName.split(' ')[0]}</span>
+            Merhaba, {user?.fullName.split(' ')[0]}
           </h2>
-          <p className="text-xs font-semibold text-slate-400 tracking-normal">Akademik gelişim</p>
+          <p className="text-sm text-slate-500">Akademik gelişim</p>
         </div>
 
-        <Card className="rounded-xl sm:rounded-xl border-0 shadow-sm bg-slate-900 text-white p-5 sm:p-8 relative overflow-hidden group">
-           <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <Card className="rounded-xl border border-slate-200 shadow-none bg-white p-5 sm:p-6">
+           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-4 sm:gap-6 min-w-0">
-                 <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-xl bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center shrink-0">
-                    <Target className="h-6 w-6 sm:h-8 sm:w-8 text-cyan-400" />
-                 </div>
+                 <Target className="h-5 w-5 text-slate-400 shrink-0" />
                  <div className="min-w-0">
-                    <h4 className="text-xs font-semibold tracking-normal text-cyan-400 mb-1">Akademik Hedefin</h4>
-                    <p className="font-medium text-base sm:text-lg leading-tight truncate">
+                    <h4 className="text-sm text-slate-500 mb-0.5">Hedef okulun</h4>
+                    <p className="font-semibold text-slate-900 text-base sm:text-lg leading-tight truncate">
                        {profile?.targetSchoolName ? profile.targetSchoolName : (profile?.targetScore ? `Hedef Puan: ${profile.targetScore}` : 'Henüz hedef belirlenmedi')}
                     </p>
                  </div>
               </div>
               <button 
                 onClick={() => setShowTargetModal(true)}
-                className="tap-44 min-h-[44px] self-start sm:self-auto bg-white text-slate-900 px-6 py-3 rounded-lg font-semibold text-xs tracking-normal hover:bg-cyan-400 hover:text-white transition-all shadow-sm shadow-black/20 shrink-0"
+                className="tap-44 h-9 self-start sm:self-auto border border-slate-300 bg-white text-slate-800 px-4 rounded-md text-sm hover:bg-slate-50 transition-colors shrink-0"
               >
-                {profile?.targetSchoolId ? 'Hedefi Güncelle' : 'Hedef Belirle'}
+                {profile?.targetSchoolId ? 'Hedefi değiştir' : 'Hedef belirle'}
               </button>
            </div>
         </Card>
@@ -193,7 +191,7 @@ export default function StudentDashboard() {
               <Card className="rounded-xl border border-slate-100 bg-white p-12 text-center shadow-sm">
                 <div className="flex flex-col items-center justify-center gap-3">
                   <Loader2 className="h-8 w-8 animate-spin text-cyan-500" />
-                  <p className="text-xs font-semibold tracking-normal text-slate-400">Çalışma Planları Yükleniyor...</p>
+                  <p className="text-sm text-slate-500">Çalışma Planları Yükleniyor...</p>
                 </div>
               </Card>
             ) : studyPlans.length === 0 ? (
@@ -335,7 +333,7 @@ export default function StudentDashboard() {
               <Card className="rounded-xl border border-slate-100 bg-white p-12 text-center shadow-sm">
                 <div className="flex flex-col items-center justify-center gap-3">
                   <Loader2 className="h-8 w-8 animate-spin text-cyan-500" />
-                  <p className="text-xs font-semibold tracking-normal text-slate-400">Ölçekler Yükleniyor...</p>
+                  <p className="text-sm text-slate-500">Ölçekler Yükleniyor...</p>
                 </div>
               </Card>
             ) : psychAssignments.length === 0 ? (
@@ -385,7 +383,7 @@ export default function StudentDashboard() {
                                 </span>
                               )}
                             </div>
-                            <p className="text-xs font-semibold text-slate-400 tracking-normal">
+                            <p className="text-sm text-slate-500">
                               Atanma Tarihi: {formattedDate}
                               {completedDate && ` • Tamamlanma: ${completedDate}`}
                             </p>
@@ -434,7 +432,7 @@ export default function StudentDashboard() {
                           <div className="w-12 h-12 sm:w-14 sm:h-14 bg-cyan-50 text-cyan-600 rounded-lg flex items-center justify-center shrink-0"><FileBarChart2 className="h-6 w-6" /></div>
                           <div className="min-w-0">
                              <h4 className="text-base sm:text-lg font-semibold text-slate-900 tracking-tight truncate">{report.examTitle}</h4>
-                             <p className="text-xs font-semibold text-slate-400 tracking-normal mt-1">
+                             <p className="text-sm text-slate-500 mt-1">
                                 {new Date(report.processedAt).toLocaleDateString('tr-TR')} • {report.intendedExamCount} Deneme Verisi
                              </p>
                           </div>
@@ -470,12 +468,12 @@ export default function StudentDashboard() {
       {showTargetModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-900/40 animate-in fade-in duration-300">
            <div className="bg-white w-full max-w-2xl rounded-xl shadow-sm overflow-hidden animate-in zoom-in-95 duration-300">
-              <div className="bg-slate-900 p-10 text-white flex justify-between items-center">
-                 <div className="flex items-center gap-6">
-                    <div className="w-16 h-16 bg-cyan-500 text-white rounded-xl flex items-center justify-center"><School className="h-8 w-8" /></div>
-                    <div><h3 className="text-2xl font-semibold tracking-tight">Hedef Okulunu Seç</h3><p className="text-xs font-medium text-cyan-400 tracking-normal mt-1">2025 LGS Referans Verileri</p></div>
+              <div className="border-b border-slate-200 p-6 flex justify-between items-center">
+                 <div className="flex items-center gap-3">
+                    <School className="h-5 w-5 text-slate-400" />
+                    <div><h3 className="text-lg font-semibold tracking-tight text-slate-900">Hedef okulunu seç</h3><p className="text-sm text-slate-500 mt-0.5">2025 LGS taban puanları</p></div>
                  </div>
-                 <button onClick={() => setShowTargetModal(false)} className="p-4 hover:bg-white/10 rounded-lg transition-all"><X className="h-6 w-6" /></button>
+                 <button onClick={() => setShowTargetModal(false)} aria-label="Kapat" className="tap-44 p-2 text-slate-500 hover:text-slate-900 rounded-md transition-colors"><X className="h-5 w-5" /></button>
               </div>
               
               <div className="p-10 space-y-8">

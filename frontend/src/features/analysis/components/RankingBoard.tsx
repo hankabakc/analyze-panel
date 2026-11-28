@@ -32,7 +32,7 @@ export function RankingBoard() {
   if (isLoading) {
     return (
       <Card className="rounded-xl border-0 shadow-sm bg-white p-10 text-center">
-        <p className="text-xs font-semibold tracking-normal text-slate-400">Sıralama yükleniyor…</p>
+        <p className="text-sm text-slate-500">Sıralama yükleniyor…</p>
       </Card>
     );
   }
@@ -64,7 +64,7 @@ export function RankingBoard() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-4">
         <h3 className="text-xl font-semibold tracking-tight text-slate-900">Deneme Sıralaması</h3>
-        <span className="text-xs font-semibold tracking-normal text-slate-400">
+        <span className="text-sm text-slate-500">
           {toplamKatilimci} katılımcı · onaylı denemelerin net ortalaması
         </span>
       </div>
