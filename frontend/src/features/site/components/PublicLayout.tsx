@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X } from "@/components/icons";
 import { useAuth } from "@/lib/auth-context";
 import { useSiteContent } from "../site-content-context";
+import { Logo } from "@/components/Logo";
 import { LOGIN_BUTTON_LABEL, text } from "../siteContent";
 
 /** Üst menüdeki bilgi sayfaları (S-026). */
@@ -17,12 +18,12 @@ const FOCUS_RING =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2";
 
 const desktopLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `tap-44 inline-flex items-center rounded-lg text-[11px] font-black uppercase tracking-[0.2em] transition-colors ${FOCUS_RING} ${
+  `tap-44 inline-flex items-center rounded-md text-sm transition-colors ${FOCUS_RING} ${
     isActive ? "text-cyan-700" : "text-slate-500 hover:text-slate-900"
   }`;
 
 const mobileLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `flex min-h-[48px] items-center rounded-xl px-3 text-sm font-bold ${FOCUS_RING} ${
+  `flex min-h-[48px] items-center rounded-md px-3 text-sm font-medium ${FOCUS_RING} ${
     isActive ? "bg-slate-100 text-slate-900" : "text-slate-600 hover:bg-slate-50"
   }`;
 
@@ -51,16 +52,16 @@ export function PublicLayout() {
     : { to: "/giris", label: LOGIN_BUTTON_LABEL };
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8FAFC] text-slate-900">
+    <div className="flex min-h-screen flex-col bg-white text-slate-900">
       <a
         href="#site-icerik"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[60] focus:rounded-xl focus:bg-slate-900 focus:px-4 focus:py-3 focus:text-sm focus:font-bold focus:text-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[60] focus:rounded-xl focus:bg-slate-900 focus:px-4 focus:py-3 focus:text-sm focus:font-medium focus:text-white"
       >
         İçeriğe geç
       </a>
 
-      <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/85 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:h-20 sm:px-8">
+      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-8">
           <Link to={homePath} className={`flex min-h-[44px] min-w-0 items-center rounded-xl ${FOCUS_RING}`}>
             <Wordmark institution={institution} />
           </Link>
@@ -76,7 +77,7 @@ export function PublicLayout() {
           <div className="flex shrink-0 items-center gap-2">
             <Link
               to={account.to}
-              className={`hidden h-11 items-center justify-center rounded-2xl bg-slate-900 px-5 text-[11px] font-black uppercase tracking-[0.2em] text-white transition-colors hover:bg-slate-800 sm:inline-flex ${FOCUS_RING}`}
+              className={`tap-44 hidden h-9 items-center justify-center rounded-md bg-slate-900 px-4 text-sm font-medium text-white transition-colors hover:bg-slate-800 sm:inline-flex ${FOCUS_RING}`}
             >
               {account.label}
             </Link>
@@ -86,7 +87,7 @@ export function PublicLayout() {
               aria-expanded={menuOpen}
               aria-controls="site-mobil-menu"
               aria-label={menuOpen ? "Menüyü kapat" : "Menüyü aç"}
-              className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 md:hidden ${FOCUS_RING}`}
+              className={`inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 md:hidden ${FOCUS_RING}`}
             >
               {menuOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
             </button>
@@ -110,7 +111,7 @@ export function PublicLayout() {
               <li className="pt-2">
                 <Link
                   to={account.to}
-                  className={`flex min-h-[48px] items-center justify-center rounded-2xl bg-slate-900 text-[11px] font-black uppercase tracking-[0.2em] text-white ${FOCUS_RING}`}
+                  className={`flex min-h-[48px] items-center justify-center rounded-md bg-slate-900 text-sm font-medium text-white ${FOCUS_RING}`}
                 >
                   {account.label}
                 </Link>
@@ -147,7 +148,7 @@ export function PublicLayout() {
           </nav>
         </div>
         <div className="border-t border-slate-100">
-          <p className="mx-auto max-w-6xl truncate px-4 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 sm:px-8">
+          <p className="mx-auto max-w-6xl truncate px-4 py-5 text-xs font-medium tracking-normal text-slate-400 sm:px-8">
             © {new Date().getFullYear()} {institution || "Analiz Sistemi"}
           </p>
         </div>
@@ -156,26 +157,7 @@ export function PublicLayout() {
   );
 }
 
-/** Wordmark: Uygulamanın mevcut markası; kurum adı doldurulmuşsa altında görünür. */
+/** Wordmark: Uygulamanın markası; kurum adı doldurulmuşsa altında görünür. */
 function Wordmark({ institution }: { institution: string }) {
-  return (
-    <span className="flex min-w-0 items-center gap-3">
-      <span
-        aria-hidden="true"
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-lg font-black italic text-white"
-      >
-        A
-      </span>
-      <span className="min-w-0">
-        <span className="block whitespace-nowrap text-lg font-black tracking-tighter text-slate-900 sm:text-xl">
-          ANALİZ <span className="italic text-cyan-500">SİSTEMİ</span>
-        </span>
-        {institution && (
-          <span className="block truncate text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
-            {institution}
-          </span>
-        )}
-      </span>
-    </span>
-  );
+  return <Logo institution={institution} />;
 }

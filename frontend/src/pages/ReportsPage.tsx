@@ -4,7 +4,7 @@ import { useAuth } from "@/lib/auth-context";
 import { analysisApi, membershipApi } from "@/lib/api";
 import type { User, AnalysisData } from "@/lib/types";
 import { Card, CardContent } from "@/components/ui/card";
-import { FileBarChart2, ChevronRight, Users, Layers, Info } from "lucide-react";
+import { FileBarChart2, ChevronRight, Users, Layers, Info } from "@/components/icons";
 
 /**
  * ReportsPage: Kullanıcı rolüne göre analiz raporlarını listeleyen merkezi sayfa (T-047).
@@ -77,7 +77,7 @@ export default function ReportsPage() {
     return (
       <div className="w-full flex flex-col items-center justify-center gap-6 py-32">
         <div className="w-10 h-10 border-[5px] border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Raporlar Yükleniyor</p>
+        <p className="text-xs font-semibold tracking-normal text-slate-400">Raporlar Yükleniyor</p>
       </div>
     );
   }
@@ -88,18 +88,18 @@ export default function ReportsPage() {
       <div className="w-full space-y-8 animate-in fade-in duration-500 pb-20">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex flex-col gap-2">
-            <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tighter flex items-center gap-3">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight flex items-center gap-3">
               <FileBarChart2 className="h-7 w-7 sm:h-8 sm:w-8 text-cyan-500" />
-              Analiz <span className="text-cyan-500 italic">Raporlarım</span>
+              Analiz Raporlarım
             </h2>
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">
+            <p className="text-xs font-semibold text-slate-400 tracking-normal">
               Tamamlanmış ve Onaylanmış Deneme Karneleri
             </p>
           </div>
           {reports.length > 0 && (
             <button
               onClick={() => navigate(`/analysis/cumulative/${user.id}`)}
-              className="tap-44 self-start md:self-auto bg-cyan-600 text-white px-6 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-cyan-700 transition-all shadow-xl shadow-cyan-100 flex items-center gap-2"
+              className="tap-44 self-start md:self-auto bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold text-xs tracking-normal hover:bg-cyan-700 transition-all shadow-sm shadow-cyan-100 flex items-center gap-2"
             >
               <Layers className="h-4 w-4" /> Gelişim Dosyası
             </button>
@@ -107,9 +107,9 @@ export default function ReportsPage() {
         </div>
 
         {reports.length === 0 ? (
-          <Card className="rounded-[3rem] border-2 border-dashed border-slate-200 bg-slate-50/50 p-12 sm:p-24 text-center">
+          <Card className="rounded-xl border-2 border-dashed border-slate-200 bg-slate-50/50 p-12 sm:p-24 text-center">
             <Info className="h-10 w-10 text-slate-300 mx-auto mb-4" />
-            <p className="text-slate-400 font-black text-[10px] uppercase tracking-[0.4em]">
+            <p className="text-slate-400 font-semibold text-xs tracking-normal">
               Henüz bir analiz raporun bulunmuyor.
             </p>
           </Card>
@@ -119,16 +119,16 @@ export default function ReportsPage() {
               <Card
                 key={report.id}
                 onClick={() => navigate(`/analysis/${report.id}`)}
-                className="rounded-[2.5rem] border-0 shadow-lg hover:shadow-xl transition-all bg-white group cursor-pointer overflow-hidden"
+                className="rounded-xl border-0 shadow-sm hover:shadow-sm transition-all bg-white group cursor-pointer overflow-hidden"
               >
                 <CardContent className="p-5 sm:p-8 flex items-center justify-between">
                   <div className="flex items-center gap-4 sm:gap-6 min-w-0">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-cyan-50 text-cyan-600 rounded-2xl flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-cyan-50 text-cyan-600 rounded-lg flex items-center justify-center shrink-0">
                       <FileBarChart2 className="h-5 w-5 sm:h-6 sm:w-6" />
                     </div>
                     <div className="min-w-0">
-                      <h4 className="text-base sm:text-lg font-black text-slate-900 tracking-tight truncate">{report.examTitle}</h4>
-                      <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-1 truncate">
+                      <h4 className="text-base sm:text-lg font-semibold text-slate-900 tracking-tight truncate">{report.examTitle}</h4>
+                      <p className="text-xs font-semibold text-slate-400 tracking-normal mt-1 truncate">
                         {new Date(report.processedAt).toLocaleDateString("tr-TR")} • {report.intendedExamCount} Deneme Verisi
                       </p>
                     </div>
@@ -149,11 +149,11 @@ export default function ReportsPage() {
   return (
     <div className="w-full space-y-8 animate-in fade-in duration-500 pb-20">
       <div className="flex flex-col gap-2">
-        <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tighter flex items-center gap-3">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight flex items-center gap-3">
           <FileBarChart2 className="h-7 w-7 sm:h-8 sm:w-8 text-blue-500" />
-          Analiz <span className="text-blue-500 italic">Raporları</span>
+          Analiz Raporları
         </h2>
-        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">
+        <p className="text-xs font-semibold text-slate-400 tracking-normal">
           Öğrenci Bazlı Karne ve Gelişim Raporları
         </p>
       </div>
@@ -161,14 +161,14 @@ export default function ReportsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* SOL: Öğrenci Seçim Listesi */}
         <div className="lg:col-span-1 space-y-4">
-          <h3 className="text-lg font-black text-slate-900 tracking-tight flex items-center gap-2">
+          <h3 className="text-lg font-semibold text-slate-900 tracking-tight flex items-center gap-2">
             <Users className="h-5 w-5 text-blue-500" />
             {user?.role === "TEACHER" ? "Öğrencilerim" : "Tüm Öğrenciler"}
           </h3>
 
           {students.length === 0 ? (
-            <Card className="rounded-[2.5rem] border-2 border-dashed border-slate-200 bg-slate-50/50 p-12 text-center">
-              <p className="text-slate-400 font-black text-[10px] uppercase tracking-widest">
+            <Card className="rounded-xl border-2 border-dashed border-slate-200 bg-slate-50/50 p-12 text-center">
+              <p className="text-slate-400 font-semibold text-xs tracking-normal">
                 Henüz kayıtlı öğrenci bulunmuyor.
               </p>
             </Card>
@@ -178,15 +178,15 @@ export default function ReportsPage() {
                 <div
                   key={student.id}
                   onClick={() => setSelectedStudentId(student.id)}
-                  className={`p-5 rounded-[2rem] border-2 cursor-pointer transition-all tap-44 flex items-center justify-between ${
+                  className={`p-5 rounded-xl border-2 cursor-pointer transition-all tap-44 flex items-center justify-between ${
                     selectedStudentId === student.id
                       ? "border-blue-500 bg-blue-50/40 shadow-md scale-[1.02]"
                       : "border-slate-100 bg-white hover:border-slate-200"
                   }`}
                 >
                   <div className="min-w-0">
-                    <h5 className="font-black text-sm text-slate-900 tracking-tight truncate">{student.fullName}</h5>
-                    <p className="text-[9px] font-bold text-slate-400 tracking-wide mt-0.5 truncate">
+                    <h5 className="font-semibold text-sm text-slate-900 tracking-tight truncate">{student.fullName}</h5>
+                    <p className="text-xs font-medium text-slate-400 tracking-wide mt-0.5 truncate">
                       {student.email}
                     </p>
                   </div>
@@ -202,27 +202,27 @@ export default function ReportsPage() {
         {/* SAĞ: Seçilen Öğrencinin Raporları */}
         <div className="lg:col-span-2 space-y-6">
           {!selectedStudentId ? (
-            <Card className="rounded-[3rem] border-2 border-dashed border-slate-200 bg-slate-50/50 p-12 sm:p-24 text-center">
+            <Card className="rounded-xl border-2 border-dashed border-slate-200 bg-slate-50/50 p-12 sm:p-24 text-center">
               <Info className="h-10 w-10 text-slate-300 mx-auto mb-4" />
-              <p className="text-slate-400 font-black text-[10px] uppercase tracking-[0.4em]">
+              <p className="text-slate-400 font-semibold text-xs tracking-normal">
                 Soldan bir öğrenci seçerek analiz raporlarını görüntüleyin.
               </p>
             </Card>
           ) : (
             <div className="space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 sm:p-6 rounded-[2.5rem] border border-slate-100 shadow-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 sm:p-6 rounded-xl border border-slate-100 shadow-sm">
                 <div>
-                  <h4 className="text-lg font-black text-slate-900 tracking-tight">
+                  <h4 className="text-lg font-semibold text-slate-900 tracking-tight">
                     {selectedStudent?.fullName}
                   </h4>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                  <p className="text-xs text-slate-500">
                     Toplam {reports.length} Analiz Raporu
                   </p>
                 </div>
                 {reports.length > 0 && (
                   <button
                     onClick={() => navigate(`/analysis/cumulative/${selectedStudentId}`)}
-                    className="tap-44 self-start sm:self-auto bg-indigo-600 text-white px-6 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 flex items-center gap-2"
+                    className="tap-44 self-start sm:self-auto bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold text-xs tracking-normal hover:bg-indigo-700 transition-all shadow-sm shadow-indigo-100 flex items-center gap-2"
                   >
                     <Layers className="h-4 w-4" /> Gelişim Dosyası
                   </button>
@@ -232,12 +232,12 @@ export default function ReportsPage() {
               {isReportsLoading ? (
                 <div className="py-20 flex flex-col items-center justify-center gap-4">
                   <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Raporlar yükleniyor…</p>
+                  <p className="text-xs font-semibold tracking-normal text-slate-400">Raporlar yükleniyor…</p>
                 </div>
               ) : reports.length === 0 ? (
-                <Card className="rounded-[3rem] border-2 border-dashed border-slate-200 bg-slate-50/50 p-12 sm:p-20 text-center">
+                <Card className="rounded-xl border-2 border-dashed border-slate-200 bg-slate-50/50 p-12 sm:p-20 text-center">
                   <Info className="h-8 w-8 text-slate-300 mx-auto mb-3" />
-                  <p className="text-slate-400 font-black text-[10px] uppercase tracking-widest">
+                  <p className="text-slate-400 font-semibold text-xs tracking-normal">
                     Bu öğrenciye ait onaylanmış veya bekleyen analiz raporu bulunmuyor.
                   </p>
                 </Card>
@@ -247,24 +247,24 @@ export default function ReportsPage() {
                     <Card
                       key={report.id}
                       onClick={() => navigate(`/analysis/${report.id}`)}
-                      className={`rounded-[2.5rem] border-0 shadow-lg hover:shadow-xl transition-all bg-white group cursor-pointer overflow-hidden ${
+                      className={`rounded-xl border-0 shadow-sm hover:shadow-sm transition-all bg-white group cursor-pointer overflow-hidden ${
                         report.status === "PROCESSING" ? "opacity-60 pointer-events-none" : ""
                       }`}
                     >
                       <CardContent className="p-5 sm:p-7 flex items-center justify-between">
                         <div className="flex items-center gap-4 sm:gap-6 min-w-0">
-                          <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shrink-0 ${
+                          <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center shrink-0 ${
                             report.status === "PROCESSING" ? "bg-blue-50 text-blue-500 animate-spin" : "bg-slate-50 text-slate-900"
                           }`}>
                             <FileBarChart2 className="h-5 w-5 sm:h-6 sm:w-6" />
                           </div>
                           <div className="min-w-0">
                             <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-                              <h4 className="text-base sm:text-lg font-black text-slate-900 tracking-tight truncate">
+                              <h4 className="text-base sm:text-lg font-semibold text-slate-900 tracking-tight truncate">
                                 {report.examTitle}
                               </h4>
                               <span
-                                className={`text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-md ${
+                                className={`text-xs font-semibold tracking-normal px-2 py-1 rounded-md ${
                                   report.status === "APPROVED"
                                     ? "bg-emerald-50 text-emerald-600"
                                     : report.status === "PROCESSING"
@@ -283,7 +283,7 @@ export default function ReportsPage() {
                                   : "Onay Bekliyor"}
                               </span>
                             </div>
-                            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-1">
+                            <p className="text-xs font-semibold text-slate-400 tracking-normal mt-1">
                               {new Date(report.processedAt).toLocaleDateString("tr-TR")} •{" "}
                               {report.intendedExamCount > 0
                                 ? `${report.intendedExamCount} Deneme Verisi`

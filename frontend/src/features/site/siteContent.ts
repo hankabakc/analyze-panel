@@ -1,5 +1,5 @@
-import { Brain, FileText, ListChecks, Target, TrendingUp, Trophy, Users } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { Brain, FileText, ListChecks, Target, TrendingUp, Trophy, Users } from "@/components/icons";
+import type { LucideIcon } from "@/components/icons";
 
 /**
  * siteContent: Karşılama sitesinin içerik yardımcıları (T-063B / S-026).

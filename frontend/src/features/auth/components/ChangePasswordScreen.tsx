@@ -5,7 +5,7 @@ import { useAuth } from "@/lib/auth-context";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { KeyRound, Eye, EyeOff, Loader2, ArrowLeft, AlertTriangle, ShieldCheck } from "lucide-react";
+import { KeyRound, Eye, EyeOff, Loader2, ArrowLeft, AlertTriangle, ShieldCheck } from "@/components/icons";
 
 /**
  * ChangePasswordScreen: Giriş yapmış kullanıcının şifresini isteğine göre değiştirdiği ekrandır (T-018).
@@ -85,30 +85,30 @@ export function ChangePasswordScreen() {
   );
 
   const alanSinifi =
-    "h-14 rounded-2xl border-2 border-slate-50 bg-slate-50 focus:bg-white font-bold px-5 text-sm pr-12 transition-all";
+    "h-14 rounded-lg border-2 border-slate-50 bg-slate-50 focus:bg-white font-medium px-5 text-sm pr-12 transition-all";
 
   return (
     <div className="w-full flex justify-center">
       <div className="w-full max-w-[520px] animate-in fade-in zoom-in-95 duration-500">
-        <Card className="rounded-[3rem] border-0 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.10)] overflow-hidden bg-white">
-          <div className="h-2.5 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
+        <Card className="rounded-xl border-0 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.10)] overflow-hidden bg-white">
+
 
           <CardContent className="p-8 sm:p-12">
             <div className="flex flex-col items-center text-center mb-8">
-              <div className="w-20 h-20 bg-cyan-50 rounded-[2rem] flex items-center justify-center mb-4 border border-cyan-100/60 shadow-inner">
+              <div className="w-20 h-20 bg-cyan-50 rounded-xl flex items-center justify-center mb-4 border border-cyan-100/60 shadow-inner">
                 <KeyRound className="h-9 w-9 text-cyan-600" />
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tighter">
+              <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
                 Şifremi Değiştir
               </h2>
-              <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+              <p className="text-xs text-slate-500 mt-1">
                 Hesap Güvenliği
               </p>
             </div>
 
-            <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-2xl p-4 mb-6 flex items-start gap-3 text-left">
+            <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-4 mb-6 flex items-start gap-3 text-left">
               <ShieldCheck className="h-5 w-5 text-cyan-600 shrink-0 mt-0.5" />
-              <p className="text-xs font-bold text-cyan-950 leading-relaxed">
+              <p className="text-xs font-medium text-cyan-950 leading-relaxed">
                 Şifreniz değiştiğinde <strong>diğer cihazlardaki oturumlarınız kapatılır.</strong> Bu cihazda
                 oturumunuz açık kalır.
               </p>
@@ -117,10 +117,10 @@ export function ChangePasswordScreen() {
             {validationError && (
               <div
                 role="alert"
-                className="bg-red-50 border border-red-200 rounded-2xl p-3.5 mb-6 flex items-center gap-2.5 text-left animate-in fade-in"
+                className="bg-red-50 border border-red-200 rounded-lg p-3.5 mb-6 flex items-center gap-2.5 text-left animate-in fade-in"
               >
                 <AlertTriangle className="h-4 w-4 text-red-600 shrink-0" />
-                <p className="text-xs font-bold text-red-700">{validationError}</p>
+                <p className="text-xs font-medium text-red-700">{validationError}</p>
               </div>
             )}
 
@@ -130,7 +130,7 @@ export function ChangePasswordScreen() {
                 <div className="space-y-1.5 text-left">
                   <label
                     htmlFor="mevcut-sifre"
-                    className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4 block"
+                    className="text-xs font-semibold text-slate-400 tracking-normal ml-4 block"
                   >
                     Mevcut Şifre *
                   </label>
@@ -149,9 +149,9 @@ export function ChangePasswordScreen() {
                   </div>
                 </div>
               ) : (
-                <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-4 flex items-start gap-3 text-left">
+                <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-4 flex items-start gap-3 text-left">
                   <ShieldCheck className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
-                  <p className="text-xs font-bold text-emerald-950 leading-relaxed">
+                  <p className="text-xs font-medium text-emerald-950 leading-relaxed">
                     Geçici şifrenizle ilk oturumu açtığınız için <strong>mevcut şifrenizi girmeden</strong> doğrudan yeni bir şifre belirleyebilirsiniz.
                   </p>
                 </div>
@@ -161,12 +161,12 @@ export function ChangePasswordScreen() {
                 <div className="flex items-center justify-between ml-4">
                   <label
                     htmlFor="yeni-sifre"
-                    className="text-[10px] font-black text-slate-400 uppercase tracking-widest"
+                    className="text-xs font-semibold text-slate-400 tracking-normal"
                   >
                     Yeni Şifre *
                   </label>
                   <span
-                    className={`text-[10px] font-black ${
+                    className={`text-xs font-semibold ${
                       newPassword.length >= 12 ? "text-emerald-600" : "text-slate-400"
                     }`}
                   >
@@ -191,7 +191,7 @@ export function ChangePasswordScreen() {
               <div className="space-y-1.5 text-left">
                 <label
                   htmlFor="yeni-sifre-tekrar"
-                  className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4 block"
+                  className="text-xs font-semibold text-slate-400 tracking-normal ml-4 block"
                 >
                   Yeni Şifre (Tekrar) *
                 </label>
@@ -213,7 +213,7 @@ export function ChangePasswordScreen() {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-16 rounded-2xl font-black text-sm uppercase tracking-widest bg-slate-900 hover:bg-slate-800 text-white transition-all shadow-xl active:scale-98 mt-2"
+                className="w-full h-16 rounded-lg font-semibold text-sm tracking-normal bg-slate-900 hover:bg-slate-800 text-white transition-all shadow-sm mt-2"
               >
                 {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : "Şifreyi Güncelle"}
               </Button>
@@ -222,7 +222,7 @@ export function ChangePasswordScreen() {
                 type="button"
                 onClick={() => navigate("/")}
                 disabled={isLoading}
-                className="tap-44 min-h-[44px] w-full flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-700 transition-colors py-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
+                className="tap-44 min-h-[44px] w-full flex items-center justify-center gap-2 text-xs font-semibold tracking-normal text-slate-400 hover:text-slate-700 transition-colors py-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
               >
                 <ArrowLeft className="h-3.5 w-3.5" /> Vazgeç
               </button>

@@ -58,19 +58,19 @@ describe("Yönlendirme (S-026)", () => {
   it("oturumsuz ziyaretçi / adresinde karşılama sayfasını görür", async () => {
     signedOut();
     renderAt("/");
-    expect(await screen.findByRole("heading", { level: 1, name: "ANALİZ SİSTEMİ" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { level: 1, name: "Analiz Sistemi" })).toBeInTheDocument();
   });
 
   it("oturumsuz ziyaretçi /giris adresinde giriş formunu görür", async () => {
     signedOut();
     renderAt("/giris");
-    expect(await screen.findByRole("heading", { name: "Giriş Yap" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Giriş yap" })).toBeInTheDocument();
   });
 
   it("oturumsuz ziyaretçi panel adresine girerse giriş ekranına yönlenir", async () => {
     signedOut();
     renderAt("/raporlar");
-    expect(await screen.findByRole("heading", { name: "Giriş Yap" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Giriş yap" })).toBeInTheDocument();
     expect(screen.queryByText("Raporlar sayfası")).not.toBeInTheDocument();
   });
 

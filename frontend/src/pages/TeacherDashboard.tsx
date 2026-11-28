@@ -10,7 +10,7 @@ import {
   FileUp, AlertCircle, CheckCircle2, Trash2, Loader2, ArrowRight,
   Calendar, Plus, ListTodo, CheckCircle, Clock, X, BookOpen, RefreshCw,
   Brain
-} from "lucide-react";
+} from "@/components/icons";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const BULK_POLLING_TIMEOUT_MS = 120_000; // 2 dakika üst sınır (T-051)
@@ -389,7 +389,7 @@ export default function TeacherDashboard() {
     if (!file) return;
 
     try {
-      toast.loading("Otonom Süper Analiz başlatıldı...");
+      toast.loading("Karne okunuyor...");
       const response = await analysisApi.uploadPdf(studentId, 0, 'AUTO', file);
       if (response.data.success) {
         toast.dismiss();
@@ -699,7 +699,7 @@ export default function TeacherDashboard() {
   if (isLoading) return (
     <div className="w-full flex flex-col items-center justify-center gap-6 py-32">
       <div className="w-10 h-10 border-[5px] border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-      <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Analiz Merkezi Yükleniyor</p>
+      <p className="text-xs font-semibold tracking-normal text-slate-400">Yükleniyor</p>
     </div>
   );
 
@@ -708,17 +708,17 @@ export default function TeacherDashboard() {
       {/* Üst Başlık ve Mod Değiştirici Sekmeler */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6">
         <div className="flex flex-col gap-2">
-          <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tighter">
-            Eğitmen <span className="text-blue-500 italic">Paneli</span>
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
+            Eğitmen Paneli
           </h2>
-          <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Otonom Analiz & Öğrenci Takibi</p>
+          <p className="text-xs font-semibold text-slate-400 tracking-normal">Karne yükleme ve öğrenci takibi</p>
         </div>
 
-        <div className="flex items-center gap-2 p-1.5 bg-slate-100/80 rounded-2xl self-start sm:self-auto">
+        <div className="flex items-center gap-2 p-1.5 bg-slate-100/80 rounded-lg self-start sm:self-auto">
           <button
             type="button"
             onClick={() => setActiveMode("SINGLE")}
-            className={`tap-44 min-h-[44px] px-4 sm:px-6 rounded-xl font-black text-xs transition-all flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none ${
+            className={`tap-44 min-h-[44px] px-4 sm:px-6 rounded-xl font-semibold text-xs transition-all flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none ${
               activeMode === "SINGLE"
                 ? "bg-white text-slate-900 shadow-sm"
                 : "text-slate-500 hover:text-slate-900"
@@ -730,7 +730,7 @@ export default function TeacherDashboard() {
           <button
             type="button"
             onClick={() => setActiveMode("BULK")}
-            className={`tap-44 min-h-[44px] px-4 sm:px-6 rounded-xl font-black text-xs transition-all flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none ${
+            className={`tap-44 min-h-[44px] px-4 sm:px-6 rounded-xl font-semibold text-xs transition-all flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none ${
               activeMode === "BULK"
                 ? "bg-blue-600 text-white shadow-sm shadow-blue-200"
                 : "text-slate-500 hover:text-slate-900"
@@ -739,7 +739,7 @@ export default function TeacherDashboard() {
             <FileUp className="h-4 w-4" />
             Toplu Karne Yükleme
             {bulkItems.length > 0 && (
-              <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${activeMode === "BULK" ? "bg-white text-blue-600" : "bg-blue-100 text-blue-700"}`}>
+              <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${activeMode === "BULK" ? "bg-white text-blue-600" : "bg-blue-100 text-blue-700"}`}>
                 {bulkItems.length}
               </span>
             )}
@@ -750,20 +750,20 @@ export default function TeacherDashboard() {
       {activeMode === "BULK" ? (
         /* Toplu Karne Yükleme Görünümü (T-049) */
         <div className="space-y-8 animate-in fade-in duration-500">
-          <div className="bg-white p-6 sm:p-10 rounded-[2.5rem] sm:rounded-[3.5rem] shadow-xl border border-slate-100 flex flex-col items-center gap-6 text-center relative overflow-hidden">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-50 text-blue-600 rounded-[1.5rem] sm:rounded-[2rem] flex items-center justify-center shadow-lg shadow-blue-100">
+          <div className="bg-white p-6 sm:p-10 rounded-xl sm:rounded-xl shadow-sm border border-slate-100 flex flex-col items-center gap-6 text-center relative overflow-hidden">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-50 text-blue-600 rounded-xl sm:rounded-xl flex items-center justify-center shadow-sm shadow-blue-100">
               <FileUp className="h-8 w-8 sm:h-10 sm:w-10" />
             </div>
             <div className="space-y-2 max-w-xl">
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Toplu Karne Yükleme Merkezi</h3>
-              <p className="text-xs font-bold text-slate-500">
+              <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 tracking-tight">Toplu karne yükleme</h3>
+              <p className="text-xs font-medium text-slate-500">
                 Birden çok PDF karne seçin, her birini ilgili öğrenciyle eşleştirin ve tek akışta yükleyin. Karneden öğrenci bilgisi okunmaz, eşleştirme kontrolü öğretmendedir.
               </p>
             </div>
 
             <label
               htmlFor="bulk-pdf-input"
-              className="cursor-pointer bg-slate-900 text-white px-6 sm:px-10 py-3.5 sm:py-4 rounded-2xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-3 hover:bg-blue-600 transition-all shadow-xl shadow-slate-200 tap-44 min-h-[44px] focus-within:ring-2 focus-within:ring-blue-500"
+              className="cursor-pointer bg-slate-900 text-white px-6 sm:px-10 py-3.5 sm:py-4 rounded-lg font-semibold text-xs tracking-normal flex items-center justify-center gap-3 hover:bg-blue-600 transition-all shadow-sm shadow-slate-200 tap-44 min-h-[44px] focus-within:ring-2 focus-within:ring-blue-500"
             >
               <Upload className="h-4 w-4 shrink-0" />
               {bulkItems.length === 0 ? "PDF Karneleri Seçin" : "Daha Fazla PDF Ekle"}
@@ -780,17 +780,17 @@ export default function TeacherDashboard() {
           </div>
 
           {bulkItems.length === 0 ? (
-            <div className="text-center py-16 text-slate-400 text-xs font-black uppercase tracking-widest italic border-2 border-dashed border-slate-200 rounded-[2.5rem] p-8">
+            <div className="text-center py-16 text-slate-400 text-xs font-semibold tracking-normal border-2 border-dashed border-slate-200 rounded-xl p-8">
               Henüz dosya seçilmedi. Yukarıdaki butona tıklayarak birden çok PDF karne seçebilirsiniz.
             </div>
           ) : (
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-2">
                 <div className="flex items-center gap-3">
-                  <h4 className="font-black text-base text-slate-900">
+                  <h4 className="font-semibold text-base text-slate-900">
                     Seçilen Dosyalar ({bulkItems.length})
                   </h4>
-                  <span className="text-[11px] font-bold text-slate-500">
+                  <span className="text-xs font-medium text-slate-500">
                     ({bulkItems.filter(i => i.studentId).length}/{bulkItems.length} öğrenci eşleştirildi)
                   </span>
                 </div>
@@ -799,7 +799,7 @@ export default function TeacherDashboard() {
                     type="button"
                     disabled={isBulkUploading}
                     onClick={handleClearBulkItems}
-                    className="tap-44 min-h-[44px] px-4 py-2 text-xs font-bold text-slate-500 hover:text-red-600 transition-colors disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:outline-none rounded-xl"
+                    className="tap-44 min-h-[44px] px-4 py-2 text-xs font-medium text-slate-500 hover:text-red-600 transition-colors disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:outline-none rounded-xl"
                   >
                     Listeyi Temizle
                   </button>
@@ -807,7 +807,7 @@ export default function TeacherDashboard() {
                     type="button"
                     disabled={isBulkUploading || !canStartBulkUpload}
                     onClick={startBulkUpload}
-                    className="tap-44 min-h-[44px] px-6 py-2.5 bg-blue-600 text-white rounded-xl font-black text-xs uppercase tracking-wider hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 flex items-center gap-2 disabled:opacity-50 disabled:pointer-events-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                    className="tap-44 min-h-[44px] px-6 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-xs tracking-normal hover:bg-blue-700 transition-all shadow-sm shadow-blue-200 flex items-center gap-2 disabled:opacity-50 disabled:pointer-events-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                   >
                     {isBulkUploading ? (
                       <>
@@ -826,17 +826,17 @@ export default function TeacherDashboard() {
                 {bulkItems.map((item, index) => (
                   <div
                     key={item.id}
-                    className="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all"
+                    className="p-4 sm:p-5 rounded-lg border border-slate-200 bg-white shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all"
                   >
                     <div className="flex items-center gap-3 min-w-0 flex-1">
-                      <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center shrink-0 font-bold text-slate-700 text-xs">
+                      <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center shrink-0 font-medium text-slate-700 text-xs">
                         {index + 1}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="font-bold text-sm text-slate-900 truncate" title={item.file.name}>
+                        <p className="font-medium text-sm text-slate-900 truncate" title={item.file.name}>
                           {item.file.name}
                         </p>
-                        <p className="text-[10px] text-slate-400 font-semibold mt-0.5">
+                        <p className="text-xs text-slate-400 font-semibold mt-0.5">
                           {(item.file.size / 1024).toFixed(1)} KB
                         </p>
                       </div>
@@ -851,7 +851,7 @@ export default function TeacherDashboard() {
                         value={item.studentId}
                         disabled={isBulkUploading || item.status === "SUCCESS"}
                         onChange={(e) => updateItemStudent(item.id, e.target.value)}
-                        className="w-full min-h-[44px] tap-44 px-3 py-2 text-xs font-bold text-slate-800 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all disabled:opacity-60"
+                        className="w-full min-h-[44px] tap-44 px-3 py-2 text-xs font-medium text-slate-800 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all disabled:opacity-60"
                       >
                         <option value="">-- Öğrenci Seçiniz --</option>
                         {students.map((s) => (
@@ -864,28 +864,28 @@ export default function TeacherDashboard() {
 
                     <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 flex-wrap">
                       {item.status === "PENDING" && (
-                        <span className="text-[10px] font-bold px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600">
+                        <span className="text-xs font-medium px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600">
                           Bekliyor
                         </span>
                       )}
                       {item.status === "UPLOADING" && (
-                        <span className="text-[10px] font-bold px-3 py-1.5 rounded-lg bg-blue-50 text-blue-600 flex items-center gap-1.5 animate-pulse">
+                        <span className="text-xs font-medium px-3 py-1.5 rounded-lg bg-blue-50 text-blue-600 flex items-center gap-1.5">
                           <Loader2 className="h-3.5 w-3.5 animate-spin" /> Yükleniyor
                         </span>
                       )}
                       {item.status === "PROCESSING" && (
-                        <span className="text-[10px] font-bold px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-600 flex items-center gap-1.5 animate-pulse">
+                        <span className="text-xs font-medium px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-600 flex items-center gap-1.5">
                           <Loader2 className="h-3.5 w-3.5 animate-spin" /> Ayrıştırılıyor
                         </span>
                       )}
                       {(item.status === "PENDING_APPROVAL" || item.status === "SUCCESS") && (
-                        <span className="text-[10px] font-bold px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 flex items-center gap-1.5">
+                        <span className="text-xs font-medium px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 flex items-center gap-1.5">
                           <CheckCircle2 className="h-3.5 w-3.5" /> Onay Bekliyor
                         </span>
                       )}
                       {item.status === "FAILED" && (
                         <span
-                          className="text-[10px] font-bold px-3 py-1.5 rounded-lg bg-red-50 text-red-700 flex items-center gap-1.5 max-w-[180px] sm:max-w-[240px] truncate"
+                          className="text-xs font-medium px-3 py-1.5 rounded-lg bg-red-50 text-red-700 flex items-center gap-1.5 max-w-[180px] sm:max-w-[240px] truncate"
                           title={item.errorMessage}
                         >
                           <AlertCircle className="h-3.5 w-3.5 shrink-0" />
@@ -895,7 +895,7 @@ export default function TeacherDashboard() {
                       {item.status === "TIMEOUT" && (
                         <div className="flex items-center gap-2">
                           <span
-                            className="text-[10px] font-bold px-3 py-1.5 rounded-lg bg-amber-50 text-amber-800 flex items-center gap-1.5 border border-amber-200/60"
+                            className="text-xs font-medium px-3 py-1.5 rounded-lg bg-amber-50 text-amber-800 flex items-center gap-1.5 border border-amber-200/60"
                             title="Ayrıştırma durumu 2 dakika içinde doğrulanamadı"
                           >
                             <AlertCircle className="h-3.5 w-3.5 text-amber-600 shrink-0" />
@@ -904,7 +904,7 @@ export default function TeacherDashboard() {
                           <button
                             type="button"
                             onClick={() => handleRetryBulkItem(item.id)}
-                            className="tap-44 min-h-[44px] min-w-[44px] px-3.5 py-2 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-white rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-sm focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none"
+                            className="tap-44 min-h-[44px] min-w-[44px] px-3.5 py-2 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-white rounded-xl text-xs font-semibold tracking-normal flex items-center gap-1.5 transition-all shadow-sm focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none"
                             title="Durumu yeniden sorgula"
                           >
                             <RefreshCw className="h-3.5 w-3.5" /> Yenile
@@ -933,7 +933,7 @@ export default function TeacherDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-12">
           {/* SOL: Öğrenci Listesi */}
           <div className="lg:col-span-1 space-y-6">
-             <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+             <h3 className="text-xl font-semibold text-slate-900 tracking-tight flex items-center gap-3">
                 <Users className="h-6 w-6 text-blue-500" /> Öğrencilerim
              </h3>
              <div className="space-y-3">
@@ -952,15 +952,15 @@ export default function TeacherDashboard() {
                         }
                       }}
                       onClick={() => fetchStudentDetails(student.id)}
-                      className={`p-4 sm:p-6 rounded-[2rem] sm:rounded-[2.5rem] border-2 cursor-pointer transition-all tap-44 min-h-[44px] ${selectedStudentId === student.id ? 'border-blue-500 bg-blue-50/30 shadow-lg' : 'border-slate-50 bg-white hover:border-slate-200'}`}
+                      className={`p-4 sm:p-6 rounded-xl sm:rounded-xl border-2 cursor-pointer transition-all tap-44 min-h-[44px] ${selectedStudentId === student.id ? 'border-blue-500 bg-blue-50/30 shadow-sm' : 'border-slate-50 bg-white hover:border-slate-200'}`}
                     >
                        <div className="flex items-center justify-between gap-2">
-                         <h5 className="font-black text-sm text-slate-900 tracking-tight truncate">{student.fullName}</h5>
+                         <h5 className="font-semibold text-sm text-slate-900 tracking-tight truncate">{student.fullName}</h5>
                          <div className="flex items-center gap-1.5 shrink-0">
                            {count > 0 && (
                              <span 
                                data-testid={`unseen-badge-${student.id}`}
-                               className="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-[10px] font-black bg-blue-600 text-white shadow-sm animate-pulse"
+                               className="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-sm"
                                title={`${count} yeni tamamlanan görev`}
                                aria-label={`${count} yeni tamamlanan çalışma görevi`}
                              >
@@ -970,7 +970,7 @@ export default function TeacherDashboard() {
                            {(unseenPsychCounts[student.id] || 0) > 0 && (
                              <span 
                                data-testid={`unseen-psych-badge-${student.id}`}
-                               className="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-[10px] font-black bg-purple-600 text-white shadow-sm animate-pulse"
+                               className="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-semibold bg-purple-600 text-white shadow-sm"
                                title={`${unseenPsychCounts[student.id]} yeni psikolojik test sonucu`}
                                aria-label={`${unseenPsychCounts[student.id]} yeni psikolojik test sonucu`}
                              >
@@ -979,7 +979,7 @@ export default function TeacherDashboard() {
                            )}
                          </div>
                        </div>
-                       <p className="text-[9px] font-black text-slate-400 tracking-wide mt-1 truncate">{student.email}</p>
+                       <p className="text-xs font-semibold text-slate-400 tracking-wide mt-1 truncate">{student.email}</p>
                     </div>
                   );
                 })}
@@ -989,29 +989,28 @@ export default function TeacherDashboard() {
           {/* SAĞ: Otonom Analiz Merkezi */}
           <div className="lg:col-span-2 space-y-8">
              {!selectedStudentId ? (
-               <Card className="rounded-[2.5rem] sm:rounded-[4rem] border-2 border-dashed border-slate-200 bg-slate-50/50 p-12 sm:p-32 text-center">
+               <Card className="rounded-xl sm:rounded-xl border-2 border-dashed border-slate-200 bg-slate-50/50 p-12 sm:p-32 text-center">
                   <Info className="h-12 w-12 text-slate-200 mx-auto mb-6" />
-                  <p className="text-slate-400 font-black text-[10px] uppercase tracking-[0.4em]">Soldan bir öğrenci seçerek otonom analizi başlatın.</p>
+                  <p className="text-slate-400 font-semibold text-xs tracking-normal">Karne yüklemek veya raporlarını görmek için soldan bir öğrenci seçin.</p>
                </Card>
              ) : (
                <div className="space-y-8 animate-in slide-in-from-bottom-5">
                   
                   {/* Otonom Yükleme Alanı */}
-                  <div className="bg-white p-6 sm:p-10 rounded-[2.5rem] sm:rounded-[4rem] shadow-2xl border border-slate-50 flex flex-col items-center gap-8 relative overflow-hidden">
-                     <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl"></div>
+                  <div className="bg-white p-6 sm:p-10 rounded-xl sm:rounded-xl shadow-sm border border-slate-50 flex flex-col items-center gap-8 relative overflow-hidden">
                      <div className="flex flex-col items-center text-center gap-4">
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-600 text-white rounded-[1.5rem] sm:rounded-[2rem] flex items-center justify-center shadow-2xl shadow-blue-200">
-                           <Sparkles className="h-8 w-8 sm:h-10 sm:w-10 animate-pulse" />
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-600 text-white rounded-xl sm:rounded-xl flex items-center justify-center shadow-sm shadow-blue-200">
+                           <Sparkles className="h-8 w-8 sm:h-10 sm:w-10" />
                         </div>
                         <div className="space-y-1">
-                           <h3 className="font-black text-slate-900 text-lg sm:text-xl tracking-tight uppercase">Karne Analizi</h3>
-                           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">PDF Karneyi Yükleyin, Netler ve Konular Otomatik Okunsun</p>
+                           <h3 className="font-semibold text-slate-900 text-lg sm:text-xl tracking-tight">Karne Analizi</h3>
+                           <p className="text-xs text-slate-500">PDF karneyi yükleyin; netler ve konular otomatik okunur.</p>
                         </div>
                      </div>
 
                      <div className="flex flex-col items-center gap-3 w-full max-w-md">
-                       <label className="w-full cursor-pointer bg-slate-900 text-white px-6 sm:px-12 py-4 sm:py-6 rounded-[2rem] sm:rounded-[2.5rem] font-black text-[11px] uppercase tracking-[0.3em] flex items-center justify-center gap-4 hover:bg-blue-600 transition-all shadow-2xl shadow-blue-100 group tap-44 min-h-[44px]">
-                          <Upload className="h-5 w-5 group-hover:-translate-y-1 transition-transform shrink-0" /> 
+                       <label className="w-full cursor-pointer bg-slate-900 text-white px-6 sm:px-12 py-4 sm:py-6 rounded-xl sm:rounded-xl font-semibold text-xs tracking-normal flex items-center justify-center gap-4 hover:bg-blue-600 transition-all shadow-sm shadow-blue-100 group tap-44 min-h-[44px]">
+                          <Upload className="h-5 w-5 transition-transform shrink-0" /> 
                           PDF Karne Analiz Et
                           <input type="file" className="hidden" accept=".pdf" onChange={(e) => handleFileUpload(selectedStudentId, e)} />
                        </label>
@@ -1019,7 +1018,7 @@ export default function TeacherDashboard() {
                        <button
                          type="button"
                          onClick={() => setActiveMode("BULK")}
-                         className="tap-44 min-h-[44px] text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none rounded-xl"
+                         className="tap-44 min-h-[44px] text-xs font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none rounded-xl"
                        >
                          Birden fazla karne mi var? Toplu yüklemeye geçin <ArrowRight className="h-3.5 w-3.5" />
                        </button>
@@ -1027,15 +1026,15 @@ export default function TeacherDashboard() {
                    </div>
 
                   {/* T-050B: Çalışma Planları Bölümü */}
-                  <div className="bg-white p-6 sm:p-10 rounded-[2.5rem] sm:rounded-[3.5rem] shadow-xl border border-slate-100 space-y-6">
+                  <div className="bg-white p-6 sm:p-10 rounded-xl sm:rounded-xl shadow-sm border border-slate-100 space-y-6">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
                           <ListTodo className="h-5 w-5" />
                         </div>
                         <div>
-                          <h3 className="text-lg font-black text-slate-900 tracking-tight">Çalışma Planları</h3>
-                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Konu Hedefleri & Teslim Takvimi</p>
+                          <h3 className="text-lg font-semibold text-slate-900 tracking-tight">Çalışma Planları</h3>
+                          <p className="text-xs text-slate-500">Konu hedefleri ve teslim tarihleri</p>
                         </div>
                       </div>
 
@@ -1045,7 +1044,7 @@ export default function TeacherDashboard() {
                           id="btn-create-plan"
                           data-testid="btn-create-plan"
                           onClick={openCreatePlanModal}
-                          className="tap-44 min-h-[44px] px-5 py-2.5 bg-blue-600 text-white rounded-xl font-black text-xs uppercase tracking-wider hover:bg-blue-700 transition-all shadow-md shadow-blue-200 flex items-center gap-2 self-start sm:self-auto focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                          className="tap-44 min-h-[44px] px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-xs tracking-normal hover:bg-blue-700 transition-all shadow-md shadow-blue-200 flex items-center gap-2 self-start sm:self-auto focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                         >
                           <Plus className="h-4 w-4" /> Yeni Plan Ver
                         </button>
@@ -1054,9 +1053,9 @@ export default function TeacherDashboard() {
 
                     {/* Yeni Plan Verme Formu */}
                     {isPlanModalOpen && (
-                      <form onSubmit={submitPlan} className="p-5 sm:p-7 rounded-2xl border-2 border-blue-100 bg-blue-50/20 space-y-5 animate-in fade-in duration-300">
+                      <form onSubmit={submitPlan} className="p-5 sm:p-7 rounded-lg border-2 border-blue-100 bg-blue-50/20 space-y-5 animate-in fade-in duration-300">
                         <div className="flex items-center justify-between gap-2 border-b border-blue-100 pb-3">
-                          <h4 className="font-black text-sm text-slate-900 flex items-center gap-2">
+                          <h4 className="font-semibold text-sm text-slate-900 flex items-center gap-2">
                             <Plus className="h-4 w-4 text-blue-600" /> Öğrenciye Yeni Çalışma Planı Ata
                           </h4>
                           <button
@@ -1078,7 +1077,7 @@ export default function TeacherDashboard() {
                           <>
                             {/* Teslim Tarihi */}
                             <div className="space-y-1.5">
-                              <label htmlFor="plan-due-date" className="block text-xs font-black text-slate-700 uppercase tracking-wider">
+                              <label htmlFor="plan-due-date" className="block text-xs font-semibold text-slate-700 tracking-normal">
                                 Teslim Tarihi <span className="text-red-500">*</span>
                               </label>
                               <div className="relative max-w-xs">
@@ -1088,14 +1087,14 @@ export default function TeacherDashboard() {
                                   min={new Date().toISOString().split("T")[0]}
                                   value={planDueDate}
                                   onChange={(e) => setPlanDueDate(e.target.value)}
-                                  className="tap-44 min-h-[44px] w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl font-bold text-xs text-slate-800 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none shadow-sm"
+                                  className="tap-44 min-h-[44px] w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl font-medium text-xs text-slate-800 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none shadow-sm"
                                 />
                               </div>
                             </div>
 
                             {/* Konu Kalemleri */}
                             <div className="space-y-3">
-                              <label className="block text-xs font-black text-slate-700 uppercase tracking-wider">
+                              <label className="block text-xs font-semibold text-slate-700 tracking-normal">
                                 Konu ve Soru Hedefleri <span className="text-red-500">*</span>
                               </label>
 
@@ -1113,7 +1112,7 @@ export default function TeacherDashboard() {
                                         key={item.id}
                                         className="p-3 sm:p-4 rounded-xl border border-slate-200 bg-white shadow-sm flex flex-col lg:flex-row items-stretch lg:items-center gap-2.5 sm:gap-3"
                                       >
-                                        <span className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center font-bold text-slate-600 text-xs shrink-0 self-start lg:self-auto">
+                                        <span className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center font-medium text-slate-600 text-xs shrink-0 self-start lg:self-auto">
                                           {index + 1}
                                         </span>
 
@@ -1124,7 +1123,7 @@ export default function TeacherDashboard() {
                                             data-testid={`plan-lesson-select-${index}`}
                                             value={item.lessonName || ""}
                                             onChange={(e) => handlePlanItemChange(item.id, "lessonName", e.target.value)}
-                                            className="tap-44 min-h-[44px] w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-xs text-slate-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                                            className="tap-44 min-h-[44px] w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-medium text-xs text-slate-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                                           >
                                             <option value="">-- Ders Seçiniz --</option>
                                             {availableLessons.map((lesson: string) => (
@@ -1145,7 +1144,7 @@ export default function TeacherDashboard() {
                                             value={item.topicSearch || ""}
                                             onChange={(e) => handlePlanItemChange(item.id, "topicSearch", e.target.value)}
                                             disabled={!item.lessonName}
-                                            className="tap-44 min-h-[44px] w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-xs text-slate-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none disabled:opacity-50 disabled:bg-slate-100"
+                                            className="tap-44 min-h-[44px] w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-medium text-xs text-slate-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none disabled:opacity-50 disabled:bg-slate-100"
                                           />
                                         </div>
 
@@ -1157,7 +1156,7 @@ export default function TeacherDashboard() {
                                             value={item.topicName}
                                             onChange={(e) => handlePlanItemChange(item.id, "topicName", e.target.value)}
                                             disabled={!item.lessonName}
-                                            className="tap-44 min-h-[44px] w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-xs text-slate-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none disabled:opacity-50 disabled:bg-slate-100"
+                                            className="tap-44 min-h-[44px] w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-medium text-xs text-slate-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none disabled:opacity-50 disabled:bg-slate-100"
                                           >
                                             <option value="">
                                               {item.lessonName ? `-- Konu Seçiniz (${filteredLessonTopics.length}) --` : "-- Önce Ders Seçiniz --"}
@@ -1180,9 +1179,9 @@ export default function TeacherDashboard() {
                                             placeholder="Soru"
                                             value={item.questionCount}
                                             onChange={(e) => handlePlanItemChange(item.id, "questionCount", e.target.value)}
-                                            className="tap-44 min-h-[44px] w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-xs text-slate-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none text-center"
+                                            className="tap-44 min-h-[44px] w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-medium text-xs text-slate-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none text-center"
                                           />
-                                          <span className="text-xs font-bold text-slate-400 shrink-0">Soru</span>
+                                          <span className="text-xs font-medium text-slate-400 shrink-0">Soru</span>
                                         </div>
 
                                         {/* Sil Butonu */}
@@ -1205,7 +1204,7 @@ export default function TeacherDashboard() {
                                 id="btn-add-plan-topic"
                                 data-testid="btn-add-plan-topic"
                                 onClick={addPlanRow}
-                                className="tap-44 min-h-[44px] px-4 py-2 text-xs font-bold text-blue-600 bg-white border border-blue-200 hover:bg-blue-50 rounded-xl transition-colors flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                                className="tap-44 min-h-[44px] px-4 py-2 text-xs font-medium text-blue-600 bg-white border border-blue-200 hover:bg-blue-50 rounded-xl transition-colors flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                               >
                                 <Plus className="h-4 w-4" /> Yeni Konu Ekle
                               </button>
@@ -1217,7 +1216,7 @@ export default function TeacherDashboard() {
                                 type="button"
                                 disabled={isSubmittingPlan}
                                 onClick={() => setIsPlanModalOpen(false)}
-                                className="tap-44 min-h-[44px] px-5 py-2.5 text-xs font-bold text-slate-500 hover:text-slate-800 rounded-xl transition-colors"
+                                className="tap-44 min-h-[44px] px-5 py-2.5 text-xs font-medium text-slate-500 hover:text-slate-800 rounded-xl transition-colors"
                               >
                                 Vazgeç
                               </button>
@@ -1226,7 +1225,7 @@ export default function TeacherDashboard() {
                                 id="btn-save-plan"
                                 data-testid="btn-save-plan"
                                 disabled={isSubmittingPlan}
-                                className="tap-44 min-h-[44px] px-6 py-2.5 bg-blue-600 text-white rounded-xl font-black text-xs uppercase tracking-wider hover:bg-blue-700 transition-all shadow-md shadow-blue-200 flex items-center gap-2 disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                                className="tap-44 min-h-[44px] px-6 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-xs tracking-normal hover:bg-blue-700 transition-all shadow-md shadow-blue-200 flex items-center gap-2 disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                               >
                                 {isSubmittingPlan ? (
                                   <>
@@ -1251,7 +1250,7 @@ export default function TeacherDashboard() {
                           <Loader2 className="h-6 w-6 animate-spin text-blue-500" />
                         </div>
                       ) : studyPlans.length === 0 ? (
-                        <p className="text-center py-8 text-slate-400 text-xs font-black uppercase tracking-widest italic border border-dashed border-slate-200 rounded-2xl p-6">
+                        <p className="text-center py-8 text-slate-400 text-xs font-semibold tracking-normal border border-dashed border-slate-200 rounded-lg p-6">
                           Henüz bu öğrenciye atanmış bir çalışma planı bulunmuyor.
                         </p>
                       ) : (
@@ -1264,17 +1263,17 @@ export default function TeacherDashboard() {
                             return (
                               <div
                                 key={plan.id}
-                                className="p-5 sm:p-6 rounded-2xl border border-slate-200 bg-white shadow-sm space-y-4 transition-all"
+                                className="p-5 sm:p-6 rounded-lg border border-slate-200 bg-white shadow-sm space-y-4 transition-all"
                               >
                                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
                                   <div className="flex items-center gap-3">
                                     <Calendar className="h-4 w-4 text-blue-500 shrink-0" />
-                                    <span className="font-black text-sm text-slate-900">
+                                    <span className="font-semibold text-sm text-slate-900">
                                       Teslim: {new Date(plan.dueDate).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}
                                     </span>
                                   </div>
                                   <div className="flex items-center gap-2">
-                                    <span className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 ${
+                                    <span className={`px-2.5 py-1 rounded-lg text-xs font-medium flex items-center gap-1.5 ${
                                       isAllCompleted
                                         ? "bg-emerald-50 text-emerald-700"
                                         : "bg-blue-50 text-blue-700"
@@ -1300,21 +1299,21 @@ export default function TeacherDashboard() {
                                     >
                                       <div className="flex items-center gap-2.5 min-w-0">
                                         <BookOpen className="h-4 w-4 text-slate-400 shrink-0" />
-                                        <span className="font-bold text-slate-800 truncate" title={item.topicName}>
+                                        <span className="font-medium text-slate-800 truncate" title={item.topicName}>
                                           {item.topicName}
                                         </span>
                                       </div>
 
                                       <div className="flex items-center gap-3 shrink-0">
-                                        <span className="font-black text-slate-600">
+                                        <span className="font-semibold text-slate-600">
                                           {item.questionCount} Soru
                                         </span>
                                         {item.completedAt ? (
-                                          <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 text-[10px] font-bold flex items-center gap-1">
+                                          <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 text-xs font-medium flex items-center gap-1">
                                             <CheckCircle className="h-3 w-3" /> Çözüldü
                                           </span>
                                         ) : (
-                                          <span className="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 text-[10px] font-bold flex items-center gap-1">
+                                          <span className="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 text-xs font-medium flex items-center gap-1">
                                             <Clock className="h-3 w-3" /> Bekliyor
                                           </span>
                                         )}
@@ -1333,16 +1332,16 @@ export default function TeacherDashboard() {
                   {/* Psikolojik Ölçek Sonuçları (T-052D) */}
                   <div
                     data-testid="psych-results-section"
-                    className="p-6 sm:p-8 rounded-[2.5rem] sm:rounded-[3rem] border border-slate-100 bg-white/60 backdrop-blur-xl shadow-xl space-y-6"
+                    className="p-6 sm:p-8 rounded-xl sm:rounded-xl border border-slate-100 bg-white/60 shadow-sm space-y-6"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="p-3 bg-purple-50 text-purple-600 rounded-2xl">
+                        <div className="p-3 bg-purple-50 text-purple-600 rounded-lg">
                           <Brain className="h-6 w-6" />
                         </div>
                         <div>
-                          <h3 className="text-lg font-black text-slate-900 tracking-tight">Psikolojik Ölçek Sonuçları</h3>
-                          <p className="text-xs font-bold text-slate-400">STAI Durumluk ve Sürekli Kaygı Envanteri</p>
+                          <h3 className="text-lg font-semibold text-slate-900 tracking-tight">Psikolojik Ölçek Sonuçları</h3>
+                          <p className="text-xs font-medium text-slate-400">STAI Durumluk ve Sürekli Kaygı Envanteri</p>
                         </div>
                       </div>
                     </div>
@@ -1354,11 +1353,11 @@ export default function TeacherDashboard() {
                     ) : psychResultsForbidden ? (
                       <div
                         data-testid="psych-results-forbidden"
-                        className="p-5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 flex items-start gap-3"
+                        className="p-5 rounded-lg bg-amber-50 border border-amber-200 text-amber-900 flex items-start gap-3"
                       >
                         <AlertCircle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
                         <div>
-                          <h4 className="font-bold text-sm text-amber-900">Erişim Yetkisi Yok</h4>
+                          <h4 className="font-medium text-sm text-amber-900">Erişim Yetkisi Yok</h4>
                           <p className="text-xs text-amber-700 mt-1">
                             Bu öğrencinin psikolojik ölçek sonuçlarını görüntüleme yetkiniz bulunmamaktadır.
                           </p>
@@ -1367,7 +1366,7 @@ export default function TeacherDashboard() {
                     ) : psychResults.length === 0 ? (
                       <p
                         data-testid="psych-results-empty"
-                        className="text-center py-8 text-slate-400 text-xs font-black uppercase tracking-widest italic border border-dashed border-slate-200 rounded-2xl p-6"
+                        className="text-center py-8 text-slate-400 text-xs font-semibold tracking-normal border border-dashed border-slate-200 rounded-lg p-6"
                       >
                         Bu öğrenciye ait henüz bir psikolojik ölçek kaydı bulunmuyor.
                       </p>
@@ -1382,11 +1381,11 @@ export default function TeacherDashboard() {
                             <div
                               key={result.id}
                               data-testid={`psych-result-card-${result.id}`}
-                              className="p-5 sm:p-6 rounded-2xl border border-slate-200 bg-white shadow-sm space-y-4"
+                              className="p-5 sm:p-6 rounded-lg border border-slate-200 bg-white shadow-sm space-y-4"
                             >
                               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
                                 <div className="flex items-center gap-3">
-                                  <span className="font-black text-sm text-slate-900">
+                                  <span className="font-semibold text-sm text-slate-900">
                                     {isBourdon
                                       ? 'Bourdon Dikkat Testi'
                                       : result.testCode === 'STAI'
@@ -1398,14 +1397,14 @@ export default function TeacherDashboard() {
                                   {isCompleted ? (
                                     <span
                                       data-testid="psych-result-completed"
-                                      className="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700 flex items-center gap-1.5"
+                                      className="px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-50 text-emerald-700 flex items-center gap-1.5"
                                     >
                                       <CheckCircle className="h-3.5 w-3.5" /> Tamamlandı
                                     </span>
                                   ) : (
                                     <span
                                       data-testid="psych-result-pending"
-                                      className="px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-50 text-amber-700 flex items-center gap-1.5"
+                                      className="px-2.5 py-1 rounded-lg text-xs font-medium bg-amber-50 text-amber-700 flex items-center gap-1.5"
                                     >
                                       <Clock className="h-3.5 w-3.5" /> Bekliyor
                                     </span>
@@ -1416,7 +1415,7 @@ export default function TeacherDashboard() {
                               <div className="text-xs text-slate-500 space-y-1">
                                 <div>
                                   <span className="font-medium text-slate-400">Atanma Tarihi: </span>
-                                  <span className="font-bold text-slate-700">
+                                  <span className="font-medium text-slate-700">
                                     {new Date(result.assignedAt).toLocaleDateString('tr-TR', {
                                       day: 'numeric',
                                       month: 'long',
@@ -1429,7 +1428,7 @@ export default function TeacherDashboard() {
                                 {result.completedAt && (
                                   <div>
                                     <span className="font-medium text-slate-400">Tamamlanma Tarihi: </span>
-                                    <span className="font-bold text-slate-700">
+                                    <span className="font-medium text-slate-700">
                                       {new Date(result.completedAt).toLocaleDateString('tr-TR', {
                                         day: 'numeric',
                                         month: 'long',
@@ -1454,7 +1453,7 @@ export default function TeacherDashboard() {
                                       >
                                         <AlertCircle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
                                         <div>
-                                          <p className="font-bold">Süre aşımıyla teslim edildi</p>
+                                          <p className="font-medium">Süre aşımıyla teslim edildi</p>
                                           <p className="mt-0.5 text-amber-800">
                                             Test 180 saniyelik standart süre aşılarak tamamlanmıştır — gerçek süre: <strong>{result.bourdonDurationSeconds ?? 0} sn</strong>. Sayılar değerlendirilirken süre dikkate alınmalıdır.
                                           </p>
@@ -1465,26 +1464,26 @@ export default function TeacherDashboard() {
                                     {/* TOPLAM SAYILAR */}
                                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                                       <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex flex-col justify-center">
-                                        <span className="text-[11px] font-medium text-slate-500">Toplam Doğru</span>
-                                        <span data-testid="bourdon-total-correct" className="text-xl font-black text-emerald-600 mt-1">
+                                        <span className="text-xs font-medium text-slate-500">Toplam Doğru</span>
+                                        <span data-testid="bourdon-total-correct" className="text-xl font-semibold text-emerald-600 mt-1">
                                           {result.bourdonTotalCorrect ?? 0}
                                         </span>
                                       </div>
                                       <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex flex-col justify-center">
-                                        <span className="text-[11px] font-medium text-slate-500">Toplam Atlanan</span>
-                                        <span data-testid="bourdon-total-omitted" className="text-xl font-black text-amber-600 mt-1">
+                                        <span className="text-xs font-medium text-slate-500">Toplam Atlanan</span>
+                                        <span data-testid="bourdon-total-omitted" className="text-xl font-semibold text-amber-600 mt-1">
                                           {result.bourdonTotalOmitted ?? 0}
                                         </span>
                                       </div>
                                       <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex flex-col justify-center">
-                                        <span className="text-[11px] font-medium text-slate-500">Toplam Yanlış</span>
-                                        <span data-testid="bourdon-total-incorrect" className="text-xl font-black text-rose-600 mt-1">
+                                        <span className="text-xs font-medium text-slate-500">Toplam Yanlış</span>
+                                        <span data-testid="bourdon-total-incorrect" className="text-xl font-semibold text-rose-600 mt-1">
                                           {result.bourdonTotalIncorrect ?? 0}
                                         </span>
                                       </div>
                                       <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex flex-col justify-center">
-                                        <span className="text-[11px] font-medium text-slate-500">Harcanan Süre</span>
-                                        <span data-testid="bourdon-duration" className="text-xl font-black text-slate-900 mt-1">
+                                        <span className="text-xs font-medium text-slate-500">Harcanan Süre</span>
+                                        <span data-testid="bourdon-duration" className="text-xl font-semibold text-slate-900 mt-1">
                                           {result.bourdonDurationSeconds ?? 0} sn
                                         </span>
                                       </div>
@@ -1493,10 +1492,10 @@ export default function TeacherDashboard() {
                                     {/* BLOK 1/2/3 TABLOSU */}
                                     {bDetail ? (
                                       <div className="space-y-3 pt-1">
-                                        <h5 className="text-xs font-bold text-slate-700 uppercase tracking-wider">Bölüm (Blok) Analizi</h5>
+                                        <h5 className="text-xs font-medium text-slate-700 tracking-normal">Bölüm (Blok) Analizi</h5>
                                         <div className="overflow-x-auto rounded-xl border border-slate-100">
                                           <table className="w-full text-xs text-left" data-testid="bourdon-blocks-table">
-                                            <thead className="bg-slate-50 text-slate-400 font-bold uppercase text-[10px]">
+                                            <thead className="bg-slate-50 text-slate-400 font-medium text-xs">
                                               <tr>
                                                 <th className="py-2.5 px-3">Bölüm</th>
                                                 <th className="py-2.5 px-3">Satırlar</th>
@@ -1509,11 +1508,11 @@ export default function TeacherDashboard() {
                                             <tbody className="divide-y divide-slate-100 text-slate-700 font-medium">
                                               {[bDetail.block1, bDetail.block2, bDetail.block3].map((block) => (
                                                 <tr key={block.blockNumber} data-testid={`bourdon-block-row-${block.blockNumber}`}>
-                                                  <td className="py-2 px-3 font-bold text-slate-900">Blok {block.blockNumber}</td>
+                                                  <td className="py-2 px-3 font-medium text-slate-900">Blok {block.blockNumber}</td>
                                                   <td className="py-2 px-3 text-slate-400">{(block.blockNumber - 1) * 10 + 1}–{block.blockNumber * 10}</td>
-                                                  <td className="py-2 px-3 font-bold text-emerald-600">{block.correct}</td>
-                                                  <td className="py-2 px-3 font-bold text-amber-600">{block.omitted}</td>
-                                                  <td className="py-2 px-3 font-bold text-rose-600">{block.incorrect}</td>
+                                                  <td className="py-2 px-3 font-medium text-emerald-600">{block.correct}</td>
+                                                  <td className="py-2 px-3 font-medium text-amber-600">{block.omitted}</td>
+                                                  <td className="py-2 px-3 font-medium text-rose-600">{block.incorrect}</td>
                                                   <td className="py-2 px-3 text-slate-500">{block.targetCount}</td>
                                                 </tr>
                                               ))}
@@ -1532,7 +1531,7 @@ export default function TeacherDashboard() {
                                     ) : null}
 
                                     {/* APP-03 §5 YASAL BİLGİLENDİRME */}
-                                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-[11px] text-slate-500 flex items-start gap-2">
+                                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-500 flex items-start gap-2">
                                       <Info className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" />
                                       <p className="leading-relaxed">
                                         Bourdon Dikkat Testi (a, b, d, g harfleri, 30 satır). Puanlar tanı veya kategori içermez; sonuçlar bireysel değerlendirilir.
@@ -1546,7 +1545,7 @@ export default function TeacherDashboard() {
                                       <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col justify-center">
                                         <span className="text-xs font-medium text-slate-500">Durumluk Kaygı Puanı</span>
                                         <div className="flex items-center gap-2.5 mt-1">
-                                          <span data-testid="state-score-value" className="text-2xl font-black text-slate-900">
+                                          <span data-testid="state-score-value" className="text-2xl font-semibold text-slate-900">
                                             {result.stateScore ?? '-'}
                                           </span>
                                           <StaiLevelBadge level={result.stateLevel} testIdPrefix={`teacher-state-level-${result.id}`} />
@@ -1555,7 +1554,7 @@ export default function TeacherDashboard() {
                                       <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col justify-center">
                                         <span className="text-xs font-medium text-slate-500">Sürekli Kaygı Puanı</span>
                                         <div className="flex items-center gap-2.5 mt-1">
-                                          <span data-testid="trait-score-value" className="text-2xl font-black text-slate-900">
+                                          <span data-testid="trait-score-value" className="text-2xl font-semibold text-slate-900">
                                             {result.traitScore ?? '-'}
                                           </span>
                                           <StaiLevelBadge level={result.traitLevel} testIdPrefix={`teacher-trait-level-${result.id}`} />
@@ -1584,35 +1583,35 @@ export default function TeacherDashboard() {
                   {/* Rapor Listesi */}
                   <div className="space-y-4">
                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-2 sm:px-4 mb-6">
-                        <h3 className="text-lg font-black text-slate-900 tracking-tight">Analiz Geçmişi</h3>
+                        <h3 className="text-lg font-semibold text-slate-900 tracking-tight">Analiz Geçmişi</h3>
                         <button 
                           onClick={() => navigate(`/analysis/cumulative/${selectedStudentId}`)}
-                          className="tap-44 min-h-[44px] self-start sm:self-auto bg-indigo-600 text-white px-6 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-100 flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
+                          className="tap-44 min-h-[44px] self-start sm:self-auto bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold text-xs tracking-normal hover:bg-indigo-700 transition-all shadow-sm shadow-indigo-100 flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
                         >
                           <Layers className="h-4 w-4" /> Tüm PDF'lerin Analizi
                         </button>
                      </div>
                      {reports.length === 0 ? (
-                       <p className="text-center py-16 sm:py-20 text-slate-400 text-[10px] font-black uppercase tracking-widest italic border-2 border-dashed border-slate-100 rounded-[2.5rem] sm:rounded-[3rem] px-4">Henüz bir analiz raporu bulunmuyor.</p>
+                       <p className="text-center py-16 sm:py-20 text-slate-400 text-xs font-semibold tracking-normal border-2 border-dashed border-slate-100 rounded-xl sm:rounded-xl px-4">Henüz bir analiz raporu bulunmuyor.</p>
                      ) : (
                        reports.map(report => (
                           <Card 
                            key={report.id} 
                            onClick={() => navigate(`/analysis/${report.id}`)}
-                           className={`rounded-[2.5rem] border-0 shadow-lg hover:shadow-xl transition-all bg-white group cursor-pointer overflow-hidden ${report.examTitle === "Analiz Ediliyor..." || report.status === "PROCESSING" ? "opacity-60 pointer-events-none" : ""}`}
+                           className={`rounded-xl border-0 shadow-sm hover:shadow-sm transition-all bg-white group cursor-pointer overflow-hidden ${report.examTitle === "Analiz Ediliyor..." || report.status === "PROCESSING" ? "opacity-60 pointer-events-none" : ""}`}
                           >
                              <CardContent className="p-5 sm:p-8 flex items-center justify-between">
                                 <div className="flex items-center gap-4 sm:gap-6 min-w-0">
-                                   <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shrink-0 ${report.examTitle === "Analiz Ediliyor..." || report.status === "PROCESSING" ? "bg-blue-50 text-blue-500 animate-spin" : "bg-slate-50 text-slate-900"}`}>
+                                   <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center shrink-0 ${report.examTitle === "Analiz Ediliyor..." || report.status === "PROCESSING" ? "bg-blue-50 text-blue-500 animate-spin" : "bg-slate-50 text-slate-900"}`}>
                                      <FileBarChart2 className="h-5 w-5 sm:h-6 sm:w-6" />
                                   </div>
                                   <div className="min-w-0">
                                      <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-                                        <h4 className="text-base sm:text-lg font-black text-slate-900 tracking-tight truncate">
+                                        <h4 className="text-base sm:text-lg font-semibold text-slate-900 tracking-tight truncate">
                                           {report.examTitle}
                                           {report.examTitle === "Analiz Ediliyor..." && <span className="ml-2 inline-block w-1.5 h-1.5 bg-blue-500 rounded-full animate-ping"></span>}
                                         </h4>
-                                        <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-md shrink-0 ${
+                                        <span className={`text-xs font-semibold tracking-normal px-2 py-1 rounded-md shrink-0 ${
                                           report.status === 'APPROVED' ? 'bg-emerald-50 text-emerald-600' :
                                           report.status === 'PROCESSING' ? 'bg-blue-50 text-blue-600' :
                                           report.status === 'FAILED' ? 'bg-red-50 text-red-600' :
@@ -1623,7 +1622,7 @@ export default function TeacherDashboard() {
                                             report.status === 'FAILED' ? 'Başarısız' : 'Onay Bekliyor'}
                                         </span>
                                      </div>
-                                     <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-1 truncate">
+                                     <p className="text-xs font-semibold text-slate-400 tracking-normal mt-1 truncate">
                                         {new Date(report.processedAt).toLocaleDateString('tr-TR')} • {(report.intendedExamCount ?? 0) > 0 ? `${report.intendedExamCount} Deneme Verisi` : "Tür Tespit Ediliyor..."}
                                      </p>
                                   </div>

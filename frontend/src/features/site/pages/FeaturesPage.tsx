@@ -20,12 +20,12 @@ export default function FeaturesPage() {
                 <li key={key} className="grid gap-4 py-8 sm:grid-cols-[3rem_1fr] sm:gap-8">
                   <span
                     aria-hidden="true"
-                    className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-900 text-cyan-400"
+                    className="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-900 text-cyan-400"
                   >
                     <Icon className="h-6 w-6" />
                   </span>
                   <div className="min-w-0">
-                    <h2 className="text-2xl font-black tracking-tight text-slate-900">{title}</h2>
+                    <h2 className="text-2xl font-semibold tracking-tight text-slate-900">{title}</h2>
                     <Prose value={description} className="mt-3 max-w-3xl" />
                   </div>
                 </li>

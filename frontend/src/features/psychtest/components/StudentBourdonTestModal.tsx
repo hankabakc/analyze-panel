@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { 
   CheckCircle2, X, AlertCircle, Loader2, Brain, 
   Clock, Award, ChevronRight
-} from "lucide-react";
+} from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -232,27 +232,27 @@ export function StudentBourdonTestModal({
   return (
     <div
       data-testid="student-bourdon-test-modal"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 backdrop-blur-xl bg-slate-900/60 animate-in fade-in duration-300"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 animate-in fade-in duration-300"
       role="dialog"
       aria-modal="true"
       aria-labelledby="bourdon-modal-title"
     >
-      <div className="bg-white w-full max-w-4xl max-h-[92vh] rounded-[2rem] sm:rounded-[3rem] shadow-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-300 border border-slate-100">
+      <div className="bg-white w-full max-w-4xl max-h-[92vh] rounded-xl sm:rounded-xl shadow-sm overflow-hidden flex flex-col animate-in zoom-in-95 duration-300 border border-slate-100">
         
         {/* ÜST BAŞLIK BARI */}
         <div className="bg-slate-900 p-5 sm:p-7 text-white flex justify-between items-center shrink-0">
           <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 rounded-2xl flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 rounded-lg flex items-center justify-center shrink-0">
               <Brain className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
             <div className="min-w-0">
               <h3
                 id="bourdon-modal-title"
-                className="text-base sm:text-xl font-black tracking-tight truncate"
+                className="text-base sm:text-xl font-semibold tracking-tight truncate"
               >
                 {testTitle}
               </h3>
-              <p className="text-[9px] sm:text-[10px] font-bold text-cyan-400 uppercase tracking-widest mt-0.5">
+              <p className="text-xs sm:text-xs font-bold text-cyan-400 tracking-normal mt-0.5">
                 Dikkat ve Konsantrasyon Değerlendirmesi
               </p>
             </div>
@@ -274,7 +274,7 @@ export function StudentBourdonTestModal({
         {/* MODAL İÇERİK GÖVDESİ */}
         <div className="p-4 sm:p-8 overflow-y-auto flex-1 space-y-6 custom-scrollbar">
           {serverError && (
-            <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl flex items-center gap-3 text-rose-700 text-xs font-bold">
+            <div className="p-4 bg-rose-50 border border-rose-200 rounded-lg flex items-center gap-3 text-rose-700 text-xs font-bold">
               <AlertCircle className="h-5 w-5 shrink-0" />
               <span>{serverError}</span>
             </div>
@@ -283,8 +283,8 @@ export function StudentBourdonTestModal({
           {/* 1. FAZ: GİRİŞ VE YÖNERGE EKRANI */}
           {phase === "INTRO" && (
             <div className="space-y-6 py-2">
-              <div className="p-5 sm:p-6 bg-cyan-50/60 border border-cyan-200/70 rounded-3xl space-y-3">
-                <div className="flex items-center gap-2 text-cyan-900 font-black text-sm sm:text-base">
+              <div className="p-5 sm:p-6 bg-cyan-50/60 border border-cyan-200/70 rounded-xl space-y-3">
+                <div className="flex items-center gap-2 text-cyan-900 font-semibold text-sm sm:text-base">
                   <Clock className="h-5 w-5 text-cyan-600" />
                   <span>Test Yönergesi ve Kurallar</span>
                 </div>
@@ -292,23 +292,23 @@ export function StudentBourdonTestModal({
                   Önünüzdeki sayfada bulunan bütün <strong>a, b, d, g</strong> harflerinin altını çizin / üzerine dokunarak işaretleyin.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                  <div className="p-3 bg-white rounded-2xl border border-cyan-100 flex items-center gap-3">
-                    <span className="text-xl font-black text-cyan-600">3 dk</span>
-                    <span className="text-[11px] font-bold text-slate-600">Toplam Süre (180 sn)</span>
+                  <div className="p-3 bg-white rounded-lg border border-cyan-100 flex items-center gap-3">
+                    <span className="text-xl font-semibold text-cyan-600">3 dk</span>
+                    <span className="text-xs font-bold text-slate-600">Toplam Süre (180 sn)</span>
                   </div>
-                  <div className="p-3 bg-white rounded-2xl border border-cyan-100 flex items-center gap-3">
-                    <span className="text-xl font-black text-cyan-600">4</span>
-                    <span className="text-[11px] font-bold text-slate-600">Hedef Harf (a, b, d, g)</span>
+                  <div className="p-3 bg-white rounded-lg border border-cyan-100 flex items-center gap-3">
+                    <span className="text-xl font-semibold text-cyan-600">4</span>
+                    <span className="text-xs font-bold text-slate-600">Hedef Harf (a, b, d, g)</span>
                   </div>
-                  <div className="p-3 bg-white rounded-2xl border border-cyan-100 flex items-center gap-3">
-                    <span className="text-xl font-black text-cyan-600">30</span>
-                    <span className="text-[11px] font-bold text-slate-600">Satır Harf Izgarası</span>
+                  <div className="p-3 bg-white rounded-lg border border-cyan-100 flex items-center gap-3">
+                    <span className="text-xl font-semibold text-cyan-600">30</span>
+                    <span className="text-xs font-bold text-slate-600">Satır Harf Izgarası</span>
                   </div>
                 </div>
               </div>
 
               {isContinuing && (
-                <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-3 text-amber-800 text-xs font-medium">
+                <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-3 text-amber-800 text-xs font-medium">
                   <AlertCircle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
                   <div>
                     <p className="font-bold text-amber-900">Yarıda Kalan Teste Devam Ediliyor</p>
@@ -319,9 +319,9 @@ export function StudentBourdonTestModal({
                 </div>
               )}
 
-              <div className="p-4 sm:p-5 bg-slate-50 border border-slate-200/80 rounded-2xl text-xs text-slate-600 space-y-2">
+              <div className="p-4 sm:p-5 bg-slate-50 border border-slate-200/80 rounded-lg text-xs text-slate-600 space-y-2">
                 <p className="font-bold text-slate-800">📌 Nasıl Çözülür?</p>
-                <ul className="list-disc list-inside space-y-1 text-[11px] sm:text-xs">
+                <ul className="list-disc list-inside space-y-1 text-xs sm:text-xs">
                   <li>Harflere dokunarak işaretleyebilir, vazgeçtiğinizde tekrar dokunarak işareti kaldırabilirsiniz.</li>
                   <li>Süreniz dolduğunda test otomatik olarak teslim edilecektir.</li>
                   <li>İstediğiniz an "Testi Tamamla" butonuyla da teslim edebilirsiniz.</li>
@@ -335,7 +335,7 @@ export function StudentBourdonTestModal({
                   data-testid="bourdon-start-confirm-btn"
                   onClick={handleStartTest}
                   disabled={isStarting}
-                  className="w-full sm:w-auto tap-44 min-h-[48px] px-8 bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800 text-white rounded-2xl font-black text-sm tracking-wide shadow-lg shadow-cyan-600/25 flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto tap-44 min-h-[48px] px-8 bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800 text-white rounded-lg font-semibold text-sm tracking-wide shadow-sm flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {isStarting ? (
                     <>
@@ -358,7 +358,7 @@ export function StudentBourdonTestModal({
             <div className="space-y-4">
               
               {/* SAYAÇ VE KONTROL BARI (Sticky: Izgara kaydırılırken her zaman ekranda görünür) */}
-              <div className="sticky top-0 z-20 flex flex-wrap items-center justify-between gap-3 p-3.5 sm:p-4 bg-slate-900 text-white rounded-2xl sm:rounded-3xl shadow-lg">
+              <div className="sticky top-0 z-20 flex flex-wrap items-center justify-between gap-3 p-3.5 sm:p-4 bg-slate-900 text-white rounded-lg sm:rounded-xl shadow-sm">
                 
                 {/* Sol: Geri Sayım Sayacı */}
                 <div className="flex items-center gap-3">
@@ -366,16 +366,16 @@ export function StudentBourdonTestModal({
                     data-testid="bourdon-timer"
                     className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl border transition-all ${
                       isTimeCritical 
-                        ? "bg-rose-500/20 border-rose-500/50 text-rose-400 animate-pulse font-black" 
-                        : "bg-white/10 border-white/20 text-cyan-300 font-black"
+                        ? "bg-rose-500/20 border-rose-500/50 text-rose-400 font-semibold" 
+                        : "bg-white/10 border-white/20 text-cyan-300 font-semibold"
                     }`}
                   >
                     <Clock className="h-4 w-4" />
-                    <span className="text-base sm:text-lg tracking-wider font-mono">
+                    <span className="text-base sm:text-lg tracking-normal font-mono">
                       {formattedTime}
                     </span>
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 hidden sm:inline">
+                  <span className="text-xs font-bold tracking-normal text-slate-400 hidden sm:inline">
                     Kalan Süre
                   </span>
                 </div>
@@ -383,9 +383,9 @@ export function StudentBourdonTestModal({
                 {/* Orta: Hedef Harfler Hatırlatıcı */}
                 <div 
                   data-testid="target-letters-reminder"
-                  className="flex items-center gap-1.5 text-xs font-black bg-cyan-950/80 border border-cyan-800/80 px-3 py-1.5 rounded-xl text-cyan-300"
+                  className="flex items-center gap-1.5 text-xs font-semibold bg-cyan-950/80 border border-cyan-800/80 px-3 py-1.5 rounded-xl text-cyan-300"
                 >
-                  <span className="text-[10px] uppercase text-cyan-400/80 tracking-widest mr-1">Hedefler:</span>
+                  <span className="text-xs text-cyan-400/80 tracking-normal mr-1">Hedefler:</span>
                   <span className="bg-cyan-500/30 px-1.5 py-0.5 rounded text-white font-mono">a</span>
                   <span className="bg-cyan-500/30 px-1.5 py-0.5 rounded text-white font-mono">b</span>
                   <span className="bg-cyan-500/30 px-1.5 py-0.5 rounded text-white font-mono">d</span>
@@ -406,7 +406,7 @@ export function StudentBourdonTestModal({
                     data-testid="submit-bourdon-btn"
                     onClick={submitTest}
                     disabled={isSubmitting}
-                    className="tap-44 min-h-[40px] px-4 sm:px-6 bg-cyan-500 hover:bg-cyan-600 active:bg-cyan-700 text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-sm cursor-pointer"
+                    className="tap-44 min-h-[40px] px-4 sm:px-6 bg-cyan-500 hover:bg-cyan-600 active:bg-cyan-700 text-white rounded-xl font-semibold text-xs tracking-normal transition-all flex items-center gap-1.5 shadow-sm cursor-pointer"
                   >
                     {isSubmitting ? (
                       <>
@@ -423,7 +423,7 @@ export function StudentBourdonTestModal({
               </div>
 
               {/* HARF IZGARASI (30 SATIR × 22 SÜTUN) (IST-02 §3.1: En az 44×44 px hücreler) */}
-              <div className="p-2 sm:p-4 bg-slate-50 border border-slate-200/80 rounded-2xl sm:rounded-3xl shadow-inner">
+              <div className="p-2 sm:p-4 bg-slate-50 border border-slate-200/80 rounded-lg sm:rounded-xl shadow-inner">
                 <div className="overflow-x-auto overflow-y-auto max-h-[55vh] sm:max-h-[60vh] custom-scrollbar touch-pan-x pr-1">
                   <div className="inline-block min-w-full space-y-2">
                     {startData.grid.map((rowStr, rowIdx) => (
@@ -433,7 +433,7 @@ export function StudentBourdonTestModal({
                         className="flex items-center gap-1.5"
                       >
                         {/* Satır Numarası */}
-                        <div className="w-8 min-w-[32px] shrink-0 text-center text-xs font-black text-slate-400 select-none">
+                        <div className="w-8 min-w-[32px] shrink-0 text-center text-xs font-semibold text-slate-400 select-none">
                           {rowIdx + 1}
                         </div>
 
@@ -452,7 +452,7 @@ export function StudentBourdonTestModal({
                                 onClick={() => handleCellClick(rowIdx, colIdx)}
                                 onTouchStart={handleTouchStart}
                                 onTouchMove={handleTouchMove}
-                                className={`w-[44px] h-[44px] min-w-[44px] min-h-[44px] shrink-0 flex items-center justify-center rounded-xl text-base font-black transition-all select-none focus:outline-none cursor-pointer ${
+                                className={`w-[44px] h-[44px] min-w-[44px] min-h-[44px] shrink-0 flex items-center justify-center rounded-xl text-base font-semibold transition-all select-none focus:outline-none cursor-pointer ${
                                   isMarked
                                     ? "bg-cyan-600 text-white shadow-md ring-2 ring-cyan-400 ring-offset-1 scale-105 z-10"
                                     : "bg-white hover:bg-slate-200/80 text-slate-700 border border-slate-200/90 hover:border-slate-300 shadow-2xs"
@@ -470,7 +470,7 @@ export function StudentBourdonTestModal({
                 </div>
               </div>
 
-              <p className="text-[10px] text-slate-400 font-bold text-center">
+              <p className="text-xs text-slate-400 font-bold text-center">
                 İpucu: Harfe dokunarak işaretleyebilir, tekrar dokunarak işareti kaldırabilirsiniz. Izgara yatay ve dikey kaydırılabilir.
               </p>
             </div>
@@ -480,14 +480,14 @@ export function StudentBourdonTestModal({
           {phase === "COMPLETED" && (
             <Card
               data-testid="bourdon-completed-card"
-              className="p-6 sm:p-10 text-center space-y-6 rounded-[2rem] sm:rounded-[2.5rem] border-0 shadow-lg bg-gradient-to-b from-white to-slate-50"
+              className="p-6 sm:p-10 text-center space-y-6 rounded-xl sm:rounded-xl border-0 shadow-sm bg-white"
             >
               <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-inner border border-emerald-100">
                 <CheckCircle2 className="h-8 w-8 sm:h-10 sm:w-10" />
               </div>
 
               <div className="space-y-2 max-w-md mx-auto">
-                <h4 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                <h4 className="text-xl sm:text-2xl font-semibold text-slate-900 tracking-tight">
                   Bourdon Dikkat Testi Tamamlandı
                 </h4>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
@@ -495,7 +495,7 @@ export function StudentBourdonTestModal({
                 </p>
               </div>
 
-              <div className="p-4 bg-cyan-50/60 border border-cyan-200/60 rounded-2xl max-w-md mx-auto text-left text-xs text-cyan-950 flex items-start gap-3">
+              <div className="p-4 bg-cyan-50/60 border border-cyan-200/60 rounded-lg max-w-md mx-auto text-left text-xs text-cyan-950 flex items-start gap-3">
                 <Award className="h-5 w-5 text-cyan-600 shrink-0 mt-0.5" />
                 <p className="leading-normal">
                   Düzenli dikkat ve konsantrasyon testleri, çalışma alışkanlıklarınızı ve deneme performansınızı en üst seviyeye çıkarmaya yardımcı olur.
@@ -510,7 +510,7 @@ export function StudentBourdonTestModal({
                     onSuccess();
                     onClose();
                   }}
-                  className="tap-44 min-h-[48px] px-8 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer"
+                  className="tap-44 min-h-[48px] px-8 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-semibold text-xs tracking-normal transition-all cursor-pointer"
                 >
                   Pencereyi Kapat
                 </Button>

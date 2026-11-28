@@ -6,7 +6,7 @@ import {
   ShieldAlert, LayoutDashboard, Link2, 
   ChevronRight, UserPlus, GraduationCap, 
   Briefcase, ArrowRight, Loader2, KeyRound, Copy, Check, Info, UserMinus, Eye, Clock, Brain, Globe
-} from "lucide-react";
+} from "@/components/icons";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -333,18 +333,18 @@ export default function ManagerDashboard() {
       type="button"
       data-testid={`sidebar-tab-${id.toLowerCase()}`}
       onClick={() => setActiveTab(id)}
-      className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 group ${
+      className={`w-full flex items-center gap-4 px-6 py-4 rounded-lg transition-all duration-300 group ${
         activeTab === id 
-        ? "bg-slate-900 text-white shadow-lg shadow-slate-200" 
+        ? "bg-slate-900 text-white shadow-sm shadow-slate-200" 
         : "text-slate-400 hover:bg-slate-50 hover:text-slate-900"
       }`}
     >
       <Icon className={`h-5 w-5 ${activeTab === id ? "text-cyan-400" : "group-hover:text-slate-900"}`} />
-      <span className="text-[11px] font-black uppercase tracking-[0.2em]">{label}</span>
+      <span className="text-xs font-semibold tracking-normal">{label}</span>
       {badge !== undefined && badge > 0 && (
         <span
           data-testid={`sidebar-badge-${id.toLowerCase()}`}
-          className="px-2 py-0.5 rounded-full text-[10px] font-black bg-purple-600 text-white animate-pulse"
+          className="px-2 py-0.5 rounded-full text-xs font-semibold bg-purple-600 text-white"
           aria-label={`${badge} yeni sonuç`}
         >
           {badge}
@@ -358,7 +358,7 @@ export default function ManagerDashboard() {
     return (
       <div className="flex-1 flex flex-col items-center justify-center gap-6 py-32">
         <div className="w-10 h-10 border-[5px] border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Veriler Senkronize Ediliyor</p>
+        <p className="text-xs font-semibold tracking-normal text-slate-400">Yükleniyor</p>
       </div>
     );
   }
@@ -367,46 +367,46 @@ export default function ManagerDashboard() {
     <div className="flex flex-col lg:flex-row min-h-[80vh] gap-8 lg:gap-12 animate-in fade-in duration-700">
       {/* TEK SEFERLİK ŞİFRE GÖSTERİM MODALI (T-010 / T-013 / K3, K4) */}
       {createdUserInfo && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <Card className="max-w-md w-full rounded-[3rem] border-2 border-emerald-500/30 bg-white shadow-2xl p-8 sm:p-10 space-y-6 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 animate-in fade-in duration-200">
+          <Card className="max-w-md w-full rounded-xl border-2 border-emerald-500/30 bg-white shadow-sm p-8 sm:p-10 space-y-6 animate-in zoom-in-95 duration-200">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shadow-lg shadow-emerald-200 shrink-0">
+              <div className="w-12 h-12 rounded-lg bg-emerald-600 text-white flex items-center justify-center shadow-sm shadow-emerald-200 shrink-0">
                 <KeyRound className="h-6 w-6" />
               </div>
               <div>
-                <h3 className="text-lg font-black text-slate-900 tracking-tight">Geçici Giriş Bilgileri</h3>
-                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-700 bg-emerald-100 px-3 py-1 rounded-lg">
+                <h3 className="text-lg font-semibold text-slate-900 tracking-tight">Geçici Giriş Bilgileri</h3>
+                <span className="text-xs font-semibold tracking-normal text-emerald-700 bg-emerald-100 px-3 py-1 rounded-lg">
                   {createdUserInfo.role}
                 </span>
               </div>
             </div>
 
-            <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4 flex items-start gap-3">
+            <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 flex items-start gap-3">
               <Info className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
-              <p className="text-xs font-bold text-amber-900 leading-relaxed">
+              <p className="text-xs font-medium text-amber-900 leading-relaxed">
                 ⚠️ Bu şifre güvenlik protokolü gereği veritabanında saklanmaz ve <strong>bir daha gösterilmeyecektir</strong>. Lütfen bilgileri kaydedip kullanıcıya iletiniz.
               </p>
             </div>
 
             <div className="space-y-3">
               {/* Ad Soyad */}
-              <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex items-center justify-between">
+              <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 flex items-center justify-between">
                 <div>
-                  <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Ad Soyad</p>
-                  <p className="text-sm font-black text-slate-900">{createdUserInfo.fullName}</p>
+                  <p className="text-xs font-semibold text-slate-400 tracking-normal">Ad Soyad</p>
+                  <p className="text-sm font-semibold text-slate-900">{createdUserInfo.fullName}</p>
                 </div>
               </div>
 
               {/* E-Posta */}
-              <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex items-center justify-between">
+              <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 flex items-center justify-between">
                 <div>
-                  <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Giriş E-Postası</p>
-                  <p className="text-sm font-black text-slate-900 font-mono">{createdUserInfo.email}</p>
+                  <p className="text-xs font-semibold text-slate-400 tracking-normal">Giriş E-Postası</p>
+                  <p className="text-sm font-semibold text-slate-900 font-mono">{createdUserInfo.email}</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => copyToClipboard(createdUserInfo.email, "email")}
-                  className="p-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 transition-all active:scale-95"
+                  className="p-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 transition-all"
                   title="E-postayı Kopyala"
                 >
                   {copiedEmail ? <Check className="h-4 w-4 text-emerald-600" /> : <Copy className="h-4 w-4" />}
@@ -414,15 +414,15 @@ export default function ManagerDashboard() {
               </div>
 
               {/* Şifre */}
-              <div className="bg-emerald-50/50 rounded-2xl p-4 border border-emerald-100 flex items-center justify-between">
+              <div className="bg-emerald-50/50 rounded-lg p-4 border border-emerald-100 flex items-center justify-between">
                 <div>
-                  <p className="text-[9px] font-black text-emerald-700 uppercase tracking-widest">İlk Giriş Şifresi</p>
-                  <p className="text-sm font-black text-emerald-900 font-mono tracking-wider">{createdUserInfo.password}</p>
+                  <p className="text-xs font-semibold text-emerald-700 tracking-normal">İlk Giriş Şifresi</p>
+                  <p className="text-sm font-semibold text-emerald-900 font-mono tracking-normal">{createdUserInfo.password}</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => copyToClipboard(createdUserInfo.password, "password")}
-                  className="p-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-200 transition-all active:scale-95"
+                  className="p-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-200 transition-all"
                   title="Şifreyi Kopyala"
                 >
                   {copiedPassword ? <Check className="h-4 w-4 text-white" /> : <Copy className="h-4 w-4" />}
@@ -433,7 +433,7 @@ export default function ManagerDashboard() {
             <Button
               type="button"
               onClick={() => setCreatedUserInfo(null)}
-              className="w-full h-14 rounded-2xl font-black text-xs uppercase tracking-widest bg-slate-900 hover:bg-slate-800 text-white shadow-lg"
+              className="w-full h-14 rounded-lg font-semibold text-xs tracking-normal bg-slate-900 hover:bg-slate-800 text-white shadow-sm"
             >
               Bilgileri Kaydettim / Kapat
             </Button>
@@ -443,10 +443,10 @@ export default function ManagerDashboard() {
 
       {/* SaaS SIDEBAR */}
       <aside className="w-full lg:w-80 shrink-0 space-y-6 lg:space-y-8">
-        <div className="bg-white rounded-[2.5rem] sm:rounded-[3rem] p-4 shadow-xl shadow-slate-100/50 border border-slate-50">
+        <div className="bg-white rounded-xl sm:rounded-xl p-4 shadow-sm border border-slate-50">
           <div className="p-4 sm:p-6 mb-2 sm:mb-4">
-             <p className="text-[9px] font-black text-slate-400 uppercase tracking-[0.4em] mb-2">Yönetim Paneli</p>
-             <h3 className="text-xl font-black text-slate-900 tracking-tighter">Navigasyon</h3>
+             <p className="text-xs font-semibold text-slate-400 tracking-normal mb-2">Yönetim Paneli</p>
+             <h3 className="text-xl font-semibold text-slate-900 tracking-tight">Navigasyon</h3>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-2">
             <SidebarItem id="OVERVIEW" label="Genel Bakış" icon={LayoutDashboard} />
@@ -460,11 +460,10 @@ export default function ManagerDashboard() {
         </div>
 
         {/* Bilgi Kartı (Sidebar altı) */}
-        <div className="bg-slate-900 rounded-[2.5rem] sm:rounded-[3rem] p-6 sm:p-10 text-white relative overflow-hidden group">
-           <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl group-hover:bg-cyan-500/20 transition-all"></div>
+        <div className="bg-slate-900 rounded-xl sm:rounded-xl p-6 sm:p-10 text-white relative overflow-hidden group">
            <ShieldAlert className="h-8 w-8 sm:h-10 sm:w-10 text-cyan-400 mb-4 sm:mb-6" />
-           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-cyan-400/80 mb-2">Hesap Yönetimi</p>
-           <p className="text-xs font-bold leading-relaxed text-slate-300">
+           <p className="text-xs font-semibold tracking-normal text-cyan-400/80 mb-2">Hesap Yönetimi</p>
+           <p className="text-xs font-medium leading-relaxed text-slate-300">
              Yeni öğretmen ve öğrenci hesapları güvenli e-posta ve şifre ile anında aktifleşir.
            </p>
         </div>
@@ -478,42 +477,42 @@ export default function ManagerDashboard() {
              {managerCount <= 1 && (
                <div
                  data-testid="single-admin-warning"
-                 className="bg-amber-50 border-2 border-amber-300/80 rounded-[2.5rem] p-6 sm:p-8 flex items-start gap-4 sm:gap-6 shadow-lg shadow-amber-500/5 animate-in fade-in duration-300"
+                 className="bg-amber-50 border-2 border-amber-300/80 rounded-xl p-6 sm:p-8 flex items-start gap-4 sm:gap-6 shadow-sm animate-in fade-in duration-300"
                >
-                 <div className="p-3.5 bg-amber-100 rounded-2xl text-amber-700 shrink-0 mt-0.5 shadow-sm">
+                 <div className="p-3.5 bg-amber-100 rounded-lg text-amber-700 shrink-0 mt-0.5 shadow-sm">
                    <ShieldAlert className="h-6 w-6 sm:h-7 sm:w-7" />
                  </div>
                  <div className="space-y-2">
-                   <h4 className="text-sm sm:text-base font-black text-amber-950 uppercase tracking-wide">
+                   <h4 className="text-sm sm:text-base font-semibold text-amber-950 tracking-wide">
                      Önemli Güvenlik Önerisi: Tek Yönetici Hesabı Tespit Edildi
                    </h4>
-                   <p className="text-xs sm:text-sm font-bold text-amber-900/90 leading-relaxed">
+                   <p className="text-xs sm:text-sm font-medium text-amber-900/90 leading-relaxed">
                      Sistemde şu anda yalnızca <strong>1 aktif yönetici</strong> bulunmaktadır. Olası kilitlenme ve acil durum erişim kayıplarını önlemek amacıyla sisteme en az bir adet yedek yönetici (ikinci yönetici) tanımlanması şiddetle önerilir.
                    </p>
-                   <p className="text-[11px] font-semibold text-amber-800/80">
+                   <p className="text-xs font-semibold text-amber-800/80">
                      İkinci bir yönetici hesabı oluşturmak ve kilitlenme kurtarma adımlarını incelemek için sistem runbook dokümantasyonuna (<code className="bg-amber-100/80 px-1.5 py-0.5 rounded font-mono text-amber-950">YONETICI_KURTARMA_REHBERI.md</code>) başvurabilirsiniz.
                    </p>
                  </div>
                </div>
              )}
 
-             <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tighter">Sistem <span className="text-cyan-500 italic">Özeti</span></h2>
+             <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">Sistem Özeti</h2>
              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
-                <Card className="rounded-[2.5rem] sm:rounded-[3rem] border-0 shadow-xl p-6 sm:p-10 bg-white">
-                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Aktif Kullanıcı Sayısı</p>
-                   <p className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tighter">
+                <Card className="rounded-xl sm:rounded-xl border-0 shadow-sm p-6 sm:p-10 bg-white">
+                   <p className="text-xs font-semibold text-slate-400 tracking-normal mb-4">Aktif Kullanıcı Sayısı</p>
+                   <p className="text-4xl sm:text-5xl font-semibold text-slate-900 tracking-tight">
                      {activeTeachers.length + activeStudents.length}
                    </p>
-                   <div className="mt-4 flex gap-4 text-xs font-bold text-slate-500">
+                   <div className="mt-4 flex gap-4 text-xs font-medium text-slate-500">
                      <span>Öğretmen: <b className="text-slate-900">{activeTeachers.length}</b></span>
                      <span>•</span>
                      <span>Öğrenci: <b className="text-slate-900">{activeStudents.length}</b></span>
                    </div>
                 </Card>
-                <Card className="rounded-[2.5rem] sm:rounded-[3rem] border-0 shadow-xl p-6 sm:p-10 bg-slate-900 text-white">
-                   <p className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-4">Eşleşme Bekleyenler</p>
-                   <p className="text-4xl sm:text-5xl font-black tracking-tighter">{unpairedStudents.length}</p>
-                   <div className="mt-4 text-xs font-bold text-slate-400">
+                <Card className="rounded-xl sm:rounded-xl border-0 shadow-sm p-6 sm:p-10 bg-slate-900 text-white">
+                   <p className="text-xs font-semibold text-cyan-400 tracking-normal mb-4">Eşleşme Bekleyenler</p>
+                   <p className="text-4xl sm:text-5xl font-semibold tracking-tight">{unpairedStudents.length}</p>
+                   <div className="mt-4 text-xs font-medium text-slate-400">
                      <span>Eşleşmemiş Öğrenci Sayısı</span>
                    </div>
                 </Card>
@@ -522,26 +521,26 @@ export default function ManagerDashboard() {
              {/* Aktif Kullanıcı Listeleri */}
              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
                 {/* Öğretmenler */}
-                <div className="bg-white rounded-[3rem] p-8 shadow-xl border border-slate-50 space-y-4">
-                  <h3 className="text-lg font-black text-slate-900 tracking-tight flex items-center justify-between">
+                <div className="bg-white rounded-xl p-8 shadow-sm border border-slate-50 space-y-4">
+                  <h3 className="text-lg font-semibold text-slate-900 tracking-tight flex items-center justify-between">
                     <span>Aktif Eğitmenler</span>
                     <span className="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full">{activeTeachers.length}</span>
                   </h3>
                   <div className="space-y-3 max-h-[350px] overflow-y-auto">
                     {activeTeachers.length === 0 ? (
-                      <p className="text-slate-400 text-xs py-8 text-center font-bold">Kayıtlı öğretmen bulunmuyor.</p>
+                      <p className="text-slate-400 text-xs py-8 text-center font-medium">Kayıtlı öğretmen bulunmuyor.</p>
                     ) : (
                       activeTeachers.map(t => (
-                        <div key={t.id} className="p-4 rounded-2xl bg-slate-50 flex items-center justify-between gap-2">
+                        <div key={t.id} className="p-4 rounded-lg bg-slate-50 flex items-center justify-between gap-2">
                           <div className="min-w-0 flex-1">
-                            <p className="font-black text-sm text-slate-900 truncate">{t.fullName}</p>
-                            <p className="text-[10px] font-bold text-slate-400 truncate">{t.email}</p>
+                            <p className="font-semibold text-sm text-slate-900 truncate">{t.fullName}</p>
+                            <p className="text-xs font-medium text-slate-400 truncate">{t.email}</p>
                           </div>
                           <div className="flex items-center gap-2 shrink-0">
                             <button
                               type="button"
                               onClick={() => handleResetPassword(t)}
-                              className="tap-44 px-2.5 py-1.5 rounded-xl bg-white hover:bg-amber-50 hover:text-amber-700 text-slate-600 border border-slate-200 hover:border-amber-200 transition-all flex items-center gap-1 text-[9px] font-black uppercase tracking-wider"
+                              className="tap-44 px-2.5 py-1.5 rounded-xl bg-white hover:bg-amber-50 hover:text-amber-700 text-slate-600 border border-slate-200 hover:border-amber-200 transition-all flex items-center gap-1 text-xs font-semibold tracking-normal"
                               title="Yeni Geçici Şifre Üret"
                             >
                               <KeyRound className="h-3.5 w-3.5 text-amber-600" />
@@ -555,33 +554,33 @@ export default function ManagerDashboard() {
                 </div>
 
                 {/* Öğrenciler */}
-                <div className="bg-white rounded-[3rem] p-8 shadow-xl border border-slate-50 space-y-4">
-                  <h3 className="text-lg font-black text-slate-900 tracking-tight flex items-center justify-between">
+                <div className="bg-white rounded-xl p-8 shadow-sm border border-slate-50 space-y-4">
+                  <h3 className="text-lg font-semibold text-slate-900 tracking-tight flex items-center justify-between">
                     <span>Aktif Öğrenciler</span>
                     <span className="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full">{activeStudents.length}</span>
                   </h3>
                   <div className="space-y-3 max-h-[350px] overflow-y-auto">
                     {activeStudents.length === 0 ? (
-                      <p className="text-slate-400 text-xs py-8 text-center font-bold">Kayıtlı öğrenci bulunmuyor.</p>
+                      <p className="text-slate-400 text-xs py-8 text-center font-medium">Kayıtlı öğrenci bulunmuyor.</p>
                     ) : (
                       activeStudents.map(s => (
-                        <div key={s.id} className="p-4 rounded-2xl bg-slate-50 flex items-center justify-between gap-2">
+                        <div key={s.id} className="p-4 rounded-lg bg-slate-50 flex items-center justify-between gap-2">
                           <div className="min-w-0 flex-1">
-                            <p className="font-black text-sm text-slate-900 truncate">{s.fullName}</p>
-                            <p className="text-[10px] font-bold text-slate-400 truncate">{s.email}</p>
+                            <p className="font-semibold text-sm text-slate-900 truncate">{s.fullName}</p>
+                            <p className="text-xs font-medium text-slate-400 truncate">{s.email}</p>
                           </div>
                           <div className="flex items-center gap-2 shrink-0">
                             <button
                               type="button"
                               onClick={() => handleResetPassword(s)}
-                              className="tap-44 px-2.5 py-1.5 rounded-xl bg-white hover:bg-amber-50 hover:text-amber-700 text-slate-600 border border-slate-200 hover:border-amber-200 transition-all flex items-center gap-1 text-[9px] font-black uppercase tracking-wider"
+                              className="tap-44 px-2.5 py-1.5 rounded-xl bg-white hover:bg-amber-50 hover:text-amber-700 text-slate-600 border border-slate-200 hover:border-amber-200 transition-all flex items-center gap-1 text-xs font-semibold tracking-normal"
                               title="Yeni Geçici Şifre Üret"
                             >
                               <KeyRound className="h-3.5 w-3.5 text-amber-600" />
                               <span>Şifre Sıfırla</span>
                             </button>
                             {s.grade && (
-                              <span className="text-[9px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-lg">
+                              <span className="text-xs font-semibold tracking-normal text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-lg">
                                 {s.grade}. Sınıf
                               </span>
                             )}
@@ -599,18 +598,18 @@ export default function ManagerDashboard() {
         {activeTab === "CREATE_USER" && (
           <div className="space-y-8 animate-in slide-in-from-right-10 duration-500 max-w-2xl">
              <div className="flex flex-col gap-2">
-                <h2 className="text-4xl font-black text-slate-900 tracking-tighter">Yeni <span className="text-cyan-500 italic">Kullanıcı Ekle</span></h2>
-                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+                <h2 className="text-3xl font-semibold text-slate-900 tracking-tight">Yeni Kullanıcı Ekle</h2>
+                <p className="text-xs text-slate-500">
                   Öğretmen ve öğrenci hesaplarını oluşturun. Girişler güvenli e-posta ve şifre ile sağlanır.
                 </p>
              </div>
 
 
-             <Card className="rounded-[3rem] border-0 shadow-2xl bg-white overflow-hidden p-8 sm:p-12">
+             <Card className="rounded-xl border-0 shadow-sm bg-white overflow-hidden p-8 sm:p-12">
                <form onSubmit={handleCreateUser} className="space-y-6">
                  {/* Ad Soyad */}
                  <div className="space-y-2">
-                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">
+                   <label className="text-xs font-semibold text-slate-400 tracking-normal ml-4">
                      Ad Soyad *
                    </label>
                    <Input 
@@ -618,13 +617,13 @@ export default function ManagerDashboard() {
                      value={createFullName} 
                      onChange={(e) => setCreateFullName(e.target.value)} 
                      disabled={isSubmitting}
-                     className="h-16 rounded-2xl border-2 border-slate-50 bg-slate-50 focus:bg-white focus:border-slate-900 font-bold px-6 text-sm"
+                     className="h-16 rounded-lg border-2 border-slate-50 bg-slate-50 focus:bg-white focus:border-slate-900 font-medium px-6 text-sm"
                    />
                  </div>
 
                  {/* Hesap Türü (Rol Seçimi) */}
                  <div className="space-y-2 pt-2">
-                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">
+                   <label className="text-xs font-semibold text-slate-400 tracking-normal ml-4">
                      Hesap Türü *
                    </label>
                    <div className="grid grid-cols-2 gap-4">
@@ -632,28 +631,28 @@ export default function ManagerDashboard() {
                        type="button"
                        onClick={() => setCreateRole("STUDENT")}
                        disabled={isSubmitting}
-                       className={`p-5 rounded-[2rem] border-2 transition-all flex flex-col items-center gap-3 cursor-pointer ${
+                       className={`p-5 rounded-xl border-2 transition-all flex flex-col items-center gap-3 cursor-pointer ${
                          createRole === "STUDENT" 
-                           ? "border-emerald-500 bg-emerald-50/40 shadow-lg text-emerald-900" 
+                           ? "border-emerald-500 bg-emerald-50/40 shadow-sm text-emerald-900" 
                            : "border-slate-50 bg-slate-50/50 hover:border-slate-200 text-slate-600"
                        }`}
                      >
                        <GraduationCap className={`h-8 w-8 ${createRole === "STUDENT" ? "text-emerald-600" : "text-slate-300"}`} />
-                       <span className="text-[10px] font-black uppercase tracking-widest">Öğrenci</span>
+                       <span className="text-xs font-semibold tracking-normal">Öğrenci</span>
                      </button>
 
                      <button 
                        type="button"
                        onClick={() => setCreateRole("TEACHER")}
                        disabled={isSubmitting}
-                       className={`p-5 rounded-[2rem] border-2 transition-all flex flex-col items-center gap-3 cursor-pointer ${
+                       className={`p-5 rounded-xl border-2 transition-all flex flex-col items-center gap-3 cursor-pointer ${
                          createRole === "TEACHER" 
-                           ? "border-blue-500 bg-blue-50/40 shadow-lg text-blue-900" 
+                           ? "border-blue-500 bg-blue-50/40 shadow-sm text-blue-900" 
                            : "border-slate-50 bg-slate-50/50 hover:border-slate-200 text-slate-600"
                        }`}
                      >
                        <Briefcase className={`h-8 w-8 ${createRole === "TEACHER" ? "text-blue-600" : "text-slate-300"}`} />
-                       <span className="text-[10px] font-black uppercase tracking-widest">Eğitmen</span>
+                       <span className="text-xs font-semibold tracking-normal">Eğitmen</span>
                      </button>
                    </div>
                  </div>
@@ -661,17 +660,17 @@ export default function ManagerDashboard() {
                  {/* Sınıf Seviyesi (Yalnızca Öğrenci için görünür - T-016 / IST-02 §3) */}
                  {createRole === "STUDENT" && (
                    <fieldset className="space-y-2 animate-in fade-in slide-in-from-top-2 duration-300 border-0 p-0 m-0">
-                     <legend className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4 mb-2">
+                     <legend className="text-xs font-semibold text-slate-400 tracking-normal ml-4 mb-2">
                        Sınıf Seviyesi *
                      </legend>
                      <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
                        {[5, 6, 7, 8, 9, 10, 11, 12].map((g) => (
                          <label
                            key={g}
-                           className={`flex flex-col items-center justify-center p-3 rounded-2xl border-2 cursor-pointer transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-emerald-500 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:border-emerald-500 ${
+                           className={`flex flex-col items-center justify-center p-3 rounded-lg border-2 cursor-pointer transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-emerald-500 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:border-emerald-500 ${
                              createGrade === g
-                               ? "border-emerald-500 bg-emerald-50 text-emerald-900 shadow-sm font-black"
-                               : "border-slate-50 bg-slate-50 text-slate-700 hover:border-slate-200 font-bold"
+                               ? "border-emerald-500 bg-emerald-50 text-emerald-900 shadow-sm font-semibold"
+                               : "border-slate-50 bg-slate-50 text-slate-700 hover:border-slate-200 font-medium"
                            }`}
                          >
                            <input
@@ -684,7 +683,7 @@ export default function ManagerDashboard() {
                              className="sr-only"
                            />
                            <span className="text-base">{g}</span>
-                           <span className="text-[9px] font-bold text-slate-400">Sınıf</span>
+                           <span className="text-xs font-medium text-slate-400">Sınıf</span>
                          </label>
                        ))}
                      </div>
@@ -698,7 +697,7 @@ export default function ManagerDashboard() {
                       !createFullName.trim() || 
                       (createRole === "STUDENT" && createGrade === null)
                     }
-                    className="w-full h-16 rounded-2xl font-black text-sm uppercase tracking-widest bg-slate-900 hover:bg-slate-800 text-white transition-all shadow-xl active:scale-98 mt-4"
+                    className="w-full h-16 rounded-lg font-semibold text-sm tracking-normal bg-slate-900 hover:bg-slate-800 text-white transition-all shadow-sm mt-4"
                   >
                     {isSubmitting ? (
                       <Loader2 className="h-5 w-5 animate-spin" />
@@ -716,14 +715,14 @@ export default function ManagerDashboard() {
         {activeTab === "CLASSES" && (
           <div className="space-y-8 animate-in fade-in duration-500">
             <div>
-              <h2 className="text-4xl font-black tracking-tight text-slate-900">Sınıflar</h2>
-              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mt-2">
+              <h2 className="text-3xl font-semibold tracking-tight text-slate-900">Sınıflar</h2>
+              <p className="text-xs font-semibold tracking-normal text-slate-400 mt-2">
                 Sınıf oluştur, öğrencileri ekle ve çıkar
               </p>
             </div>
 
-            <Card className="rounded-[2rem] border-0 shadow-lg bg-white p-8">
-              <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-4">Yeni Sınıf</p>
+            <Card className="rounded-xl border-0 shadow-sm bg-white p-8">
+              <p className="text-xs font-semibold tracking-normal text-slate-400 mb-4">Yeni Sınıf</p>
               <div className="flex flex-wrap gap-3">
                 <input
                   type="text"
@@ -731,13 +730,13 @@ export default function ManagerDashboard() {
                   onChange={(e) => setNewClassName(e.target.value)}
                   placeholder="Örn. 12-A"
                   maxLength={100}
-                  className="flex-1 min-w-[220px] bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-3 min-h-[44px] font-bold text-slate-700 focus:outline-none focus:border-cyan-500 transition-all"
+                  className="flex-1 min-w-[220px] bg-slate-50 border-2 border-slate-100 rounded-lg px-6 py-3 min-h-[44px] font-medium text-slate-700 focus:outline-none focus:border-cyan-500 transition-all"
                 />
                 <button
                   type="button"
                   onClick={handleCreateClass}
                   disabled={classBusy || !newClassName.trim()}
-                  className="tap-44 px-8 py-3 rounded-2xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-widest hover:bg-slate-800 disabled:opacity-40 transition-all"
+                  className="tap-44 px-8 py-3 rounded-lg bg-slate-900 text-white font-semibold text-xs tracking-normal hover:bg-slate-800 disabled:opacity-40 transition-all"
                 >
                   Sınıf Oluştur
                 </button>
@@ -745,9 +744,9 @@ export default function ManagerDashboard() {
             </Card>
 
             {classes.length === 0 ? (
-              <Card className="rounded-[2rem] border-0 shadow-lg bg-white p-10 text-center">
-                <p className="text-sm font-black text-slate-700">Henüz sınıf yok.</p>
-                <p className="text-[11px] font-bold text-slate-400 mt-2">Yukarıdan ilk sınıfı oluşturabilirsiniz.</p>
+              <Card className="rounded-xl border-0 shadow-sm bg-white p-10 text-center">
+                <p className="text-sm font-semibold text-slate-700">Henüz sınıf yok.</p>
+                <p className="text-xs font-medium text-slate-400 mt-2">Yukarıdan ilk sınıfı oluşturabilirsiniz.</p>
               </Card>
             ) : (
               <div className="space-y-4">
@@ -756,11 +755,11 @@ export default function ManagerDashboard() {
                     (st) => !classes.some((k) => k.students.some((x) => x.id === st.id))
                   );
                   return (
-                    <Card key={c.id} className="rounded-[2rem] border-0 shadow-lg bg-white p-8 space-y-6">
+                    <Card key={c.id} className="rounded-xl border-0 shadow-sm bg-white p-8 space-y-6">
                       <div className="flex flex-wrap items-center justify-between gap-4">
                         <div>
-                          <h3 className="text-xl font-black text-slate-900">{c.name}</h3>
-                          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-1">
+                          <h3 className="text-xl font-semibold text-slate-900">{c.name}</h3>
+                          <p className="text-xs font-semibold tracking-normal text-slate-400 mt-1">
                             {c.students.length} öğrenci
                           </p>
                         </div>
@@ -768,7 +767,7 @@ export default function ManagerDashboard() {
                           type="button"
                           onClick={() => handleDeleteClass(c)}
                           disabled={classBusy}
-                          className="tap-44 px-5 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-red-50 hover:text-red-600 hover:border-red-200 font-black text-[9px] uppercase tracking-widest transition-all disabled:opacity-40"
+                          className="tap-44 px-5 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-red-50 hover:text-red-600 hover:border-red-200 font-semibold text-xs tracking-normal transition-all disabled:opacity-40"
                         >
                           Sınıfı Sil
                         </button>
@@ -778,10 +777,10 @@ export default function ManagerDashboard() {
                         <div className="space-y-2">
                           {c.students.map((st) => (
                             <div key={st.id} className="flex items-center justify-between gap-4 px-4 py-2.5 rounded-xl bg-slate-50">
-                              <span className="text-xs font-bold text-slate-700">
+                              <span className="text-xs font-medium text-slate-700">
                                 {st.fullName}
                                 {st.grade != null && (
-                                  <span className="ml-2 text-[9px] font-black uppercase tracking-widest text-slate-400">
+                                  <span className="ml-2 text-xs font-semibold tracking-normal text-slate-400">
                                     {st.grade}. sınıf
                                   </span>
                                 )}
@@ -790,7 +789,7 @@ export default function ManagerDashboard() {
                                 type="button"
                                 onClick={() => handleRemoveStudentFromClass(c.id, st)}
                                 disabled={classBusy}
-                                className="tap-44 px-4 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-500 hover:text-red-600 transition-all disabled:opacity-40"
+                                className="tap-44 px-4 py-1.5 rounded-lg text-xs font-semibold tracking-normal text-slate-500 hover:text-red-600 transition-all disabled:opacity-40"
                               >
                                 Çıkar
                               </button>
@@ -801,7 +800,7 @@ export default function ManagerDashboard() {
 
                       {sinifsizlar.length > 0 && (
                         <div className="pt-4 border-t border-slate-100">
-                          <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-3">
+                          <p className="text-xs font-semibold tracking-normal text-slate-400 mb-3">
                             Sınıfsız öğrenciyi ekle
                           </p>
                           <div className="flex flex-wrap gap-2">
@@ -811,7 +810,7 @@ export default function ManagerDashboard() {
                                 type="button"
                                 onClick={() => handleAddStudentToClass(c.id, st.id)}
                                 disabled={classBusy}
-                                className="tap-44 px-4 py-2 rounded-xl bg-slate-50 hover:bg-cyan-50 hover:text-cyan-700 border border-slate-100 text-[11px] font-bold text-slate-600 transition-all disabled:opacity-40"
+                                className="tap-44 px-4 py-2 rounded-xl bg-slate-50 hover:bg-cyan-50 hover:text-cyan-700 border border-slate-100 text-xs font-medium text-slate-600 transition-all disabled:opacity-40"
                               >
                                 + {st.fullName}
                               </button>
@@ -830,39 +829,39 @@ export default function ManagerDashboard() {
         {activeTab === "ACTIVITY" && (
           <div className="space-y-8 animate-in fade-in duration-500">
             <div>
-              <h2 className="text-4xl font-black tracking-tight text-slate-900">Aktiflik</h2>
-              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mt-2">
+              <h2 className="text-3xl font-semibold tracking-tight text-slate-900">Aktiflik</h2>
+              <p className="text-xs font-semibold tracking-normal text-slate-400 mt-2">
                 Kim ne zaman girdi, öğretmen öğrencisinin verisine baktı mı
               </p>
             </div>
 
             {activity.length === 0 ? (
-              <Card className="rounded-[2rem] border-0 shadow-lg bg-white p-10 text-center">
-                <p className="text-sm font-black text-slate-700">Henüz aktiflik kaydı yok.</p>
-                <p className="text-[11px] font-bold text-slate-400 mt-2">
+              <Card className="rounded-xl border-0 shadow-sm bg-white p-10 text-center">
+                <p className="text-sm font-semibold text-slate-700">Henüz aktiflik kaydı yok.</p>
+                <p className="text-xs font-medium text-slate-400 mt-2">
                   Kullanıcılar giriş yaptıkça ve karne görüntüledikçe burası dolar.
                 </p>
               </Card>
             ) : (
               <div className="space-y-4">
                 {activity.map((a) => (
-                  <Card key={a.userId} className="rounded-[2rem] border-0 shadow-lg bg-white p-8">
+                  <Card key={a.userId} className="rounded-xl border-0 shadow-sm bg-white p-8">
                     <div className="flex flex-wrap items-center justify-between gap-4">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center font-black text-slate-500">
+                        <div className="w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center font-semibold text-slate-500">
                           {(a.fullName || "?").charAt(0)}
                         </div>
                         <div>
-                          <p className="font-black text-slate-900">{a.fullName}</p>
-                          <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">{a.role}</span>
+                          <p className="font-semibold text-slate-900">{a.fullName}</p>
+                          <span className="text-xs font-semibold tracking-normal text-slate-400">{({ MANAGER: "Yönetici", TEACHER: "Öğretmen", STUDENT: "Öğrenci" } as Record<string, string>)[a.role] ?? a.role}</span>
                         </div>
                       </div>
                       <div className="flex flex-wrap items-center gap-3">
-                        <span className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 text-[11px] font-bold text-slate-600">
+                        <span className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 text-xs font-medium text-slate-600">
                           <Clock className="h-3.5 w-3.5 text-slate-400" />
                           {a.lastLoginAt ? `Son giriş: ${new Date(a.lastLoginAt).toLocaleString("tr-TR")}` : "Hiç giriş yapmadı"}
                         </span>
-                        <span className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 text-[11px] font-bold text-slate-600">
+                        <span className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 text-xs font-medium text-slate-600">
                           <Eye className="h-3.5 w-3.5 text-slate-400" />
                           {a.reportViewCount} karne görüntüleme
                         </span>
@@ -871,18 +870,18 @@ export default function ManagerDashboard() {
 
                     {a.viewedStudents.length > 0 && (
                       <div className="mt-6 pt-6 border-t border-slate-100 space-y-2">
-                        <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
+                        <p className="text-xs font-semibold tracking-normal text-slate-400">
                           Eşleştiği öğrenciler
                         </p>
                         {a.viewedStudents.map((sv) => (
                           <div key={sv.studentId} className="flex items-center justify-between gap-4 px-4 py-2.5 rounded-xl bg-slate-50">
-                            <span className="text-xs font-bold text-slate-700">{sv.studentName}</span>
+                            <span className="text-xs font-medium text-slate-700">{sv.studentName}</span>
                             {sv.lastViewedAt ? (
-                              <span className="text-[11px] font-bold text-emerald-600">
+                              <span className="text-xs font-medium text-emerald-600">
                                 Son bakış: {new Date(sv.lastViewedAt).toLocaleString("tr-TR")}
                               </span>
                             ) : (
-                              <span className="text-[11px] font-black uppercase tracking-wider text-amber-600">
+                              <span className="text-xs font-semibold tracking-normal text-amber-600">
                                 Hiç bakmadı
                               </span>
                             )}
@@ -900,26 +899,26 @@ export default function ManagerDashboard() {
         {activeTab === "PAIRING" && (
           <div className="space-y-8 animate-in slide-in-from-right-10 duration-500">
              <div className="flex flex-col gap-2">
-                <h2 className="text-4xl font-black text-slate-900 tracking-tighter">Eşleştirme <span className="text-cyan-500 italic">Merkezi</span></h2>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Eğitmen ve Öğrenci bağlarını buradan kurun</p>
+                <h2 className="text-3xl font-semibold text-slate-900 tracking-tight">Eşleştirme Merkezi</h2>
+                <p className="text-xs font-semibold text-slate-400 tracking-normal">Eğitmen ve Öğrenci bağlarını buradan kurun</p>
              </div>
              
              <div className="grid grid-cols-2 gap-8">
                 {/* Öğretmen Seçim Alanı */}
                 <div className="space-y-4">
-                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">1. Eğitmen Seçin ({activeTeachers.length})</p>
-                   <div className="bg-white rounded-[3rem] p-6 shadow-xl border border-slate-50 min-h-[500px] max-h-[500px] overflow-y-auto space-y-3 custom-scrollbar">
+                   <p className="text-xs font-semibold text-slate-400 tracking-normal ml-4">1. Eğitmen Seçin ({activeTeachers.length})</p>
+                   <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-50 min-h-[500px] max-h-[500px] overflow-y-auto space-y-3 custom-scrollbar">
                       {activeTeachers.length === 0 ? (
-                        <p className="text-center text-slate-300 text-[10px] font-bold py-20">Aktif eğitmen bulunmuyor.</p>
+                        <p className="text-center text-slate-300 text-xs font-medium py-20">Aktif eğitmen bulunmuyor.</p>
                       ) : (
                         activeTeachers.map(teacher => (
                           <div 
                             key={teacher.id} 
                             onClick={() => setSelectedTeacher(teacher.id)}
-                            className={`p-6 rounded-[2rem] border-2 cursor-pointer transition-all ${selectedTeacher === teacher.id ? 'border-slate-900 bg-slate-900 text-white shadow-lg' : 'border-slate-50 bg-slate-50 hover:border-slate-200'}`}
+                            className={`p-6 rounded-xl border-2 cursor-pointer transition-all ${selectedTeacher === teacher.id ? 'border-slate-900 bg-slate-900 text-white shadow-sm' : 'border-slate-50 bg-slate-50 hover:border-slate-200'}`}
                           >
-                             <h5 className="font-black text-sm tracking-tight">{teacher.fullName}</h5>
-                             <p className={`text-[9px] font-bold tracking-wide mt-1 ${selectedTeacher === teacher.id ? 'text-cyan-400' : 'text-slate-400'}`}>{teacher.email}</p>
+                             <h5 className="font-semibold text-sm tracking-tight">{teacher.fullName}</h5>
+                             <p className={`text-xs font-medium tracking-wide mt-1 ${selectedTeacher === teacher.id ? 'text-cyan-400' : 'text-slate-400'}`}>{teacher.email}</p>
                           </div>
                         ))
                       )}
@@ -928,26 +927,26 @@ export default function ManagerDashboard() {
 
                 {/* Öğrenci Seçim Alanı (T-021: Yalnızca eşleşmemiş öğrenciler) */}
                 <div className="space-y-4">
-                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">2. Öğrenci Seçin ({unpairedStudents.length})</p>
-                   <div className="bg-white rounded-[3rem] p-6 shadow-xl border border-slate-50 min-h-[500px] max-h-[500px] overflow-y-auto space-y-3 custom-scrollbar">
+                   <p className="text-xs font-semibold text-slate-400 tracking-normal ml-4">2. Öğrenci Seçin ({unpairedStudents.length})</p>
+                   <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-50 min-h-[500px] max-h-[500px] overflow-y-auto space-y-3 custom-scrollbar">
                       {unpairedStudents.length === 0 ? (
-                        <p className="text-center text-slate-300 text-[10px] font-bold py-20">Eşleşmeye uygun öğrenci bulunmuyor.</p>
+                        <p className="text-center text-slate-300 text-xs font-medium py-20">Eşleşmeye uygun öğrenci bulunmuyor.</p>
                       ) : (
                         unpairedStudents.map(student => (
                           <div 
                             key={student.id} 
                             onClick={() => setSelectedStudent(student.id)}
-                            className={`p-6 rounded-[2rem] border-2 cursor-pointer transition-all ${selectedStudent === student.id ? 'border-cyan-500 bg-cyan-50/50 shadow-lg' : 'border-slate-50 bg-slate-50 hover:border-slate-200'}`}
+                            className={`p-6 rounded-xl border-2 cursor-pointer transition-all ${selectedStudent === student.id ? 'border-cyan-500 bg-cyan-50/50 shadow-sm' : 'border-slate-50 bg-slate-50 hover:border-slate-200'}`}
                           >
                              <div className="flex items-center justify-between">
-                               <h5 className="font-black text-sm tracking-tight text-slate-900">{student.fullName}</h5>
+                               <h5 className="font-semibold text-sm tracking-tight text-slate-900">{student.fullName}</h5>
                                {student.grade && (
-                                 <span className="text-[8px] font-black uppercase text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">
+                                 <span className="text-xs font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">
                                    {student.grade}. Sınıf
                                  </span>
                                )}
                              </div>
-                             <p className="text-[9px] font-bold text-slate-400 tracking-wide mt-1">{student.email}</p>
+                             <p className="text-xs font-medium text-slate-400 tracking-wide mt-1">{student.email}</p>
                           </div>
                         ))
                       )}
@@ -959,7 +958,7 @@ export default function ManagerDashboard() {
              <button 
                onClick={handlePairing}
                disabled={!selectedTeacher || !selectedStudent}
-               className={`w-full py-8 rounded-[2.5rem] font-black text-sm uppercase tracking-[0.3em] transition-all shadow-2xl ${
+               className={`w-full py-8 rounded-xl font-semibold text-sm tracking-normal transition-all shadow-sm ${
                  !selectedTeacher || !selectedStudent 
                  ? "bg-slate-100 text-slate-300 cursor-not-allowed shadow-none" 
                  : "bg-slate-900 text-white hover:bg-cyan-500 shadow-slate-200"
@@ -972,20 +971,20 @@ export default function ManagerDashboard() {
              <div className="pt-8 space-y-4">
                <div className="flex items-center justify-between">
                  <div className="flex items-center gap-3">
-                   <h3 className="text-xl font-black text-slate-900 tracking-tight">Aktif Eşleşmeler</h3>
-                   <span className="text-xs bg-slate-900 text-white font-black px-3 py-1 rounded-full">
+                   <h3 className="text-xl font-semibold text-slate-900 tracking-tight">Aktif Eşleşmeler</h3>
+                   <span className="text-xs bg-slate-900 text-white font-semibold px-3 py-1 rounded-full">
                      {pairings.length}
                    </span>
                  </div>
-                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                 <p className="text-xs font-semibold text-slate-400 tracking-normal">
                    Mevcut Eğitmen - Öğrenci Bağlantıları
                  </p>
                </div>
 
                {pairings.length === 0 ? (
-                 <div className="bg-white rounded-[3rem] p-16 text-center border-2 border-dashed border-slate-100">
+                 <div className="bg-white rounded-xl p-16 text-center border-2 border-dashed border-slate-100">
                    <Link2 className="h-12 w-12 text-slate-200 mx-auto mb-4" />
-                   <p className="text-slate-400 font-black text-[10px] uppercase tracking-[0.3em]">
+                   <p className="text-slate-400 font-semibold text-xs tracking-normal">
                      Henüz kurulmuş bir eşleşme bulunmuyor.
                    </p>
                  </div>
@@ -994,26 +993,26 @@ export default function ManagerDashboard() {
                    {pairings.map((p) => (
                      <div 
                        key={`${p.studentId}-${p.teacherId}`}
-                       className="bg-white rounded-[2.5rem] p-6 shadow-xl border border-slate-50 flex items-center justify-between gap-6 hover:shadow-2xl transition-all group"
+                       className="bg-white rounded-xl p-6 shadow-sm border border-slate-50 flex items-center justify-between gap-6 hover:shadow-sm transition-all group"
                      >
                        {/* Öğrenci Bilgisi */}
                        <div className="flex items-center gap-4 min-w-0 flex-1">
-                         <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 font-black text-base flex items-center justify-center shrink-0 border border-emerald-100">
+                         <div className="w-12 h-12 rounded-lg bg-emerald-50 text-emerald-700 font-semibold text-base flex items-center justify-center shrink-0 border border-emerald-100">
                            {p.studentName.charAt(0)}
                          </div>
                          <div className="min-w-0 flex-1">
                            <div className="flex items-center gap-2">
-                             <p className="font-black text-sm text-slate-900 truncate">{p.studentName}</p>
+                             <p className="font-semibold text-sm text-slate-900 truncate">{p.studentName}</p>
                              {p.studentGrade && (
-                               <span className="text-[8px] font-black uppercase text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded shrink-0">
+                               <span className="text-xs font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded shrink-0">
                                  {p.studentGrade}. Sınıf
                                </span>
                              )}
-                             <span className="text-[8px] font-black uppercase text-slate-500 bg-slate-100 px-2 py-0.5 rounded shrink-0">
+                             <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded shrink-0">
                                Öğrenci
                              </span>
                            </div>
-                           <p className="text-[10px] font-bold text-slate-400 truncate">{p.studentEmail}</p>
+                           <p className="text-xs font-medium text-slate-400 truncate">{p.studentEmail}</p>
                          </div>
                        </div>
 
@@ -1023,7 +1022,7 @@ export default function ManagerDashboard() {
                            <Link2 className="h-4 w-4" />
                          </div>
                          {p.pairedAt && (
-                           <span className="text-[8px] font-bold text-slate-400 mt-1">
+                           <span className="text-xs font-medium text-slate-400 mt-1">
                              {new Date(p.pairedAt).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' })}
                            </span>
                          )}
@@ -1031,17 +1030,17 @@ export default function ManagerDashboard() {
 
                        {/* Eğitmen Bilgisi */}
                        <div className="flex items-center gap-4 min-w-0 flex-1">
-                         <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 font-black text-base flex items-center justify-center shrink-0 border border-blue-100">
+                         <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-700 font-semibold text-base flex items-center justify-center shrink-0 border border-blue-100">
                            {p.teacherName.charAt(0)}
                          </div>
                          <div className="min-w-0 flex-1">
                            <div className="flex items-center gap-2">
-                             <p className="font-black text-sm text-slate-900 truncate">{p.teacherName}</p>
-                             <span className="text-[8px] font-black uppercase text-blue-700 bg-blue-100 px-2 py-0.5 rounded shrink-0">
+                             <p className="font-semibold text-sm text-slate-900 truncate">{p.teacherName}</p>
+                             <span className="text-xs font-semibold text-blue-700 bg-blue-100 px-2 py-0.5 rounded shrink-0">
                                Eğitmen
                              </span>
                            </div>
-                           <p className="text-[10px] font-bold text-slate-400 truncate">{p.teacherEmail}</p>
+                           <p className="text-xs font-medium text-slate-400 truncate">{p.teacherEmail}</p>
                          </div>
                        </div>
 
@@ -1051,7 +1050,7 @@ export default function ManagerDashboard() {
                            type="button"
                            onClick={() => handleUnpair(p.studentId, p.teacherId, p.studentName, p.teacherName)}
                            disabled={unpairingStudentId === p.studentId}
-                           className="tap-44 px-4 py-2.5 rounded-2xl bg-red-50 hover:bg-red-500 hover:text-white text-red-600 border border-red-100 transition-all flex items-center gap-2 text-[10px] font-black uppercase tracking-wider active:scale-95 disabled:opacity-50"
+                           className="tap-44 px-4 py-2.5 rounded-lg bg-red-50 hover:bg-red-500 hover:text-white text-red-600 border border-red-100 transition-all flex items-center gap-2 text-xs font-semibold tracking-normal disabled:opacity-50"
                            title="Eşleştirmeyi Ayır"
                          >
                            {unpairingStudentId === p.studentId ? (

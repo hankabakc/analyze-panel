@@ -61,11 +61,11 @@ export function PriorityTopics({ priorityLists, onSelect, hasData = true }: Prio
 
   if (!hasAnyTopics) {
     return (
-      <div className="rounded-[2rem] bg-slate-50 border border-slate-100 p-10 text-center">
-        <p className="text-sm font-black text-slate-700">
+      <div className="rounded-xl bg-slate-50 border border-slate-100 p-10 text-center">
+        <p className="text-sm font-semibold text-slate-700">
           {hasData ? "Eksik konu çıkmadı." : "Gösterilecek analiz yok."}
         </p>
-        <p className="text-[11px] font-bold text-slate-400 mt-2">
+        <p className="text-xs font-medium text-slate-400 mt-2">
           {hasData
             ? "Bu karnede her konuda tam başarı var. Bir sonraki denemeye geçebilirsiniz."
             : "Onaylanmış bir karne olduğunda öncelikli konular burada sıralanır."}
@@ -84,7 +84,7 @@ export function PriorityTopics({ priorityLists, onSelect, hasData = true }: Prio
     <div className="space-y-4">
       {/* Sıralama Seçici (Puana Göre / Orana Göre) */}
       <div className="flex items-center justify-between gap-3 pb-1">
-        <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+        <span className="text-xs font-semibold tracking-normal text-slate-400">
           {sortMode === "points" ? "Öncelik: Puan Kaybı" : "Öncelik: Başarı Oranı"}
         </span>
         <div
@@ -96,7 +96,7 @@ export function PriorityTopics({ priorityLists, onSelect, hasData = true }: Prio
             type="button"
             onClick={() => setSortMode("points")}
             aria-pressed={sortMode === "points"}
-            className={`tap-44 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-1 ${
+            className={`tap-44 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-normal transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-1 ${
               sortMode === "points"
                 ? "bg-white text-slate-900 shadow-sm"
                 : "text-slate-500 hover:text-slate-800"
@@ -108,7 +108,7 @@ export function PriorityTopics({ priorityLists, onSelect, hasData = true }: Prio
             type="button"
             onClick={() => setSortMode("rate")}
             aria-pressed={sortMode === "rate"}
-            className={`tap-44 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-1 ${
+            className={`tap-44 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-normal transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-1 ${
               sortMode === "rate"
                 ? "bg-white text-slate-900 shadow-sm"
                 : "text-slate-500 hover:text-slate-800"
@@ -129,12 +129,12 @@ export function PriorityTopics({ priorityLists, onSelect, hasData = true }: Prio
               type="button"
               onClick={() => onSelect?.(t.lessonName, t.topicName)}
               disabled={!onSelect}
-              className="w-full text-left rounded-[1.75rem] bg-white border border-slate-100 enabled:hover:border-cyan-500 enabled:cursor-pointer transition-colors p-5 flex items-start gap-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
+              className="w-full text-left rounded-xl bg-white border border-slate-100 enabled:hover:border-cyan-500 enabled:cursor-pointer transition-colors p-5 flex items-start gap-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
              >
               {/* Sıra numarası: liste gerçek bir öncelik sırası olduğu için bilgi taşır */}
               <span
                 aria-hidden="true"
-                className="shrink-0 w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center text-xs font-black tabular-nums"
+                className="shrink-0 w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center text-xs font-semibold tabular-nums"
               >
                 {i + 1}
               </span>
@@ -142,23 +142,23 @@ export function PriorityTopics({ priorityLists, onSelect, hasData = true }: Prio
               <div className="min-w-0 flex-1 space-y-2.5">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0 space-y-1">
-                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 truncate">
+                    <p className="text-xs font-semibold tracking-normal text-slate-400 truncate">
                       {t.lessonName}
                     </p>
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="font-black text-sm text-slate-900 leading-snug">{t.topicName}</p>
+                      <p className="font-semibold text-sm text-slate-900 leading-snug">{t.topicName}</p>
                       {t.chronic && (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-semibold tracking-normal bg-rose-50 text-rose-700 border border-rose-200">
                           Son 2 denemede de yanlış
                         </span>
                       )}
                     </div>
                   </div>
                   <div className="shrink-0 text-right space-y-0.5">
-                    <span className="block text-sm font-black tabular-nums text-slate-900">%{oran}</span>
+                    <span className="block text-sm font-semibold tabular-nums text-slate-900">%{oran}</span>
                     {/* B-60: İstemcideki gömülü sabit hesap yedeği kaldırıldı; puan sunucudan geliyorsa gösterilir (IST-02 §2) */}
                     {t.lostPoints != null && (
-                      <span className="block text-[11px] font-black tabular-nums text-rose-600">
+                      <span className="block text-xs font-semibold tabular-nums text-rose-600">
                         ≈{t.lostPoints.toFixed(1)} puan
                       </span>
                     )}
@@ -187,7 +187,7 @@ export function PriorityTopics({ priorityLists, onSelect, hasData = true }: Prio
                       )}
                     </div>
                   </div>
-                  <p className="shrink-0 text-[10px] font-bold text-slate-500 tabular-nums">
+                  <p className="shrink-0 text-xs font-medium text-slate-500 tabular-nums">
                     {t.totalQuestions} soruda {t.correctCount} doğru
                   </p>
                 </div>
@@ -207,10 +207,10 @@ export function PriorityTopics({ priorityLists, onSelect, hasData = true }: Prio
         ].map((s) => (
           <span key={s.ad} className="flex items-center gap-2">
             <span className="w-3 h-2.5 rounded-sm" style={{ background: s.renk }} aria-hidden="true" />
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">{s.ad}</span>
+            <span className="text-xs font-semibold tracking-normal text-slate-500">{s.ad}</span>
           </span>
         ))}
-        <span className="text-[10px] font-bold text-slate-400">
+        <span className="text-xs font-medium text-slate-400">
           Bar uzunluğu konudaki soru sayısını gösterir.
         </span>
       </div>

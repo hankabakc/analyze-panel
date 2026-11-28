@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { 
   KeyRound, Eye, EyeOff, 
   ArrowRight, Loader2, LogOut, Info, AlertTriangle 
-} from "lucide-react";
+} from "@/components/icons";
 
 /**
  * MustChangePasswordScreen: Kullanıcının ilk girişinde (mustChangePassword = true)
@@ -65,40 +65,38 @@ export function MustChangePasswordScreen() {
 
   return (
     <div className="auth-gradient min-h-screen w-full flex items-center justify-center p-4 relative overflow-hidden select-none">
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-amber-500/5 rounded-full blur-[120px]"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-cyan-500/5 rounded-full blur-[120px]"></div>
 
       <div className="w-full max-w-[480px] z-10 animate-in fade-in zoom-in-95 duration-500">
-        <Card className="rounded-[3rem] border-0 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.15)] overflow-hidden bg-white">
-          <div className="h-2.5 bg-gradient-to-r from-amber-500 to-emerald-500"></div>
+        <Card className="rounded-xl border-0 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.15)] overflow-hidden bg-white">
+
 
           <CardContent className="p-8 sm:p-12">
             {/* Header */}
             <div className="flex flex-col items-center text-center mb-6">
-              <div className="w-20 h-20 bg-amber-50 rounded-[2rem] flex items-center justify-center mb-4 border border-amber-100/60 shadow-inner">
+              <div className="w-20 h-20 bg-amber-50 rounded-xl flex items-center justify-center mb-4 border border-amber-100/60 shadow-inner">
                 <KeyRound className="h-9 w-9 text-amber-600" />
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tighter">
+              <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
                 Şifrenizi Belirleyin
               </h2>
-              <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+              <p className="text-xs text-slate-500 mt-1">
                 İlk Giriş Güvenlik Protokolü
               </p>
             </div>
 
             {/* Bilgilendirme Kutusu */}
-            <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4 mb-6 flex items-start gap-3 text-left">
+            <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-6 flex items-start gap-3 text-left">
               <Info className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
-              <p className="text-xs font-bold text-amber-950 leading-relaxed">
+              <p className="text-xs font-medium text-amber-950 leading-relaxed">
                 Hesabınız yöneticiniz tarafından geçici bir şifre ile oluşturuldu. Güvenliğiniz için lütfen en az <strong>12 karakterlik</strong> yeni bir şifre belirleyiniz.
               </p>
             </div>
 
             {/* Hata Bildirimi */}
             {validationError && (
-              <div className="bg-red-50 border border-red-200 rounded-2xl p-3.5 mb-6 flex items-center gap-2.5 text-left animate-in fade-in">
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3.5 mb-6 flex items-center gap-2.5 text-left animate-in fade-in">
                 <AlertTriangle className="h-4 w-4 text-red-600 shrink-0" />
-                <p className="text-xs font-bold text-red-700">{validationError}</p>
+                <p className="text-xs font-medium text-red-700">{validationError}</p>
               </div>
             )}
 
@@ -106,10 +104,10 @@ export function MustChangePasswordScreen() {
               {/* Yeni Şifre */}
               <div className="space-y-1.5 text-left">
                 <div className="flex items-center justify-between ml-4">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                  <label className="text-xs font-semibold text-slate-400 tracking-normal">
                     Yeni Şifre *
                   </label>
-                  <span className={`text-[10px] font-black ${newPassword.length >= 12 ? "text-emerald-600" : "text-slate-400"}`}>
+                  <span className={`text-xs font-semibold ${newPassword.length >= 12 ? "text-emerald-600" : "text-slate-400"}`}>
                     {newPassword.length}/12 min
                   </span>
                 </div>
@@ -121,7 +119,7 @@ export function MustChangePasswordScreen() {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     disabled={isLoading}
-                    className="h-14 rounded-2xl border-2 border-slate-50 bg-slate-50 focus:bg-white focus:border-slate-900 font-bold px-5 text-sm pr-12 transition-all"
+                    className="h-14 rounded-lg border-2 border-slate-50 bg-slate-50 focus:bg-white focus:border-slate-900 font-medium px-5 text-sm pr-12 transition-all"
                   />
                   <button
                     type="button"
@@ -136,7 +134,7 @@ export function MustChangePasswordScreen() {
 
               {/* Yeni Şifre Tekrar */}
               <div className="space-y-1.5 text-left">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">
+                <label className="text-xs font-semibold text-slate-400 tracking-normal ml-4">
                   Yeni Şifre (Tekrar) *
                 </label>
                 <div className="relative">
@@ -147,7 +145,7 @@ export function MustChangePasswordScreen() {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     disabled={isLoading}
-                    className="h-14 rounded-2xl border-2 border-slate-50 bg-slate-50 focus:bg-white focus:border-slate-900 font-bold px-5 text-sm pr-12 transition-all"
+                    className="h-14 rounded-lg border-2 border-slate-50 bg-slate-50 focus:bg-white focus:border-slate-900 font-medium px-5 text-sm pr-12 transition-all"
                   />
                   <button
                     type="button"
@@ -164,7 +162,7 @@ export function MustChangePasswordScreen() {
               <Button
                 type="submit"
                 disabled={isLoading || newPassword.length < 12 || newPassword !== confirmPassword}
-                className="w-full h-16 rounded-2xl font-black text-sm uppercase tracking-widest bg-slate-900 hover:bg-slate-800 text-white transition-all shadow-xl active:scale-98 mt-2"
+                className="w-full h-16 rounded-lg font-semibold text-sm tracking-normal bg-slate-900 hover:bg-slate-800 text-white transition-all shadow-sm mt-2"
               >
                 {isLoading ? (
                   <Loader2 className="h-5 w-5 animate-spin" />
@@ -178,14 +176,14 @@ export function MustChangePasswordScreen() {
 
             {/* Oturumu Kapat Butonu */}
             <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-              <span className="text-[10px] font-bold text-slate-400 truncate max-w-[240px]">
+              <span className="text-xs font-medium text-slate-400 truncate max-w-[240px]">
                 {user?.fullName} ({user?.email})
               </span>
               <button
                 type="button"
                 onClick={logout}
                 disabled={isLoading}
-                className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-red-500 hover:text-red-700 transition-colors"
+                className="flex items-center gap-1.5 text-xs font-semibold tracking-normal text-red-500 hover:text-red-700 transition-colors"
               >
                 <LogOut className="h-3.5 w-3.5" /> Çıkış Yap
               </button>

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import { ExternalLink, Loader2 } from "lucide-react";
+import { ExternalLink, Loader2 } from "@/components/icons";
 import { toast } from "sonner";
 import { useBlocker } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ type EditorState =
 const NO_VALUES: Record<string, string> = {};
 
 const FIELD_CLASS =
-  "mt-2 w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-900 transition-colors focus:border-cyan-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500/20";
+  "mt-2 w-full rounded-lg border-2 border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-900 transition-colors focus:border-cyan-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500/20";
 
 /**
  * SiteContentEditor: Yöneticinin karşılama sitesinin yazılarını doldurduğu ekran (T-063C / S-026).
@@ -104,7 +104,7 @@ export function SiteContentEditor() {
 
   if (state.status === "loading") {
     return (
-      <p role="status" className="py-16 text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">
+      <p role="status" className="py-16 text-xs font-semibold tracking-normal text-slate-400">
         Site içeriği yükleniyor…
       </p>
     );
@@ -112,8 +112,8 @@ export function SiteContentEditor() {
 
   if (state.status === "error") {
     return (
-      <div role="alert" className="max-w-lg rounded-[2rem] border border-red-100 bg-white p-8">
-        <p className="font-bold text-slate-900">Site içeriği yüklenemedi.</p>
+      <div role="alert" className="max-w-lg rounded-xl border border-red-100 bg-white p-8">
+        <p className="font-medium text-slate-900">Site içeriği yüklenemedi.</p>
         <p className="mt-2 text-sm text-slate-600">Bağlantınızı kontrol edip yeniden deneyin.</p>
         <Button
           type="button"
@@ -133,8 +133,8 @@ export function SiteContentEditor() {
     <section aria-labelledby="site-icerigi-baslik" className="space-y-8">
       <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Karşılama sitesi</p>
-          <h2 id="site-icerigi-baslik" className="mt-2 text-3xl font-black tracking-tighter text-slate-900">
+          <p className="text-xs font-semibold tracking-normal text-slate-400">Karşılama sitesi</p>
+          <h2 id="site-icerigi-baslik" className="mt-2 text-3xl font-semibold tracking-tight text-slate-900">
             Site içeriği
           </h2>
           <p className="mt-2 max-w-xl text-sm text-slate-500">
@@ -145,7 +145,7 @@ export function SiteContentEditor() {
           href="/karsilama"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-11 shrink-0 items-center gap-2 self-start rounded-2xl border-2 border-slate-100 bg-white px-5 text-[11px] font-black uppercase tracking-[0.2em] text-slate-700 hover:border-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
+          className="inline-flex h-11 shrink-0 items-center gap-2 self-start rounded-lg border-2 border-slate-100 bg-white px-5 text-xs font-semibold tracking-normal text-slate-700 hover:border-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
         >
           Siteyi görüntüle
           <ExternalLink className="h-4 w-4" aria-hidden="true" />
@@ -155,9 +155,9 @@ export function SiteContentEditor() {
       {groups.map((group) => (
         <fieldset
           key={group.title}
-          className="rounded-[2rem] border border-slate-100 bg-white p-6 shadow-xl shadow-slate-100/50 sm:p-8"
+          className="rounded-xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8"
         >
-          <legend className="px-2 text-[11px] font-black uppercase tracking-[0.3em] text-slate-900">{group.title}</legend>
+          <legend className="px-2 text-xs font-semibold tracking-normal text-slate-900">{group.title}</legend>
           <div className="mt-2 space-y-6">
             {group.fields.map((field) => (
               <FieldInput
@@ -171,8 +171,8 @@ export function SiteContentEditor() {
         </fieldset>
       ))}
 
-      <div className="sticky bottom-20 z-10 flex flex-col gap-3 rounded-[2rem] border border-slate-200 bg-white/95 p-4 shadow-2xl backdrop-blur sm:flex-row sm:items-center sm:justify-between lg:bottom-4">
-        <p role="status" className="text-sm font-bold text-slate-600">
+      <div className="sticky bottom-20 z-10 flex flex-col gap-3 rounded-xl border border-slate-200 bg-white/95 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between lg:bottom-4">
+        <p role="status" className="text-sm font-medium text-slate-600">
           {dirty ? `${changedKeys.length} alanda kaydedilmemiş değişiklik var.` : "Tüm değişiklikler kaydedildi."}
         </p>
         <div className="flex flex-wrap gap-2">
@@ -204,10 +204,10 @@ function FieldInput({
   return (
     <div>
       <div className="flex items-baseline justify-between gap-4">
-        <label htmlFor={id} className="text-sm font-bold text-slate-800">
+        <label htmlFor={id} className="text-sm font-medium text-slate-800">
           {fieldLabel(field.key)}
         </label>
-        <span id={counterId} className="shrink-0 text-[11px] font-bold tabular-nums text-slate-400">
+        <span id={counterId} className="shrink-0 text-xs font-medium tabular-nums text-slate-400">
           {value.length} / {field.maxLength}
         </span>
       </div>

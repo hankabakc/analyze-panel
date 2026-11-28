@@ -3,7 +3,7 @@ import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Loader2, Mail, KeyRound, Eye, EyeOff } from "lucide-react";
+import { ArrowRight, Loader2, Mail, KeyRound, Eye, EyeOff } from "@/components/icons";
 
 /**
  * AuthController: Yalnızca e-posta + şifre ile çalışan giriş bileşenidir (T-056).
@@ -44,27 +44,22 @@ export function AuthController() {
   return (
     <div className="w-full flex justify-center px-4">
       <div className="w-full max-w-[440px] animate-in fade-in slide-in-from-bottom-6 duration-500 select-none">
-        <Card className="rounded-[3rem] border-0 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.12)] overflow-hidden bg-white cursor-default">
-          <div className="h-2 bg-slate-900"></div>
-          <CardContent className="p-8 sm:p-12 text-center">
-            {/* Logo / İkon */}
-            <div className="w-20 h-20 bg-slate-50 rounded-[2rem] flex items-center justify-center mx-auto mb-5 border border-slate-100/50 shadow-inner">
-              <KeyRound className="h-9 w-9 text-slate-800" />
-            </div>
+        <Card className="rounded-xl border border-slate-200 shadow-sm overflow-hidden bg-white cursor-default">
+          <CardContent className="p-8 sm:p-10 text-center">
 
-            <h2 className="text-3xl font-black text-slate-900 tracking-tighter">Giriş Yap</h2>
-            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-2 mb-8">
+            <h2 className="text-2xl font-semibold text-slate-900 tracking-tight">Giriş yap</h2>
+            <p className="text-sm text-slate-500 mt-2 mb-8">
               Kurumsal hesabınıza e-posta ve şifrenizle erişin
             </p>
 
             <form onSubmit={handleEmailLogin} className="space-y-5">
               {/* E-posta Adresi */}
               <div className="space-y-1.5 text-left">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">
+                <label className="text-sm font-medium text-slate-700">
                   E-Posta Adresi
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-300 pointer-events-none" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
                   <Input 
                     type="email"
                     autoComplete="username"
@@ -72,18 +67,18 @@ export function AuthController() {
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)} 
                     disabled={isLoading}
-                    className="h-16 pl-14 rounded-2xl border-2 border-slate-50 bg-slate-50 focus:bg-white focus:border-slate-900 font-bold transition-all text-sm"
+                    className="h-12 pl-12 rounded-md border border-slate-300 bg-white focus:border-slate-900 transition-all text-sm"
                   />
                 </div>
               </div>
 
               {/* Şifre */}
               <div className="space-y-1.5 text-left">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">
+                <label className="text-sm font-medium text-slate-700">
                   Şifre
                 </label>
                 <div className="relative">
-                  <KeyRound className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-300 pointer-events-none" />
+                  <KeyRound className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
                   <Input 
                     type={showPassword ? "text" : "password"}
                     autoComplete="current-password"
@@ -91,7 +86,7 @@ export function AuthController() {
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
                     disabled={isLoading}
-                    className="h-16 pl-14 pr-12 rounded-2xl border-2 border-slate-50 bg-slate-50 focus:bg-white focus:border-slate-900 font-bold transition-all text-base"
+                    className="h-12 pl-12 pr-12 rounded-md border border-slate-300 bg-white focus:border-slate-900 transition-colors text-base"
                   />
                   <button
                     type="button"
@@ -106,7 +101,7 @@ export function AuthController() {
               </div>
 
               {/* Beni Hatırla (30 gün) */}
-              <label htmlFor="rememberMe" className="flex items-start space-x-3 text-left p-3.5 rounded-2xl bg-slate-50 border border-slate-100/80 cursor-pointer">
+              <label htmlFor="rememberMe" className="flex items-start space-x-3 text-left p-3.5 rounded-md cursor-pointer">
                 <input
                   id="rememberMe"
                   type="checkbox"
@@ -116,8 +111,8 @@ export function AuthController() {
                   className="mt-0.5 h-4 w-4 rounded border-slate-300 text-slate-900 focus:ring-slate-900 cursor-pointer"
                 />
                 <span className="text-xs text-slate-600 select-none">
-                  <span className="font-bold text-slate-800">Beni hatırla (30 gün)</span>
-                  <p className="text-[10px] text-slate-400 mt-0.5 leading-tight">
+                  <span className="font-medium text-slate-800">Beni hatırla (30 gün)</span>
+                  <p className="text-xs text-slate-400 mt-0.5 leading-tight">
                     Ortak kullanılan veya halka açık cihazlarda işaretlemeyiniz.
                   </p>
                 </span>
@@ -127,13 +122,13 @@ export function AuthController() {
               <Button 
                 type="submit" 
                 disabled={isLoading || !email.trim() || !password}
-                className="w-full h-16 rounded-2xl font-black text-sm uppercase tracking-widest bg-slate-900 hover:bg-slate-800 text-white transition-all shadow-lg active:scale-98"
+                className="w-full h-12 rounded-md font-medium text-sm bg-slate-900 hover:bg-slate-700 text-white transition-colors"
               >
                 {isLoading ? (
                   <Loader2 className="h-5 w-5 animate-spin" />
                 ) : (
                   <>
-                    Giriş Yap <ArrowRight className="ml-2 h-5 w-5" />
+                    Giriş Yap <ArrowRight className="ml-2 h-4 w-4" />
                   </>
                 )}
               </Button>

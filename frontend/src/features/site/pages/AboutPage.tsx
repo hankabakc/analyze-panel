@@ -30,7 +30,7 @@ export default function AboutPage() {
               {filled.map((section) => (
                 <section key={section.key}>
                   {section.title && (
-                    <h2 className="text-[11px] font-black uppercase tracking-[0.3em] text-cyan-700">{section.title}</h2>
+                    <h2 className="text-xs font-semibold tracking-normal text-cyan-700">{section.title}</h2>
                   )}
                   <Prose value={section.value} className="mt-4 max-w-3xl text-slate-700 sm:text-xl" />
                 </section>

@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { 
   CheckCircle2, X, AlertCircle, Loader2, Brain, 
   ShieldCheck, ArrowRight
-} from "lucide-react";
+} from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -154,28 +154,28 @@ export function StudentPsychTestModal({
   return (
     <div 
       data-testid="student-psych-test-modal"
-      className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-2 sm:p-4 overflow-y-auto"
+      className="fixed inset-0 z-50 bg-slate-900/60 flex items-center justify-center p-2 sm:p-4 overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby="psych-test-modal-title"
     >
-      <div className="bg-white rounded-[2rem] sm:rounded-[2.5rem] max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden animate-in zoom-in-95 duration-200">
+      <div className="bg-white rounded-xl sm:rounded-xl max-w-3xl w-full max-h-[92vh] flex flex-col shadow-sm border border-slate-100 overflow-hidden animate-in zoom-in-95 duration-200">
         {/* ÜST ÇUBUK VE İLERLEME GÖSTERGESİ (STICKY) */}
-        <div className="p-5 sm:p-6 border-b border-slate-100 bg-white/95 backdrop-blur-xs sticky top-0 z-20 space-y-3">
+        <div className="p-5 sm:p-6 border-b border-slate-100 bg-white/95 sticky top-0 z-20 space-y-3">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-10 h-10 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center shrink-0 border border-cyan-100">
+              <div className="w-10 h-10 rounded-lg bg-cyan-50 text-cyan-600 flex items-center justify-center shrink-0 border border-cyan-100">
                 <Brain className="h-5 w-5" />
               </div>
               <div className="min-w-0">
                 <h3 
                   id="psych-test-modal-title"
-                  className="font-black text-base sm:text-lg text-slate-900 truncate"
+                  className="font-semibold text-base sm:text-lg text-slate-900 truncate"
                   title={testTitle}
                 >
                   {testTitle}
                 </h3>
-                <p className="text-[11px] font-bold text-slate-400">
+                <p className="text-xs font-bold text-slate-400">
                   {isCompleted ? "Test Tamamlandı" : "Lütfen tüm maddeleri dikkatlice cevaplayınız"}
                 </p>
               </div>
@@ -185,7 +185,7 @@ export function StudentPsychTestModal({
               type="button"
               data-testid="close-modal-btn"
               onClick={onClose}
-              className="tap-44 min-h-[44px] min-w-[44px] p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all flex items-center justify-center shrink-0"
+              className="tap-44 min-h-[44px] min-w-[44px] p-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all flex items-center justify-center shrink-0"
               aria-label="Kapat"
             >
               <X className="h-5 w-5" />
@@ -195,7 +195,7 @@ export function StudentPsychTestModal({
           {/* İlerleme Çubuğu (Test devam ederken) */}
           {!isCompleted && !isLoading && (
             <div className="space-y-1.5 pt-1">
-              <div className="flex items-center justify-between text-xs font-black">
+              <div className="flex items-center justify-between text-xs font-semibold">
                 <span data-testid="test-progress-text" className="text-cyan-700">
                   {answeredCount} / {totalCount} Tamamlandı
                 </span>
@@ -206,7 +206,7 @@ export function StudentPsychTestModal({
                 className="w-full h-2.5 rounded-full bg-slate-100 overflow-hidden"
               >
                 <div 
-                  className="h-full bg-gradient-to-r from-cyan-500 to-teal-500 rounded-full transition-all duration-300"
+                  className="h-full bg-cyan-600 rounded-full transition-all duration-300"
                   style={{ width: `${progressPct}%` }}
                 />
               </div>
@@ -219,7 +219,7 @@ export function StudentPsychTestModal({
           {isLoading ? (
             <div className="py-24 flex flex-col items-center justify-center gap-4 text-center">
               <Loader2 className="h-10 w-10 text-cyan-600 animate-spin" />
-              <p className="text-xs font-black uppercase tracking-widest text-slate-400">
+              <p className="text-xs font-semibold tracking-normal text-slate-400">
                 Ölçek Maddeleri Yükleniyor...
               </p>
             </div>
@@ -229,12 +229,12 @@ export function StudentPsychTestModal({
               data-testid="test-success-card"
               className="py-12 px-4 text-center max-w-md mx-auto space-y-6 animate-in fade-in duration-300"
             >
-              <div className="w-20 h-20 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto border-2 border-emerald-200 shadow-lg shadow-emerald-100">
+              <div className="w-20 h-20 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto border-2 border-emerald-200 shadow-sm shadow-emerald-100">
                 <CheckCircle2 className="h-10 w-10" />
               </div>
 
               <div className="space-y-2">
-                <h4 className="text-2xl font-black text-slate-900 tracking-tight">
+                <h4 className="text-2xl font-semibold text-slate-900 tracking-tight">
                   Test Başarıyla Tamamlandı!
                 </h4>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
@@ -243,7 +243,7 @@ export function StudentPsychTestModal({
               </div>
 
               {/* GİZLİLİK VE REHBERLİK BİLGİLENDİRMESİ */}
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 text-left flex items-start gap-3">
+              <div className="p-4 rounded-lg bg-slate-50 border border-slate-200/80 text-left flex items-start gap-3">
                 <ShieldCheck className="h-5 w-5 text-teal-600 shrink-0 mt-0.5" />
                 <p className="text-xs text-slate-500 leading-relaxed">
                   <strong className="text-slate-700">Veri Koruma ve Gizlilik Politikası:</strong> Özel nitelikli kişisel veri koruma kuralları uyarınca psikolojik ölçek puanları öğrencilere gösterilmemekte olup, sonuçlar eğitmeniniz ve kurum rehberliği tarafından akademik gelişiminizi desteklemek amacıyla değerlendirilecektir.
@@ -257,7 +257,7 @@ export function StudentPsychTestModal({
                   onSuccess();
                   onClose();
                 }}
-                className="w-full tap-44 min-h-[44px] rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs uppercase tracking-widest shadow-lg transition-all"
+                className="w-full tap-44 min-h-[44px] rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs tracking-normal shadow-sm transition-all"
               >
                 <span>Panele Dön</span>
               </Button>
@@ -267,7 +267,7 @@ export function StudentPsychTestModal({
             <div className="space-y-8">
               {/* SUNUCU HATA MESAJI */}
               {serverError && (
-                <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-3">
+                <div className="p-4 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-3">
                   <AlertCircle className="h-4 w-4 text-rose-600 shrink-0" />
                   <span>{serverError}</span>
                 </div>
@@ -276,12 +276,12 @@ export function StudentPsychTestModal({
               {/* 1. BÖLÜM: DURUMLUK KAYGI (1 - 20) */}
               {stateItems.length > 0 && (
                 <div className="space-y-4">
-                  <div className="p-4 sm:p-5 rounded-2xl bg-cyan-50/70 border border-cyan-200/70 space-y-1.5">
+                  <div className="p-4 sm:p-5 rounded-lg bg-cyan-50/70 border border-cyan-200/70 space-y-1.5">
                     <div className="flex items-center gap-2">
-                      <span className="px-2.5 py-0.5 rounded-md bg-cyan-600 text-white text-[10px] font-black uppercase tracking-wider">
+                      <span className="px-2.5 py-0.5 rounded-md bg-cyan-600 text-white text-xs font-semibold tracking-normal">
                         1. Kısım
                       </span>
-                      <h4 className="font-black text-sm sm:text-base text-cyan-950">
+                      <h4 className="font-semibold text-sm sm:text-base text-cyan-950">
                         Durumluk Kaygı Ölçeği (Madde 1 – 20)
                       </h4>
                     </div>
@@ -300,7 +300,7 @@ export function StudentPsychTestModal({
                         <Card 
                           key={item.itemNo}
                           data-testid={`test-item-${item.itemNo}`}
-                          className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                          className={`p-4 sm:p-5 rounded-lg border transition-all ${
                             isMissing 
                               ? "border-rose-300 bg-rose-50/30 ring-1 ring-rose-400" 
                               : isAnswered 
@@ -310,7 +310,7 @@ export function StudentPsychTestModal({
                         >
                           <div className="space-y-3">
                             <div className="flex items-start gap-2.5">
-                              <span className={`px-2 py-0.5 rounded-lg text-xs font-black shrink-0 ${
+                              <span className={`px-2 py-0.5 rounded-lg text-xs font-semibold shrink-0 ${
                                 isAnswered 
                                   ? "bg-cyan-600 text-white" 
                                   : "bg-slate-100 text-slate-600"
@@ -334,7 +334,7 @@ export function StudentPsychTestModal({
                                     onClick={() => handleSelectOption(item.itemNo, opt.value)}
                                     className={`tap-44 min-h-[44px] px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center text-center border focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:outline-none ${
                                       isSelected
-                                        ? "bg-cyan-600 border-cyan-600 text-white shadow-md shadow-cyan-200 font-black"
+                                        ? "bg-cyan-600 border-cyan-600 text-white shadow-md shadow-cyan-200 font-semibold"
                                         : "bg-white border-slate-200 hover:border-cyan-300 hover:bg-cyan-50/40 text-slate-700"
                                     }`}
                                   >
@@ -354,12 +354,12 @@ export function StudentPsychTestModal({
               {/* 2. BÖLÜM: SÜREKLİ KAYGI (21 - 40) */}
               {traitItems.length > 0 && (
                 <div className="space-y-4 pt-4 border-t border-slate-100">
-                  <div className="p-4 sm:p-5 rounded-2xl bg-teal-50/70 border border-teal-200/70 space-y-1.5">
+                  <div className="p-4 sm:p-5 rounded-lg bg-teal-50/70 border border-teal-200/70 space-y-1.5">
                     <div className="flex items-center gap-2">
-                      <span className="px-2.5 py-0.5 rounded-md bg-teal-600 text-white text-[10px] font-black uppercase tracking-wider">
+                      <span className="px-2.5 py-0.5 rounded-md bg-teal-600 text-white text-xs font-semibold tracking-normal">
                         2. Kısım
                       </span>
-                      <h4 className="font-black text-sm sm:text-base text-teal-950">
+                      <h4 className="font-semibold text-sm sm:text-base text-teal-950">
                         Sürekli Kaygı Ölçeği (Madde 21 – 40)
                       </h4>
                     </div>
@@ -378,7 +378,7 @@ export function StudentPsychTestModal({
                         <Card 
                           key={item.itemNo}
                           data-testid={`test-item-${item.itemNo}`}
-                          className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                          className={`p-4 sm:p-5 rounded-lg border transition-all ${
                             isMissing 
                               ? "border-rose-300 bg-rose-50/30 ring-1 ring-rose-400" 
                               : isAnswered 
@@ -388,7 +388,7 @@ export function StudentPsychTestModal({
                         >
                           <div className="space-y-3">
                             <div className="flex items-start gap-2.5">
-                              <span className={`px-2 py-0.5 rounded-lg text-xs font-black shrink-0 ${
+                              <span className={`px-2 py-0.5 rounded-lg text-xs font-semibold shrink-0 ${
                                 isAnswered 
                                   ? "bg-teal-600 text-white" 
                                   : "bg-slate-100 text-slate-600"
@@ -412,7 +412,7 @@ export function StudentPsychTestModal({
                                     onClick={() => handleSelectOption(item.itemNo, opt.value)}
                                     className={`tap-44 min-h-[44px] px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center text-center border focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:outline-none ${
                                       isSelected
-                                        ? "bg-teal-600 border-teal-600 text-white shadow-md shadow-teal-200 font-black"
+                                        ? "bg-teal-600 border-teal-600 text-white shadow-md shadow-teal-200 font-semibold"
                                         : "bg-white border-slate-200 hover:border-teal-300 hover:bg-teal-50/40 text-slate-700"
                                     }`}
                                   >
@@ -434,7 +434,7 @@ export function StudentPsychTestModal({
 
         {/* ALT ÇUBUK VE GÖNDERİM BUTONU (STICKY FOOTER) */}
         {!isCompleted && !isLoading && (
-          <div className="p-4 sm:p-6 border-t border-slate-100 bg-white/95 backdrop-blur-xs sticky bottom-0 z-20 space-y-3">
+          <div className="p-4 sm:p-6 border-t border-slate-100 bg-white/95 sticky bottom-0 z-20 space-y-3">
             {/* EKSİK MADDE UYARISI (IST-02 §4.1) */}
             {missingItemNos.length > 0 && (
               <div 
@@ -444,7 +444,7 @@ export function StudentPsychTestModal({
                 <AlertCircle className="h-4 w-4 text-rose-600 shrink-0 mt-0.5" />
                 <div>
                   <p className="font-bold">Lütfen tüm maddeleri işaretleyiniz.</p>
-                  <p className="text-[11px] text-rose-700 mt-0.5">
+                  <p className="text-xs text-rose-700 mt-0.5">
                     Eksik maddeler: {missingItemNos.slice(0, 10).map((n) => `Madde ${n}`).join(", ")}
                     {missingItemNos.length > 10 ? ` ve ${missingItemNos.length - 10} madde daha` : ""}
                   </p>
@@ -462,7 +462,7 @@ export function StudentPsychTestModal({
                 data-testid="submit-test-btn"
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="w-full sm:w-auto tap-44 min-h-[44px] px-8 rounded-2xl bg-cyan-600 hover:bg-cyan-700 text-white font-black text-xs uppercase tracking-widest shadow-lg shadow-cyan-200 transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto tap-44 min-h-[44px] px-8 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white font-semibold text-xs tracking-normal shadow-sm shadow-cyan-200 transition-all flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>

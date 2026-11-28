@@ -31,16 +31,16 @@ export function RankingBoard() {
 
   if (isLoading) {
     return (
-      <Card className="rounded-[2rem] border-0 shadow-lg bg-white p-10 text-center">
-        <p className="text-[11px] font-black uppercase tracking-widest text-slate-400">Sıralama yükleniyor…</p>
+      <Card className="rounded-xl border-0 shadow-sm bg-white p-10 text-center">
+        <p className="text-xs font-semibold tracking-normal text-slate-400">Sıralama yükleniyor…</p>
       </Card>
     );
   }
 
   if (hata) {
     return (
-      <Card className="rounded-[2rem] border-0 shadow-lg bg-white p-10 text-center">
-        <p className="text-sm font-black text-slate-700">Sıralama getirilemedi.</p>
+      <Card className="rounded-xl border-0 shadow-sm bg-white p-10 text-center">
+        <p className="text-sm font-semibold text-slate-700">Sıralama getirilemedi.</p>
       </Card>
     );
   }
@@ -49,9 +49,9 @@ export function RankingBoard() {
 
   if (groups.length === 0 || toplamKatilimci === 0) {
     return (
-      <Card className="rounded-[2rem] border-0 shadow-lg bg-white p-10 text-center">
-        <p className="text-sm font-black text-slate-700">Henüz sıralama oluşmadı.</p>
-        <p className="text-[11px] font-bold text-slate-400 mt-2">
+      <Card className="rounded-xl border-0 shadow-sm bg-white p-10 text-center">
+        <p className="text-sm font-semibold text-slate-700">Henüz sıralama oluşmadı.</p>
+        <p className="text-xs font-medium text-slate-400 mt-2">
           Sıralama yalnızca onaylanmış denemelerden hesaplanır.
         </p>
       </Card>
@@ -63,8 +63,8 @@ export function RankingBoard() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-4">
-        <h3 className="text-xl font-black tracking-tight text-slate-900">Deneme Sıralaması</h3>
-        <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">
+        <h3 className="text-xl font-semibold tracking-tight text-slate-900">Deneme Sıralaması</h3>
+        <span className="text-xs font-semibold tracking-normal text-slate-400">
           {toplamKatilimci} katılımcı · onaylı denemelerin net ortalaması
         </span>
       </div>
@@ -72,16 +72,16 @@ export function RankingBoard() {
       {groups.map((group) => (
         <div key={group.classId ?? "unassigned"} className="space-y-3">
           <div className="flex items-center justify-between px-2">
-            <h4 className="text-sm font-black tracking-tight text-slate-800 flex items-center gap-2">
+            <h4 className="text-sm font-semibold tracking-tight text-slate-800 flex items-center gap-2">
               <span className="inline-block w-2.5 h-2.5 rounded-full bg-cyan-500" />
               {group.className}
             </h4>
-            <span className="text-[10px] font-bold text-slate-400">
+            <span className="text-xs font-medium text-slate-400">
               {group.entries.length} öğrenci
             </span>
           </div>
 
-          <Card className="rounded-[2rem] border-0 shadow-lg bg-white overflow-hidden">
+          <Card className="rounded-xl border-0 shadow-sm bg-white overflow-hidden">
             <ol className="divide-y divide-slate-50">
               {group.entries.map((r) => (
                 <li
@@ -92,24 +92,24 @@ export function RankingBoard() {
                 >
                   <div className="flex items-center gap-4 min-w-0">
                     <span
-                      className={`w-9 h-9 shrink-0 rounded-xl flex items-center justify-center text-xs font-black ${
+                      className={`w-9 h-9 shrink-0 rounded-xl flex items-center justify-center text-xs font-semibold ${
                         r.isSelf ? "bg-cyan-500 text-white" : "bg-slate-100 text-slate-500"
                       }`}
                     >
                       {r.rank}
                     </span>
-                    <span className={`text-sm truncate ${r.isSelf ? "font-black text-cyan-900" : "font-bold text-slate-700"}`}>
+                    <span className={`text-sm truncate ${r.isSelf ? "font-semibold text-cyan-900" : "font-medium text-slate-700"}`}>
                       {r.displayName}
                       {r.isSelf && (
-                        <span className="ml-2 text-[9px] font-black uppercase tracking-widest text-cyan-600">Sen</span>
+                        <span className="ml-2 text-xs font-semibold tracking-normal text-cyan-600">Sen</span>
                       )}
                     </span>
                   </div>
                   <div className="shrink-0 text-right">
-                    <span className="block text-sm font-black tabular-nums text-slate-900">
+                    <span className="block text-sm font-semibold tabular-nums text-slate-900">
                       {r.averageNet.toFixed(2)} net
                     </span>
-                    <span className="block text-[10px] font-bold text-slate-400">{r.examCount} deneme</span>
+                    <span className="block text-xs font-medium text-slate-400">{r.examCount} deneme</span>
                   </div>
                 </li>
               ))}
@@ -119,7 +119,7 @@ export function RankingBoard() {
       ))}
 
       {isStudent && (
-        <p className="text-[10px] font-bold text-slate-400 leading-relaxed">
+        <p className="text-xs font-medium text-slate-400 leading-relaxed">
           Diğer öğrenciler sıra numarasıyla gösterilir. Etiket kişiye değil sıraya aittir; aynı etiket
           farklı zamanlarda farklı kişiye denk gelebilir.
         </p>

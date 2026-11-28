@@ -30,7 +30,7 @@ describe("HomePage", () => {
 
   it("alanlar boşken marka başlığını gösterir ve boş bölüm çizmez", () => {
     renderWithSiteContent(<HomePage />, ready({}));
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("ANALİZ SİSTEMİ");
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Analiz Sistemi");
     expect(screen.queryByRole("region", { name: "Tanıtım" })).not.toBeInTheDocument();
   });
 

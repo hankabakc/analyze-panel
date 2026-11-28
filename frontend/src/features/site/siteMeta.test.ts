@@ -46,7 +46,7 @@ describe("Yayın Öncesi Site Meta ve Robots Yapılandırması (T-074)", () => {
     expect(html).toContain('rel="icon" type="image/svg+xml" href="/favicon.svg"');
 
     // Başlık ve Description
-    expect(html).toContain("<title>AnalyzePanel - Algoritma Destekli Eğitim Analiz ve Öğrenci Takip Platformu</title>");
+    expect(html).toContain("<title>Analiz Sistemi · Deneme takibi ve konu analizi</title>");
     expect(html).toContain('name="description"');
     expect(html).not.toContain("AI Destekli");
 

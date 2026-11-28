@@ -14,7 +14,7 @@ export function SiteContentGate({ children }: { children: (content: SiteContent)
   if (state.status === "loading") {
     return (
       <div className={`${PAGE_WIDTH} py-20`}>
-        <p role="status" className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-400">
+        <p role="status" className="text-xs font-semibold tracking-normal text-slate-400">
           İçerik yükleniyor…
         </p>
       </div>
@@ -24,13 +24,13 @@ export function SiteContentGate({ children }: { children: (content: SiteContent)
   if (state.status === "error") {
     return (
       <div className={`${PAGE_WIDTH} py-20`}>
-        <div role="alert" className="max-w-lg rounded-[2rem] border border-red-100 bg-white p-8">
-          <p className="font-bold text-slate-900">İçerik yüklenemedi.</p>
+        <div role="alert" className="max-w-lg rounded-xl border border-red-100 bg-white p-8">
+          <p className="font-medium text-slate-900">İçerik yüklenemedi.</p>
           <p className="mt-2 text-sm text-slate-600">Bağlantınızı kontrol edip yeniden deneyin.</p>
           <button
             type="button"
             onClick={state.retry}
-            className="mt-6 inline-flex h-11 items-center rounded-2xl bg-slate-900 px-5 text-[11px] font-black uppercase tracking-[0.2em] text-white hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
+            className="mt-6 inline-flex h-11 items-center rounded-lg bg-slate-900 px-5 text-xs font-semibold tracking-normal text-white hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
           >
             Yeniden dene
           </button>
@@ -46,7 +46,7 @@ export function SiteContentGate({ children }: { children: (content: SiteContent)
 export function PageHeader({ title }: { title: string }) {
   return (
     <header className={`${PAGE_WIDTH} pt-14 sm:pt-20`}>
-      <h1 className="text-4xl font-black tracking-tighter text-slate-900 sm:text-6xl">{title}</h1>
+      <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-6xl">{title}</h1>
       <div aria-hidden="true" className="mt-6 flex h-1.5 w-28 overflow-hidden rounded-full">
         <span className="w-[60%] bg-cyan-500" />
         <span className="w-[25%] bg-slate-900" />
@@ -75,7 +75,7 @@ export function Prose({ value, className = "" }: { value: string; className?: st
 export function EmptyPage() {
   return (
     <div className={`${PAGE_WIDTH} py-14`}>
-      <p className="max-w-lg rounded-[2rem] border border-dashed border-slate-300 bg-white p-8 text-slate-600">
+      <p className="max-w-lg rounded-xl border border-dashed border-slate-300 bg-white p-8 text-slate-600">
         Bu sayfanın içeriği henüz eklenmedi.
       </p>
     </div>

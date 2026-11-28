@@ -1,4 +1,4 @@
-import { Info } from "lucide-react";
+import { Info } from "@/components/icons";
 
 /**
  * StaiLevelBadge: Sunucudan gelen kaygı seviyesine göre renkli rozet çizer (T-061 / S-024 / T-061B / T-062).
@@ -68,7 +68,7 @@ function StaiExplanationContent({
         <strong className="text-slate-700">Durumluk:</strong> Öğrencinin testi doldurduğu andaki kaygısı; o güne göre değişebilir.{" "}
         <strong className="text-slate-700">Sürekli:</strong> Öğrencinin genel kaygı eğilimi; daha kalıcıdır. Puan aralığı 20–80.
       </p>
-      <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] pt-1.5 border-t ${dividerClass} text-slate-500`}>
+      <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-xs pt-1.5 border-t ${dividerClass} text-slate-500`}>
         <span>
           <strong className="text-emerald-700">Düşük:</strong> Kaygı düzeyi düşük.
         </span>

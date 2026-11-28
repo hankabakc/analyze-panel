@@ -66,7 +66,7 @@ export default function ContactPage() {
 function ContactItem({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div>
-      <dt className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-500">{label}</dt>
+      <dt className="text-xs font-semibold tracking-normal text-slate-500">{label}</dt>
       <dd className="mt-2 break-words text-lg font-semibold text-slate-900">{children}</dd>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Plus } from "lucide-react";
+import { Plus } from "@/components/icons";
 import { EmptyPage, PageHeader, Prose, SiteContentGate } from "../components/SiteBlocks";
 import { faqItems } from "../siteContent";
 import { useDocumentTitle } from "../useDocumentTitle";
@@ -20,11 +20,11 @@ export default function FaqPage() {
           }
           return (
             <div className="mx-auto max-w-4xl px-4 py-12 sm:px-8">
-              <ul className="divide-y divide-slate-200 rounded-[2rem] border border-slate-200 bg-white">
+              <ul className="divide-y divide-slate-200 rounded-xl border border-slate-200 bg-white">
                 {items.map((item) => (
                   <li key={item.question}>
                     <details className="group">
-                      <summary className="flex min-h-[56px] cursor-pointer list-none items-center justify-between gap-4 rounded-[2rem] px-6 py-4 text-lg font-bold text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-cyan-500 [&::-webkit-details-marker]:hidden">
+                      <summary className="flex min-h-[56px] cursor-pointer list-none items-center justify-between gap-4 rounded-xl px-6 py-4 text-lg font-medium text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-cyan-500 [&::-webkit-details-marker]:hidden">
                         <span className="min-w-0 break-words">{item.question}</span>
                         <Plus
                           className="h-5 w-5 shrink-0 text-cyan-600 transition-transform group-open:rotate-45"
