@@ -458,7 +458,7 @@ export default function StudentDashboard() {
                       <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-slate-900 font-black">{teacher.fullName.charAt(0)}</div>
                       <div>
                          <h5 className="font-black text-sm text-slate-900 tracking-tight">{teacher.fullName}</h5>
-                         <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{teacher.email}</p>
+                         <p className="text-[9px] font-bold text-slate-400 tracking-wide">{teacher.email}</p>
                       </div>
                    </CardContent>
                 </Card>

@@ -186,7 +186,7 @@ export default function ReportsPage() {
                 >
                   <div className="min-w-0">
                     <h5 className="font-black text-sm text-slate-900 tracking-tight truncate">{student.fullName}</h5>
-                    <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 truncate">
+                    <p className="text-[9px] font-bold text-slate-400 tracking-wide mt-0.5 truncate">
                       {student.email}
                     </p>
                   </div>

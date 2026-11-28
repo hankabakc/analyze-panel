@@ -244,7 +244,7 @@ export default function AnalysisDetail() {
                       ) : (
                         <AreaChart data={getExamHistoryData()}>
                            <defs><linearGradient id="colorNet" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/><stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/></linearGradient></defs>
-                           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" /><XAxis dataKey="examDate" axisLine={false} tickLine={false} tick={{fontSize: 10, fontWeight: 'bold'}} /><YAxis axisLine={false} tickLine={false} tick={{fontSize: 10, fontWeight: 'bold'}} /><Tooltip /><Area type="monotone" dataKey="totalScore" name="Tahmini Puan" stroke="#2563eb" strokeWidth={4} fillOpacity={1} fill="url(#colorNet)" />
+                           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" /><XAxis dataKey="examDate" axisLine={false} tickLine={false} tick={{fontSize: 10, fontWeight: 'bold'}} /><YAxis axisLine={false} tickLine={false} tick={{fontSize: 10, fontWeight: 'bold'}} /><Tooltip /><Area type="monotone" dataKey="totalScore" name="Toplam Net" stroke="#2563eb" strokeWidth={4} fillOpacity={1} fill="url(#colorNet)" />
                         </AreaChart>
                       )}
                    </ResponsiveContainer>
@@ -259,7 +259,7 @@ export default function AnalysisDetail() {
                             <tr className="bg-slate-50 border-b border-slate-100">
                                <th className="px-6 sm:px-10 py-4 sm:py-6 text-[10px] font-black uppercase tracking-widest text-slate-500">Sınav Adı</th>
                                <th className="px-6 sm:px-10 py-4 sm:py-6 text-[10px] font-black uppercase tracking-widest text-slate-500">Tarih</th>
-                               <th className="px-6 sm:px-10 py-4 sm:py-6 text-[10px] font-black uppercase tracking-widest text-slate-500 text-center">Puan</th>
+                               <th className="px-6 sm:px-10 py-4 sm:py-6 text-[10px] font-black uppercase tracking-widest text-slate-500 text-center">Net</th>
                                <th className="px-6 sm:px-10 py-4 sm:py-6 text-[10px] font-black uppercase tracking-widest text-slate-500 text-right">Durum</th>
                             </tr>
                          </thead>

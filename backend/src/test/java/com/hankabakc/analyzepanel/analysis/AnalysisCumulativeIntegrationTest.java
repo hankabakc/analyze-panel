@@ -359,7 +359,7 @@ public class AnalysisCumulativeIntegrationTest {
                         .requestAttr("role", "STUDENT")
                         .with(csrf()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.strategicPriority", is("Matematik dersine öncelik verilmeli (%50 başarı).")));
+                .andExpect(jsonPath("$.data.strategicPriority", is("Matematik dersine öncelik verilmeli (5 soru kaçırıldı, %50 başarı).")));
     }
 
     @Test

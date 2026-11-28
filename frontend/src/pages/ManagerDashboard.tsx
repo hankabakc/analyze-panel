@@ -547,9 +547,6 @@ export default function ManagerDashboard() {
                               <KeyRound className="h-3.5 w-3.5 text-amber-600" />
                               <span>Şifre Sıfırla</span>
                             </button>
-                            <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">
-                              Eğitmen
-                            </span>
                           </div>
                         </div>
                       ))
@@ -588,9 +585,6 @@ export default function ManagerDashboard() {
                                 {s.grade}. Sınıf
                               </span>
                             )}
-                            <span className="text-[9px] font-black uppercase tracking-widest text-cyan-600 bg-cyan-50 px-2.5 py-1 rounded-lg">
-                              Öğrenci
-                            </span>
                           </div>
                         </div>
                       ))
@@ -925,7 +919,7 @@ export default function ManagerDashboard() {
                             className={`p-6 rounded-[2rem] border-2 cursor-pointer transition-all ${selectedTeacher === teacher.id ? 'border-slate-900 bg-slate-900 text-white shadow-lg' : 'border-slate-50 bg-slate-50 hover:border-slate-200'}`}
                           >
                              <h5 className="font-black text-sm tracking-tight">{teacher.fullName}</h5>
-                             <p className={`text-[9px] font-bold uppercase tracking-widest mt-1 ${selectedTeacher === teacher.id ? 'text-cyan-400' : 'text-slate-400'}`}>{teacher.email}</p>
+                             <p className={`text-[9px] font-bold tracking-wide mt-1 ${selectedTeacher === teacher.id ? 'text-cyan-400' : 'text-slate-400'}`}>{teacher.email}</p>
                           </div>
                         ))
                       )}
@@ -953,7 +947,7 @@ export default function ManagerDashboard() {
                                  </span>
                                )}
                              </div>
-                             <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">{student.email}</p>
+                             <p className="text-[9px] font-bold text-slate-400 tracking-wide mt-1">{student.email}</p>
                           </div>
                         ))
                       )}

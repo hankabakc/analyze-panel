@@ -156,13 +156,9 @@ public final class TopicPriority {
     }
 
     /**
-     * strategicPriority: Ders listesinden en zayıf dersi tespit edip tek cümlelik stratejik öncelik metni üretir (T-039).
-     *
-     * <p>Karnenin / kümülatif derslerin başarı yüzdeleri karşılaştırılır. Eğer veri yoksa veya
-     * tüm derslerde %100 başarı sağlanmışsa null döner (uydurma cümle basılmaz - IST-02 §2, APP-01 §2.7).</p>
-     *
-     * @param lessons Ders analiz listesi
-     * @return Stratejik öncelik metni veya null
+     * Stratejik öncelik: en çok soru kaçırılan ders (yanlış + boş). Konu listesiyle aynı ölçü
+     * (kaçırılan puan) kullanılır ki iki kart birbirine ters düşmesin. Eşitlikte düşük oran öne geçer.
+     * Kaçırılan soru yoksa null döner (uydurma cümle basılmaz).
      */
     public static String strategicPriority(List<AnalysisResponse.LessonDto> lessons) {
         if (lessons == null || lessons.isEmpty()) {
@@ -170,22 +166,29 @@ public final class TopicPriority {
         }
 
         AnalysisResponse.LessonDto weakest = null;
-        double weakestRate = Double.MAX_VALUE;
+        int weakestMissed = 0;
 
         for (AnalysisResponse.LessonDto lesson : lessons) {
-            if (lesson.successRate() == null) continue;
-            double rate = lesson.successRate().doubleValue();
-            if (rate < weakestRate) {
-                weakestRate = rate;
+            int missed = nz(lesson.wrong()) + nz(lesson.empty());
+            if (missed == 0) continue;
+            boolean better = missed > weakestMissed
+                    || (missed == weakestMissed && rate(lesson) < rate(weakest));
+            if (better) {
+                weakestMissed = missed;
                 weakest = lesson;
             }
         }
 
-        if (weakest == null || weakestRate >= 100.0) {
+        if (weakest == null) {
             return null;
         }
 
-        return String.format(java.util.Locale.ROOT, "%s dersine öncelik verilmeli (%%%d başarı).", weakest.lessonName(), Math.round(weakestRate));
+        return String.format(java.util.Locale.ROOT, "%s dersine öncelik verilmeli (%d soru kaçırıldı, %%%d başarı).",
+                weakest.lessonName(), weakestMissed, Math.round(rate(weakest)));
+    }
+
+    private static double rate(AnalysisResponse.LessonDto lesson) {
+        return lesson == null || lesson.successRate() == null ? Double.MAX_VALUE : lesson.successRate().doubleValue();
     }
 
     /**

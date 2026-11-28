@@ -979,7 +979,7 @@ export default function TeacherDashboard() {
                            )}
                          </div>
                        </div>
-                       <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-1 truncate">{student.email}</p>
+                       <p className="text-[9px] font-black text-slate-400 tracking-wide mt-1 truncate">{student.email}</p>
                     </div>
                   );
                 })}
